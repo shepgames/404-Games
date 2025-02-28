@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Drive</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        button {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+    </style>
+</head>
+<body>
+
+    <video class="video-background" autoplay loop muted>
+        <source src="09291.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+    <div class="content">
+        <h1>Welcome to proxies!</h1>
+
+        <button id="nettleweb">NettleWeb (Includes Roblox!)</button>
+        <button id="interstellar">Interstellar</button>
+        <button id="doge">Doge Unblocker</button>
+        <button id="snorlax">Snorlax Unblocker</button>
+    </div>
+
+    <script>
+        // Object mapping button IDs to their respective URLs
+        const games = {
+            nettleweb: "https://realroblox.vercel.app",
+            interstellar: "https://interstellar-mu-swart.vercel.app",
+            doge: "https://doge-unblocker-tawny.vercel.app",
+            snorlax: "https://snorlaxs-cave-v1-jade.vercel.app/"
+        };
+
+        // Function to add click event listeners to each button
+        Object.keys(games).forEach(id => {
+            document.getElementById(id).addEventListener("click", function() {
+                window.location.href = games[id]; // Redirect to the respective URL
+            });
+        });
+    </script>
+
+</body>
+</html>
