@@ -73,6 +73,14 @@
         box-shadow: 0 6px 15px rgba(255, 255, 255, 0.4);
         transform: translateY(-2px);
     }
+         .search-bar {
+        margin: 20px;
+        padding: 10px;
+        font-size: 16px;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 8px;
+    }
 </style>
 
 </style>
@@ -87,7 +95,8 @@
     <div class="content">
         <h1>Welcome to about:blank Games!</h1>
         <p>Your portal to the best unblocked games online. Play now!</p>
-        <div>
+                 <input type="text" class="search-bar" id="search" placeholder="Search for a game..." onkeyup="searchGames()">
+        <div id="gamebuttons">
             <button class="button" onclick="openGame('https://404gamesgithub.github.io/1on1soccer/')">1 on 1 Soccer</button>
             <button class="button" onclick="openGame('https://404gamesgithub.github.io/1v1lol/')">1v1.lol</button>
             <button class="button" onclick="openGame('https://404gamesgithub.github.io/achieveunlocked/')">Achievement Unlocked</button>
@@ -210,6 +219,20 @@
             iframe.style.height = '100%';
             iframe.src = url;
             win.document.body.appendChild(iframe);
+        }
+
+        function searchGames() {
+            const input = document.getElementById('search').value.toLowerCase();
+            const buttons = document.querySelectorAll('.button');
+            
+            buttons.forEach(button => {
+                const buttonText = button.textContent.toLowerCase();
+                if (buttonText.includes(input)) {
+                    button.style.display = 'inline-block';
+                } else {
+                    button.style.display = 'none';
+                }
+            });
         }
     </script>
 </body>
