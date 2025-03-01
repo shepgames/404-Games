@@ -3,75 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Drive</title>
+    <title>Proxies</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #121212, #2c2c2c);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
         }
         .video-background {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
             object-fit: cover;
+            filter: brightness(0.5);
         }
         .content {
             position: relative;
             z-index: 1;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            width: 90%;
+            max-width: 800px;
             text-align: center;
-            color: white;
-            padding: 20px;
         }
-        button {
-            background-color: transparent;
+        h1 {
+            color: #a0a0a0;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        .button {
+            background: linear-gradient(135deg, #333, #555);
             color: white;
-            border: 2px solid white;
-            padding: 10px 20px;
+            border: none;
+            padding: 12px 25px;
             font-size: 16px;
             cursor: pointer;
+            margin: 8px;
+            transition: all 0.3s;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
         }
-        button:hover {
-            background-color: rgba(0, 0, 0, 0.9);
+        .button:hover {
+            background: linear-gradient(135deg, #555, #777);
+            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
-
     <video class="video-background" autoplay loop muted>
-        <source src="09291.mp4" type="video/mp4">
+        <source src="09272.mp4" type="video/mp4">
         Your browser does not support HTML5 video.
     </video>
     <div class="content">
-        <h1>Welcome to proxies!</h1>
-
-        <button id="nettleweb">NettleWeb (Includes Roblox!)</button>
-        <button id="interstellar">Interstellar</button>
-        <button id="doge">Doge Unblocker</button>
-        <button id="snorlax">Snorlax Unblocker</button>
+        <h1>Welcome to Proxies!</h1>
+        <p>Your portal to the best unblocked proxies online. Browse freely!</p>
+        <h2>Proxies</h2>
+        <div>
+            <button class="button" onclick="openGame('https://realroblox.vercel.app')">NettleWeb (Includes Roblox!)</button>
+            <button class="button" onclick="openGame('https://interstellar-mu-swart.vercel.app')">Interstellar</button>
+            <button class="button" onclick="openGame('https://doge-unblocker-tawny.vercel.app')">Doge Unblocker</button>
+            <button class="button" onclick="openGame('https://snorlaxs-cave-v1-jade.vercel.app/')">Snorlax Unblocker</button>
+        </div>
     </div>
-
     <script>
-        // Object mapping button IDs to their respective URLs
-        const games = {
-            nettleweb: "https://realroblox.vercel.app",
-            interstellar: "https://interstellar-mu-swart.vercel.app",
-            doge: "https://doge-unblocker-tawny.vercel.app",
-            snorlax: "https://snorlaxs-cave-v1-jade.vercel.app/"
-        };
-
-        // Function to add click event listeners to each button
-        Object.keys(games).forEach(id => {
-            document.getElementById(id).addEventListener("click", function() {
-                window.location.href = games[id]; // Redirect to the respective URL
-            });
-        });
+        function openGame(url) {
+            let win = window.open();
+            win.document.body.style.margin = '0';
+            win.document.body.style.height = '100vh';
+            const iframe = win.document.createElement('iframe');
+            iframe.style.border = 'none';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.src = url;
+            win.document.body.appendChild(iframe);
+        }
     </script>
-
 </body>
 </html>
