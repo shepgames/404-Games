@@ -6,8 +6,6 @@
     <title>404 Games</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-  <style>
-   <style>
     body, html {
         margin: 0;
         padding: 0;
@@ -41,8 +39,8 @@
         width: 90%;
         max-width: 800px;
         text-align: center;
-        max-height: 80vh; /* Limit the height */
-        overflow-y: auto; /* Allow scrolling */
+        max-height: 80vh;
+        overflow-y: auto;
     }
     h1 {
         color: #a0a0a0;
@@ -73,7 +71,7 @@
         box-shadow: 0 6px 15px rgba(255, 255, 255, 0.4);
         transform: translateY(-2px);
     }
-         .search-bar {
+    .search-bar {
         margin: 20px;
         padding: 10px;
         font-size: 16px;
@@ -82,10 +80,6 @@
         border-radius: 8px;
     }
 </style>
-
-</style>
-
-    </style>
 </head>
 <body>
     <video class="video-background" autoplay loop muted>
@@ -95,7 +89,7 @@
     <div class="content">
         <h1>Welcome to about:blank Games!</h1>
         <p>Your portal to the best unblocked games online. Play now!</p>
-         <input type="text" class="search-bar" id="search" placeholder="Search for a game..." onkeyup="searchGames()">
+        <input type="text" class="search-bar" id="search" placeholder="Search for a game..." onkeyup="searchGames()">
         <div id="gamebuttons">
             <button class="button" onclick="openGame('https://404gamesgithub.github.io/1on1soccer/')">1 on 1 Soccer</button>
             <button class="button" onclick="openGame('https://404gamesgithub.github.io/1v1lol/')">1v1.lol</button>
@@ -357,7 +351,7 @@
 
         function searchGames() {
             const input = document.getElementById('search').value.toLowerCase();
-            const buttons = document.querySelectorAll('.button');
+            const buttons = document.querySelectorAll('#gamebuttons .button:not(:last-child)');
             
             buttons.forEach(button => {
                 const buttonText = button.textContent.toLowerCase();
@@ -367,6 +361,14 @@
                     button.style.display = 'none';
                 }
             });
+        }
+
+        function randomGame() {
+            const gameButtons = document.querySelectorAll('#gamebuttons .button:not(:last-child)');
+            if (gameButtons.length > 0) {
+                const randomIndex = Math.floor(Math.random() * gameButtons.length);
+                gameButtons[randomIndex].click();
+            }
         }
     </script>
 </body>
