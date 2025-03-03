@@ -79,6 +79,12 @@
         max-width: 600px;
         border-radius: 8px;
     }
+    .no-results {
+        display: none;
+        color: red;
+        font-size: 1.2rem;
+        margin-top: 10px;
+    }
 </style>
 </head>
 <body>
@@ -336,6 +342,7 @@
              <button class="button" onclick="openGame('https://404gamesgithub.github.io/stickmanboost/')">Stickman Boost</button>
              <button class="button" onclick="openGame('https://404gamesgithub.github.io/stickmanclimb/')">Stickman Climb</button>
         </div>
+        <p id="noResults" class="no-results">No results found</p>
     </div>
     <script>
         function openGame(url) {
@@ -352,20 +359,33 @@
 
         function searchGames() {
             const input = document.getElementById('search').value.toLowerCase();
-            const buttons = document.querySelectorAll('#gamebuttons .button:not(:last-child)');
+            const buttons = document.querySelectorAll('#gamebuttons .button:not(#randomGameButton)');
+            let visibleCount = 0;
             
             buttons.forEach(button => {
                 const buttonText = button.textContent.toLowerCase();
                 if (buttonText.includes(input)) {
                     button.style.display = 'inline-block';
+                    visibleCount++;
                 } else {
                     button.style.display = 'none';
                 }
             });
+            
+            const randomGameButton = document.getElementById('randomGameButton');
+            const noResults = document.getElementById('noResults');
+            
+            if (visibleCount === 0) {
+                randomGameButton.style.display = 'none';
+                noResults.style.display = 'block';
+            } else {
+                randomGameButton.style.display = 'inline-block';
+                noResults.style.display = 'none';
+            }
         }
 
         function randomGame() {
-            const gameButtons = document.querySelectorAll('#gamebuttons .button:not(:last-child)');
+            const gameButtons = document.querySelectorAll('#gamebuttons .button:not(#randomGameButton):not([style*="display: none"])');
             if (gameButtons.length > 0) {
                 const randomIndex = Math.floor(Math.random() * gameButtons.length);
                 gameButtons[randomIndex].click();
