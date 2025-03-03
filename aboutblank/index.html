@@ -343,18 +343,29 @@
             win.document.body.appendChild(iframe);
         }
 
-        function searchGames() {
-            const input = document.getElementById('search').value.toLowerCase();
-            const buttons = document.querySelectorAll('#gamebuttons .button:not(#randomGameButton)');
-            let visibleCount = 0;
-            
-            buttons.forEach(button => {
-                const buttonText = button.textContent.toLowerCase();
-                if (buttonText.includes(input)) {
-                    button.style.display = 'inline-block';
-                    visibleCount++;
-                } else {
-                    button.style.display = 'none';
+       function searchGames() {
+    const input = document.getElementById('searchgames').value.toLowerCase();
+    const buttons = document.querySelectorAll('#gamebuttons .button');
+    let visibleCount = 0;
+
+    buttons.forEach(button => {
+        const buttonText = button.textContent.toLowerCase();
+        if (buttonText.includes(input)) {
+            button.style.display = 'inline-block';
+            visibleCount++;
+        } else {
+            button.style.display = 'none';
+        }
+    });
+
+    const noResults = document.getElementById('noResults');
+
+    if (visibleCount === 0) {
+        noResults.style.display = 'block';
+    } else {
+        noResults.style.display = 'none';
+    }
+}
                 }
             });
             
