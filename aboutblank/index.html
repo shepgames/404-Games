@@ -3,7 +3,8 @@
 <head>
      <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 Games</title>
+    <title>Google Drive</title>
+    <link id="favicon" rel="icon" href="https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
     body, html {
@@ -71,21 +72,7 @@
         box-shadow: 0 6px 15px rgba(255, 255, 255, 0.4);
         transform: translateY(-2px);
     }
-    .search-bar {
-        margin: 20px;
-        padding: 10px;
-        font-size: 16px;
-        width: 80%;
-        max-width: 600px;
-        border-radius: 8px;
-    }
-    .no-results {
-        display: none;
-        color: red;
-        font-size: 1.2rem;
-        margin-top: 10px;
-    }
-</style>
+    </style>
 </head>
 <body>
     <video class="video-background" autoplay loop muted>
@@ -94,10 +81,16 @@
     </video>
     <div class="content">
         <h1>Welcome to about:blank Games!</h1>
-        <p>Your portal to the best unblocked games online. Play now!</p>
+        <p>Your portal to the best unblocked games online. Play now!</p>         
          <button class="button" onclick="randomGame()">Random Game</button>
          <button class="button" onclick="openGame('https://forms.gle/YwyjVFPazMnQMLod7')">Issue/Game Suggestion</button>
-        <input type="text" class="search-bar" id="search" placeholder="Search for a game..." onkeyup="searchGames()">
+     <input type="text" class="search-bar" id="search" placeholder="Search for a game..." onkeyup="searchGames()">
+         <br>
+        <p>Select a cloaking option:</p>
+        <button class="button" onclick="cloakTab('Google Drive', 'https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png')">Google Drive</button>
+        <button class="button" onclick="cloakTab('Google Classroom', 'https://www.gstatic.com/classroom/favicon.png')">Google Classroom</button>
+        <button class="button" onclick="cloakTab('Pear Assessment', 'https://www.pearson.com/favicon.ico')">Pear Assessment</button>
+        <button class="button" onclick="cloakTab('Clever', 'https://clever.com/favicon.ico')">Clever</button>
         <div id="gamebuttons">
             <button class="button" onclick="openGame('https://404gamesgithub.github.io/1on1soccer/')">1 on 1 Soccer</button>
             <button class="button" onclick="openGame('https://404gamesgithub.github.io/1v1lol/')">1v1.lol</button>
@@ -391,6 +384,31 @@
                 const randomIndex = Math.floor(Math.random() * gameButtons.length);
                 gameButtons[randomIndex].click();
             }
+                function openGame(url) {
+            let win = window.open();
+            win.document.body.style.margin = '0';
+            win.document.body.style.height = '100vh';
+            const iframe = win.document.createElement('iframe');
+            iframe.style.border = 'none';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.src = url;
+            win.document.body.appendChild(iframe);
+            
+            // Cloak the opened about:blank tab as well
+            cloakTab('Google Drive', 'https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png', win);
+        }
+
+        function cloakTab(title, icon, win = window) {
+            win.document.title = title;
+            let favicon = win.document.getElementById("favicon");
+            if (!favicon) {
+                favicon = win.document.createElement("link");
+                favicon.id = "favicon";
+                favicon.rel = "icon";
+                win.document.head.appendChild(favicon);
+            }
+            favicon.href = icon;
         }
     </script>
 </body>
