@@ -1,418 +1,399 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Drive</title>
-    <link id="favicon" rel="icon" href="https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-    body, html {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        width: 100%;
-        font-family: 'Poppins', sans-serif;
-        background: linear-gradient(to right, #121212, #2c2c2c);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        text-align: center;
-    }
-    .video-background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        object-fit: cover;
-        filter: brightness(0.5);
-    }
-    .content {
-        position: relative;
-        z-index: 1;
-        padding: 30px;
-        background: rgba(0, 0, 0, 0.6);
-        border-radius: 15px;
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-        width: 90%;
-        max-width: 800px;
-        text-align: center;
-        max-height: 80vh;
-        overflow-y: auto;
-    }
-    h1 {
-        color: #a0a0a0;
-        font-size: 2.2rem;
-        margin-bottom: 15px;
-        font-weight: bold;
-    }
-    p {
-        font-size: 1rem;
-        margin-bottom: 20px;
-        opacity: 0.9;
-    }
-    .button {
-        background: linear-gradient(135deg, #333, #555);
-        color: white;
-        border: none;
-        padding: 12px 25px;
-        font-size: 16px;
-        cursor: pointer;
-        margin: 8px;
-        transition: all 0.3s;
-        border-radius: 8px;
-        font-weight: bold;
-        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
-    }
-    .button:hover {
-        background: linear-gradient(135deg, #555, #777);
-        box-shadow: 0 6px 15px rgba(255, 255, 255, 0.4);
-        transform: translateY(-2px);
-    }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 Games</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+body, html {
+margin: 0;
+padding: 0;
+height: 100%;
+width: 100%;
+font-family: 'Poppins', sans-serif;
+background: linear-gradient(to right, #121212, #2c2c2c);
+display: flex;
+justify-content: center;
+align-items: center;
+color: white;
+text-align: center;
+}
+.video-background {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -1;
+object-fit: cover;
+filter: brightness(0.5);
+}
+.content {
+position: relative;
+z-index: 1;
+padding: 30px;
+background: rgba(0, 0, 0, 0.6);
+border-radius: 15px;
+box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+width: 90%;
+max-width: 800px;
+text-align: center;
+max-height: 80vh;
+overflow-y: auto;
+}
+h1 {
+color: #a0a0a0;
+font-size: 2.2rem;
+margin-bottom: 15px;
+font-weight: bold;
+}
+p {
+font-size: 1rem;
+margin-bottom: 20px;
+opacity: 0.9;
+}
+.button {
+background: linear-gradient(135deg, #333, #555);
+color: white;
+border: none;
+padding: 12px 25px;
+font-size: 16px;
+cursor: pointer;
+margin: 8px;
+transition: all 0.3s;
+border-radius: 8px;
+font-weight: bold;
+box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+}
+.button:hover {
+background: linear-gradient(135deg, #555, #777);
+box-shadow: 0 6px 15px rgba(255, 255, 255, 0.4);
+transform: translateY(-2px);
+}
+.search-bar {
+margin: 20px;
+padding: 10px;
+font-size: 16px;
+width: 80%;
+max-width: 600px;
+border-radius: 8px;
+}
+.no-results {
+display: none;
+color: red;
+font-size: 1.2rem;
+margin-top: 10px;
+}
+</style>
 </head>
 <body>
-    <video class="video-background" autoplay loop muted>
-        <source src="09272.mp4" type="video/mp4">
-        Your browser does not support HTML5 video.
-    </video>
-    <div class="content">
-        <h1>Welcome to about:blank Games!</h1>
-        <p>Your portal to the best unblocked games online. Play now!</p>    
-          <input type="text" class="search-bar" id="searchgames" placeholder="Search for a game..." onkeyup="searchGames()">
-        <div id="gamebuttons">
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/1on1soccer/')">1 on 1 Soccer</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/1v1lol/')">1v1.lol</button>
+<video class="video-background" autoplay loop muted>
+<source src="09272.mp4" type="video/mp4">
+Your browser does not support HTML5 video.
+</video>
+<div class="content">
+<h1>Welcome to about:blank Games!</h1>
+<p>Your portal to the best unblocked games online. Play now!</p>
+         <button class="button" onclick="randomGame()">Random Game</button>
+         <button class="button" onclick="openGame('https://forms.gle/YwyjVFPazMnQMLod7')">Issue/Game Suggestion</button>
+<input type="text" class="search-bar" id="search" placeholder="Search for a game..." onkeyup="searchGames()">
+<div id="gamebuttons">
+             <button class="button" onclick="randomGame()">Random Game</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/1on1soccer/')">1 on 1 Soccer</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/1v1lol/')">1v1.lol</button>
+             <button class="button" onclick="openGame('https://404gamesgithub.github.io/offBrandFortnite/')">Off Brand Fortnite</button>
             <button class="button" onclick="openGame('https://404gamesgithub.github.io/offBrandFortnite/')">Off Brand Fortnite</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/achieveunlocked/')">Achievement Unlocked</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/achieveunlocked2/')">Achievement Unlocked 2</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/adarkroom/')">A Dark Room</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/adventure-capitalist/')">Adventure Capitalist</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/ageofwar/')">Age Of War</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/amazing-rope-police/')">Amazing Rope Police</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/amongus/')">Among Us</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/ayun/')">Ayun Minecraft Hacks</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/avalanche/')">Avalanche</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/badicecream2/')">Bad Ice Cream 2</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/badicecream3/')">Bad Ice Cream 3</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/badocecream/')">Bad Ice Cream</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/badpiggies/')">Bad Piggies</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/badtimeimulator/')">Bad Time Simulator</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/baldis-basics/')">Baldi's Basics</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/basketbros/')">Basket Bros</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/basketball-stars/')">Basketball Stars</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/bloons-td-2/')">Bloons TD 2</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/bloons-td/')">Bloons TD</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/bloxors/')">Bloxors</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/BTD/')">BTD</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/btd2/')">BTD2</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/btd3/')">BTD3</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/btd6/')">BTD6</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/bloodtournament/')">Blood Tournament</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/boxingphysics2/')">Boxing Physics 2</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/championisland/')">Champion Island</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/chess/')">Chess</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/circloo/')">Circloo</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/codz/')">Cod Zombies (Multiplayer!)</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/cuttherope/')">Cut The Rope</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/cuttherope-holiday/')">Cut The Rope Holiday</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/duck-life-1/')">Duck Life</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/ducklife2/')">Duck Life 2</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/ducklife4/')">Duck Life 4</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/eggycar/')">Eggy Car</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/fruit-ninja/')">Fruit Ninja</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/funnyshooter2/')">Funny Shooter 2</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/fnf/')">FNF</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/google-snake/')">Google Snake</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/hole.io/')">Hole.io</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/hypercars/')">HyperCars</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/jetpack/')">Jetpack Joyride</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/justfall/')">Just Fall</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/keylimba/')">KeyLimba</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/merge-round-racers/')">Merge Round Racers</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/monkeymart/')">Monkey Mart</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/minecraft-1.8/')">Minecraft 1.8</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/motox3m-2/')">Motox3m 2</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/motox3mpoolparty/')">Motox3m Summer</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/motox3mspookyland/')">Motox3m Halloween</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/motox3mwinter/')">Motox3m Winter</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/paperio-2/')">Paper.io 2</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/paperio2/')">PaperIo 2</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/papas-pizzaria/')">Papa's Pizzaria</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/papasb/')">Papa's Burgeria</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/polytrack/')">Polytrack</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/retrob/')">Retro Bowl</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/ragdoll-archers/')">Ragdoll Archers</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/racing-limits/')">Racing Limits</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/rocket-league/')">Rocket League</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/rooftop-snipers111/')">Rooftop Snipers</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/slow-roads/')">Slow Roads</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/soccer-random/')">Soccer Random</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/stickman/')">Stickman Hook</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/stuntcars/')">Madalin Stunt Cars</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/super-hot/')">Superhot</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/super-star-car/')">Super Star Cars</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/sushi-unroll/')">Sushi Roll</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/subwaysurfers/')">Subway Surfers</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/tanuki-sunset/')">Tanuki Sunset</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/tag/')">Tag</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/tunnel-rush/')">Tunnel Rush</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/temple-run-2/')">Temple Run 2</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/temple-run-22/')">Temple Run 2</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/tiny-fishing1/')">Tiny Fishing</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/volley-random/')">Volley Random</button>
-            <button class="button" onclick="openGame('https://404gamesgithub.github.io/xx142-b2exe/')">XX142-B2EXE</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/hilldraw/')">Hilldraw</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/glass-city/')">Glass City</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/fortcraft/')">FortCraft</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/flappyb/')">Flappybird</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/fireboyandwatergirl/')">Fireboy and Watergirl</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/drift-hunters/')">Drift Hunters</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/dreader/')">Dreader</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/deathrun/')">Deathrun</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/crossy/')">Crossyroad</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/cars-simulator/')">Cars Simulator</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/breakoid/')">Breakoid</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/breaklock/')">Breaklock</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/boxing-random/')">Boxing Random</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/bombhopper/')">Bombhopper</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/baconmaydie/')">Bacon May Die</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/bigredbutton/')">Big Red Button</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/burgerandfrights/')">Burger and Frights</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/basketbros-io/')">BasketBros.io</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/backrooms/')">Backrooms</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/aquapark-slides/')">Aquapark Slides</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/vex3/')">Vex 3</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/vex44/')">Vex 4</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/vex55/')">Vex 5</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/vex6/')">Vex 6</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/vex7/')">Vex 7</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/worlde1/')">Worlde</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/dadish2/')">Dadish 2</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/deal/')">Deal</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/death-run-3d/')">Death Run 3D</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/doom/')">Doom</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/drag/')">Drag</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/dragonballdevolution/')">Dragonball Devolution</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/drift-boss11/')">Drift Boss</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/drifthunters/')">Drift Hunters</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/ducklife1-1/')">Duck Life</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/ducklife3/')">Duck Life 3</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/ducklife4-4/')">Duck Life 4</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/ducklife5/')">Duck Life 5</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/ducklife6/')">Duck Life 6</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/emulatorjs/')">Emulator JS</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/escapingtheprison/')">Escaping The Prison</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/factoryballs/')">Factory Balls</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/factoryballsforever/')">Factory Balls Forever</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/fancypantsadventures/')">Fancy Pants Adventures</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/fancypantsadventures2/')">Fancy Pants Adventures 2</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/fireboywatergirl/')">Fireboy and Watergirl</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/fireboywatergirl2/')">Fireboy and Watergirl 2</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/fireboywatergirl3/')">Fireboy and Watergirl 3</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/fleeingthecomplex/')">Fleeing The Complex</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/flippyfish/')">Flippy Fish</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/fluidsim/')">Fluid Simulator</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/funnyballgame/')">Funny Ball Game</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/funnyshooter/')">Funny Shooter</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/gba/')">GBA</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/gdlite/')">Geometry Dash Lite</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/geometrydash/')">Geometry Dash</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/geometryrash/')">Geometry Rash</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/getawayshooter/')">Getaway Shooter</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/golddiggerfrvr/')">Gold Digger FRVR</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/guiltygear/')">Guilty Gear</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/gunmayhem/')">Gun Mayhem</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/gunmayhem2/')">Gun Mayhem 2</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/gunmayhemredux/')">Gun Mayhem Redux</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/halloween2016/')">Hallloween 2016</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/happywheels/')">Happy Wheels</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/helixjump/')">Helix Jump</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/hexgl/')">Hex GL</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/hextris/')">Hextris</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/hillclimbracing2/')">Hill Climb Racing 2</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/holeio/')">Hole.io</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/idlebreakout/')">Idle Breakout</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/infiltratingtheairship/')">Infiltrating The Airship</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/knifehit/')">Knife Hit</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/lasthorizon/')">Last Horizon</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/lazyjump3d/')">Lazy Jump 3D</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/learntofly2/')">Learn To Fly 2</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/learntoflyidle/')">Learn To Fly Idle</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/linerider/')">Line Rider</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/littlealchemy/')">Little Alchemy</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/lowsadventures2/')">Lows Adventures 2</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/mario/')">Mario</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/metroidzeromission/')">Metroid Zero Mission</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/minecraft-tower-defence-2/')">Minecraft Tower Defence 2</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/minesweeper/')">Minesweeper</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/monstertracks/')">Monstertracks</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/ngon/')">Ngon</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/ocarinaoftime/')">The Legend Of Zelda: Ocarina Of Time</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/offline-mc/')">Offline Minecraft</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/offlineparadise/')">Offline Paradise</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/osu/')">Osu!</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/osumainia/')">Osu! Mania</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/pacman/')">PacMan</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/pandemic/')">Pandemic</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/pandemic2/')">Pandemic2</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/papasfreezeria/')">Papa's Freezeria</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/paperio/')">Paper.io</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/pi/')">Pi Minecraft Hacks</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/pizzatower/')">Pizza Tower</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/pokemon/')">Pokemon</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/pong/')">Pong</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/pool/')">Pool</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/poom/')">Poom</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/pre/')">Precision Client Minecraft</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/redball3/')">Red Ball 3</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/redball4/')">Red Ball 4</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/redball4vol2/')">Red Ball 4 Volume 2</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/redball4vol3/')">Red Ball 4 Volume 3</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/zombocalypse/')">Zombocalypse</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/xp/')">Windows XP</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/worldshardestgame/')">Worlds Hardest Game</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/worldshardestgame2/')">Worlds Hardest Game 2</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/wordlebot/')">Worlde Bot</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/watermelongame/')">Watermelon Game</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/wallsmash/')">Wallsmash</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/universal-paperclips/')">Universal Paperclips</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/turbowarp/')">Turbowarp</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/tube-jumpers/')">Tube Jumpers</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/tron/')">Tron</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/timeshooter3/')">Time Shooter 3</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/timeshooter2/')">Time Shooter 2</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/timeshooter1/')">Time Shooter</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/thisistheonlylevel2/')">This Is The Only Level 2</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/thisistheonlylevel/')">This Is The Only Level</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/thritydollarwebsite/')">Thirty Dollar Website</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/thereisnogame/')">There Is No Game</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/theimpossiblequiz/')">The Impossible Quiz</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/theimpossiblegame/')">The Impossible Game</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/thefinalearth2/')">The Final Earth 2</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/tabs/')">TABS</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/supersmashflash/')">Super Smash Brothers Flash</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/supersmashbros/')">Super Smash Brothers</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/supermeatboy/')">Super Meat Boy</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/stickmangolf/')">Stickman Golf</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/retrobowlcollege/')">Retro Bowl College</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/riddleschool/')">Riddle School</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/riddleschool2/')">Riddle School 2</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/riddleschool3/')">Riddle School 3</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/riddleschool4/')">Riddle School 4</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/riddleschool5/')">Riddle School 5</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/risehigher/')">Rise Higher</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/rooftopsnipers2/')">Rooftop Snipers 2</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/run/')">Run</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/run2/')">Run 2</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/russiancardriver/')">Russian Car Driver</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/sand/')">Sand</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/sandtrix/')">Sandtrix</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/shadow/')">Shadow</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/skibiditoilet/')">Skibidi Toilet</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/skibiditoiletattack/')">Skibidi Toilet Attack</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/slope3/')">Slope 3</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/snake/')">Snake</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/snow/')">Snow</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/snowrider3d/')">Snow Rider 3D</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/solitare/')">Solitare</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/soundboard/')">Soundboard</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/space/')">Space</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/spankthemonkey/')">Spank The Monkey</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/sprinter/')">Sprinter</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/stack1/')">Stack</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/stealingthediamond/')">Stealing The Diamond</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/stickmanboost/')">Stickman Boost</button>
-             <button class="button" onclick="openGame('https://404gamesgithub.github.io/stickmanclimb/')">Stickman Climb</button>
-        </div>
-        <p id="noResults" class="no-results">No results found</p>
-    </div>
-    <script>
-        function openGame(url) {
-            let win = window.open();
-            win.document.body.style.margin = '0';
-            win.document.body.style.height = '100vh';
-            const iframe = win.document.createElement('iframe');
-            iframe.style.border = 'none';
-            iframe.style.width = '100%';
-            iframe.style.height = '100%';
-            iframe.src = url;
-            win.document.body.appendChild(iframe);
-        }
-
-       function searchGames() {
-    const input = document.getElementById('searchgames').value.toLowerCase();
-    const buttons = document.querySelectorAll('#gamebuttons .button');
-    let visibleCount = 0;
-
-    buttons.forEach(button => {
-        const buttonText = button.textContent.toLowerCase();
-        if (buttonText.includes(input)) {
-            button.style.display = 'inline-block';
-            visibleCount++;
-        } else {
-            button.style.display = 'none';
-        }
-    });
-
-    const noResults = document.getElementById('noResults');
-
-    if (visibleCount === 0) {
-        noResults.style.display = 'block';
-    } else {
-        noResults.style.display = 'none';
-    }
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/achieveunlocked/')">Achievement Unlocked</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/achieveunlocked2/')">Achievement Unlocked 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/adarkroom/')">A Dark Room</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/adventure-capitalist/')">Adventure Capitalist</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/ageofwar/')">Age Of War</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/amazing-rope-police/')">Amazing Rope Police</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/amongus/')">Among Us</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/ayun/')">Ayun Minecraft Hacks</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/avalanche/')">Avalanche</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/badicecream2/')">Bad Ice Cream 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/badicecream3/')">Bad Ice Cream 3</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/badocecream/')">Bad Ice Cream</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/badpiggies/')">Bad Piggies</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/badtimeimulator/')">Bad Time Simulator</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/baldis-basics/')">Baldi's Basics</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/basketbros/')">Basket Bros</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/basketball-stars/')">Basketball Stars</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/bloons-td-2/')">Bloons TD 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/bloons-td/')">Bloons TD</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/bloxors/')">Bloxors</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/BTD/')">BTD</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/btd2/')">BTD2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/btd3/')">BTD3</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/btd6/')">BTD6</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/bloodtournament/')">Blood Tournament</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/boxingphysics2/')">Boxing Physics 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/championisland/')">Champion Island</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/chess/')">Chess</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/circloo/')">Circloo</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/codz/')">Cod Zombies (Multiplayer!)</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/cuttherope/')">Cut The Rope</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/cuttherope-holiday/')">Cut The Rope Holiday</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/duck-life-1/')">Duck Life</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/ducklife2/')">Duck Life 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/ducklife4/')">Duck Life 4</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/eggycar/')">Eggy Car</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/fruit-ninja/')">Fruit Ninja</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/funnyshooter2/')">Funny Shooter 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/fnf/')">FNF</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/google-snake/')">Google Snake</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/hole.io/')">Hole.io</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/hypercars/')">HyperCars</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/jetpack/')">Jetpack Joyride</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/justfall/')">Just Fall</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/keylimba/')">KeyLimba</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/merge-round-racers/')">Merge Round Racers</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/monkeymart/')">Monkey Mart</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/minecraft-1.8/')">Minecraft 1.8</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/motox3m-2/')">Motox3m 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/motox3mpoolparty/')">Motox3m Summer</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/motox3mspookyland/')">Motox3m Halloween</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/motox3mwinter/')">Motox3m Winter</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/paperio-2/')">Paper.io 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/paperio2/')">PaperIo 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/papas-pizzaria/')">Papa's Pizzaria</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/papasb/')">Papa's Burgeria</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/polytrack/')">Polytrack</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/retrob/')">Retro Bowl</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/ragdoll-archers/')">Ragdoll Archers</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/racing-limits/')">Racing Limits</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/rocket-league/')">Rocket League</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/rooftop-snipers111/')">Rooftop Snipers</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/slow-roads/')">Slow Roads</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/soccer-random/')">Soccer Random</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/stickman/')">Stickman Hook</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/stuntcars/')">Madalin Stunt Cars</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/super-hot/')">Superhot</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/super-star-car/')">Super Star Cars</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/sushi-unroll/')">Sushi Roll</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/subwaysurfers/')">Subway Surfers</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/tanuki-sunset/')">Tanuki Sunset</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/tag/')">Tag</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/tunnel-rush/')">Tunnel Rush</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/temple-run-2/')">Temple Run 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/temple-run-22/')">Temple Run 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/tiny-fishing1/')">Tiny Fishing</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/volley-random/')">Volley Random</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/xx142-b2exe/')">XX142-B2EXE</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/hilldraw/')">Hilldraw</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/glass-city/')">Glass City</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/fortcraft/')">FortCraft</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/flappyb/')">Flappybird</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/fireboyandwatergirl/')">Fireboy and Watergirl</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/drift-hunters/')">Drift Hunters</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/dreader/')">Dreader</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/deathrun/')">Deathrun</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/crossy/')">Crossyroad</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/cars-simulator/')">Cars Simulator</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/breakoid/')">Breakoid</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/breaklock/')">Breaklock</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/boxing-random/')">Boxing Random</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/bombhopper/')">Bombhopper</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/baconmaydie/')">Bacon May Die</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/bigredbutton/')">Big Red Button</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/burgerandfrights/')">Burger and Frights</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/basketbros-io/')">BasketBros.io</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/backrooms/')">Backrooms</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/aquapark-slides/')">Aquapark Slides</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/vex3/')">Vex 3</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/vex44/')">Vex 4</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/vex55/')">Vex 5</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/vex6/')">Vex 6</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/vex7/')">Vex 7</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/worlde1/')">Worlde</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/dadish2/')">Dadish 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/deal/')">Deal</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/death-run-3d/')">Death Run 3D</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/doom/')">Doom</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/drag/')">Drag</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/dragonballdevolution/')">Dragonball Devolution</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/drift-boss11/')">Drift Boss</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/drifthunters/')">Drift Hunters</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/ducklife1-1/')">Duck Life</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/ducklife3/')">Duck Life 3</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/ducklife4-4/')">Duck Life 4</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/ducklife5/')">Duck Life 5</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/ducklife6/')">Duck Life 6</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/emulatorjs/')">Emulator JS</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/escapingtheprison/')">Escaping The Prison</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/factoryballs/')">Factory Balls</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/factoryballsforever/')">Factory Balls Forever</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/fancypantsadventures/')">Fancy Pants Adventures</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/fancypantsadventures2/')">Fancy Pants Adventures 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/fireboywatergirl/')">Fireboy and Watergirl</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/fireboywatergirl2/')">Fireboy and Watergirl 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/fireboywatergirl3/')">Fireboy and Watergirl 3</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/fleeingthecomplex/')">Fleeing The Complex</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/flippyfish/')">Flippy Fish</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/fluidsim/')">Fluid Simulator</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/funnyballgame/')">Funny Ball Game</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/funnyshooter/')">Funny Shooter</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/gba/')">GBA</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/gdlite/')">Geometry Dash Lite</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/geometrydash/')">Geometry Dash</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/geometryrash/')">Geometry Rash</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/getawayshooter/')">Getaway Shooter</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/golddiggerfrvr/')">Gold Digger FRVR</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/guiltygear/')">Guilty Gear</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/gunmayhem/')">Gun Mayhem</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/gunmayhem2/')">Gun Mayhem 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/gunmayhemredux/')">Gun Mayhem Redux</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/halloween2016/')">Hallloween 2016</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/happywheels/')">Happy Wheels</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/helixjump/')">Helix Jump</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/hexgl/')">Hex GL</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/hextris/')">Hextris</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/hillclimbracing2/')">Hill Climb Racing 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/holeio/')">Hole.io</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/idlebreakout/')">Idle Breakout</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/infiltratingtheairship/')">Infiltrating The Airship</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/knifehit/')">Knife Hit</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/lasthorizon/')">Last Horizon</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/lazyjump3d/')">Lazy Jump 3D</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/learntofly2/')">Learn To Fly 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/learntoflyidle/')">Learn To Fly Idle</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/linerider/')">Line Rider</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/littlealchemy/')">Little Alchemy</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/lowsadventures2/')">Lows Adventures 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/mario/')">Mario</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/metroidzeromission/')">Metroid Zero Mission</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/minecraft-tower-defence-2/')">Minecraft Tower Defence 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/minesweeper/')">Minesweeper</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/monstertracks/')">Monstertracks</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/ngon/')">Ngon</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/ocarinaoftime/')">The Legend Of Zelda: Ocarina Of Time</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/offline-mc/')">Offline Minecraft</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/offlineparadise/')">Offline Paradise</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/osu/')">Osu!</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/osumainia/')">Osu! Mania</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/pacman/')">PacMan</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/pandemic/')">Pandemic</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/pandemic2/')">Pandemic2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/papasfreezeria/')">Papa's Freezeria</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/paperio/')">Paper.io</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/pi/')">Pi Minecraft Hacks</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/pizzatower/')">Pizza Tower</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/pokemon/')">Pokemon</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/pong/')">Pong</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/pool/')">Pool</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/poom/')">Poom</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/pre/')">Precision Client Minecraft</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/redball3/')">Red Ball 3</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/redball4/')">Red Ball 4</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/redball4vol2/')">Red Ball 4 Volume 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/redball4vol3/')">Red Ball 4 Volume 3</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/zombocalypse/')">Zombocalypse</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/xp/')">Windows XP</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/worldshardestgame/')">Worlds Hardest Game</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/worldshardestgame2/')">Worlds Hardest Game 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/wordlebot/')">Worlde Bot</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/watermelongame/')">Watermelon Game</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/wallsmash/')">Wallsmash</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/universal-paperclips/')">Universal Paperclips</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/turbowarp/')">Turbowarp</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/tube-jumpers/')">Tube Jumpers</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/tron/')">Tron</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/timeshooter3/')">Time Shooter 3</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/timeshooter2/')">Time Shooter 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/timeshooter1/')">Time Shooter</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/thisistheonlylevel2/')">This Is The Only Level 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/thisistheonlylevel/')">This Is The Only Level</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/thritydollarwebsite/')">Thirty Dollar Website</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/thereisnogame/')">There Is No Game</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/theimpossiblequiz/')">The Impossible Quiz</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/theimpossiblegame/')">The Impossible Game</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/thefinalearth2/')">The Final Earth 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/tabs/')">TABS</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/supersmashflash/')">Super Smash Brothers Flash</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/supersmashbros/')">Super Smash Brothers</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/supermeatboy/')">Super Meat Boy</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/stickmangolf/')">Stickman Golf</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/retrobowlcollege/')">Retro Bowl College</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/riddleschool/')">Riddle School</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/riddleschool2/')">Riddle School 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/riddleschool3/')">Riddle School 3</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/riddleschool4/')">Riddle School 4</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/riddleschool5/')">Riddle School 5</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/risehigher/')">Rise Higher</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/rooftopsnipers2/')">Rooftop Snipers 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/run/')">Run</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/run2/')">Run 2</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/russiancardriver/')">Russian Car Driver</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/sand/')">Sand</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/sandtrix/')">Sandtrix</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/shadow/')">Shadow</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/skibiditoilet/')">Skibidi Toilet</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/skibiditoiletattack/')">Skibidi Toilet Attack</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/slope3/')">Slope 3</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/snake/')">Snake</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/snow/')">Snow</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/snowrider3d/')">Snow Rider 3D</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/solitare/')">Solitare</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/soundboard/')">Soundboard</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/space/')">Space</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/spankthemonkey/')">Spank The Monkey</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/sprinter/')">Sprinter</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/stack1/')">Stack</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/stealingthediamond/')">Stealing The Diamond</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/stickmanboost/')">Stickman Boost</button>
+<button class="button" onclick="openGame('https://404gamesgithub.github.io/stickmanclimb/')">Stickman Climb</button>
+</div>
+<p id="noResults" class="no-results">No results found</p>
+</div>
+<script>
+function openGame(url) {
+let win = window.open();
+win.document.body.style.margin = '0';
+win.document.body.style.height = '100vh';
+const iframe = win.document.createElement('iframe');
+iframe.style.border = 'none';
+iframe.style.width = '100%';
+iframe.style.height = '100%';
+iframe.src = url;
+win.document.body.appendChild(iframe);
 }
-                }
-            });
-            
-            const randomGameButton = document.getElementById('randomGameButton');
-            const noResults = document.getElementById('noResults');
-            
-            if (visibleCount === 0) {
-                randomGameButton.style.display = 'none';
-                noResults.style.display = 'block';
-            } else {
-                randomGameButton.style.display = 'inline-block';
-                noResults.style.display = 'none';
-            }
-        }
 
-        function randomGame() {
-            const gameButtons = document.querySelectorAll('#gamebuttons .button:not(#randomGameButton):not([style*="display: none"])');
-            if (gameButtons.length > 0) {
-                const randomIndex = Math.floor(Math.random() * gameButtons.length);
-                gameButtons[randomIndex].click();
-            }
-                function openGame(url) {
-            let win = window.open();
-            win.document.body.style.margin = '0';
-            win.document.body.style.height = '100vh';
-            const iframe = win.document.createElement('iframe');
-            iframe.style.border = 'none';
-            iframe.style.width = '100%';
-            iframe.style.height = '100%';
-            iframe.src = url;
-            win.document.body.appendChild(iframe);
-            
-            // Cloak the opened about:blank tab as well
-            cloakTab('Google Drive', 'https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png', win);
-        }
+function searchGames() {
+const input = document.getElementById('search').value.toLowerCase();
+const buttons = document.querySelectorAll('#gamebuttons .button:not(#randomGameButton)');
+let visibleCount = 0;
 
-        function cloakTab(title, icon, win = window) {
-            win.document.title = title;
-            let favicon = win.document.getElementById("favicon");
-            if (!favicon) {
-                favicon = win.document.createElement("link");
-                favicon.id = "favicon";
-                favicon.rel = "icon";
-                win.document.head.appendChild(favicon);
-            }
-            favicon.href = icon;
-        }
-    </script>
+buttons.forEach(button => {
+const buttonText = button.textContent.toLowerCase();
+if (buttonText.includes(input)) {
+button.style.display = 'inline-block';
+visibleCount++;
+} else {
+button.style.display = 'none';
+}
+});
+
+const randomGameButton = document.getElementById('randomGameButton');
+const noResults = document.getElementById('noResults');
+
+if (visibleCount === 0) {
+randomGameButton.style.display = 'none';
+noResults.style.display = 'block';
+} else {
+randomGameButton.style.display = 'inline-block';
+noResults.style.display = 'none';
+}
+}
+
+function randomGame() {
+const gameButtons = document.querySelectorAll('#gamebuttons .button:not(#randomGameButton):not([style*="display: none"])');
+if (gameButtons.length > 0) {
+const randomIndex = Math.floor(Math.random() * gameButtons.length);
+gameButtons[randomIndex].click();
+}
+}
+</script>
 </body>
 </html>
