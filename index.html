@@ -96,9 +96,9 @@
         <a href="Proxies/index.html" target="_blank">
             <button class="button" onclick="openGame('Proxies/index.html')">Proxies</button>
         </a>
-        <button class="button" id="toggleIframe">Enable about:blank Iframe</button>
+        <button class="button" id="toggleIframe">Enable Stealth Mode</button>
     </div>
-    <div id="notification" class="notification">Allow pop-ups for this feature to work!</div>
+    <div id="notification" class="notification">Allow pop-ups and reload for this feature to work!</div>
     <script>
         let aboutBlankEnabled = localStorage.getItem("aboutBlankEnabled") === "true";
 
@@ -147,7 +147,7 @@
                 if (win) {
                     let doc = win.document;
                     doc.open();
-                    doc.write('<html><body style="margin:0;height:100vh;overflow:hidden;"><iframe src="aboutblank/index.html" style="border:none;width:100%;height:100%;"></iframe></body></html>');
+                    doc.write('<html><body style="margin:0;height:100vh;overflow:hidden;"><iframe src="index.html" style="border:none;width:100%;height:100%;"></iframe></body></html>');
                     doc.close();
                 }
             }
