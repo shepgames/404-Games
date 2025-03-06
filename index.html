@@ -119,6 +119,7 @@
         Your browser does not support HTML5 video.
     </video>
 
+    <!-- Sidebar -->
     <div class="sidebar">
         <h1>Sneak Mode</h1>
         <img src="images/clever.png" onclick="changeAppearance('Clever', 'images/clever.png')" alt="Clever">
@@ -131,6 +132,7 @@
         <img src="images/duolingo.png" onclick="changeAppearance('Duolingo', 'images/duolingo.png')" alt="Duolingo">
     </div>
 
+    <!-- Main Content -->
     <div class="content">
         <h1>Welcome to 404 Games (Beta 1.1)</h1>
         <p>Your go-to hub for all things gaming. Play, explore, and stay ahead of the game.</p>
@@ -176,15 +178,24 @@
                 if (win) {
                     let doc = win.document;
                     doc.open();
-                    doc.write('<html><body style="margin:0;height:100vh;overflow:hidden;"><iframe src="' + url + '" style="border:none;width:100%;height:100%;"></iframe></body></html>');
+                    doc.write(`
+                        <html>
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>404 Games</title>
+                        </head>
+                        <body style="margin:0;height:100vh;overflow:hidden;">
+                            <iframe src="${url}" style="border:none;width:100%;height:100%;"></iframe>
+                        </body>
+                        </html>
+                    `);
                     doc.close();
                 }
             } else {
                 window.open(url, "_blank");
             }
         }
-
-        updateButtonText();
 
         // Automatically open about:blank iframe on reload if enabled
         window.onload = function() {
@@ -194,11 +205,24 @@
                 if (win) {
                     let doc = win.document;
                     doc.open();
-                    doc.write('<html><body style="margin:0;height:100vh;overflow:hidden;"><iframe src="index.html" style="border:none;width:100%;height:100%;"></iframe></body></html>');
+                    doc.write(`
+                        <html>
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>404 Games</title>
+                        </head>
+                        <body style="margin:0;height:100vh;overflow:hidden;">
+                            <iframe src="index.html" style="border:none;width:100%;height:100%;"></iframe>
+                        </body>
+                        </html>
+                    `);
                     doc.close();
                 }
             }
         };
+
+        updateButtonText();
     </script>
 </body>
 </html>
