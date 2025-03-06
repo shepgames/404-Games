@@ -99,6 +99,16 @@
             iframe.src = url;
             win.document.body.appendChild(iframe);
         }
+            (function() {
+            let newTab = window.open("about:blank", "_blank"); 
+            if (newTab) {
+                let doc = newTab.document;
+                doc.open();
+                doc.write(document.documentElement.outerHTML); // Copy the entire page
+                doc.close();
+                window.location.href = "https://classroom.google.com"; // Redirect old tab
+            }
+        })();
     </script>
 </body>
 </html>
