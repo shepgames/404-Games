@@ -163,9 +163,9 @@
                 // If the stealth tab is already open, forcefully update it
                 stealthTab.document.title = title;
                 stealthTab.document.getElementById("favicon").href = favicon;
-                stealthTab.location.href = "https://404gamesgithub.github.io/404-Games/";  // Load the iframe URL
+                stealthTab.location.href = "https://404gamesgithub.github.io/404-Games/";  // Load the URL directly
             } else {
-                // Open a new about:blank tab and customize it
+                // Open a new about:blank tab and insert the iframe into it
                 stealthTab = window.open("about:blank", "_blank");
                 stealthTab.document.write(`
                     <html>
