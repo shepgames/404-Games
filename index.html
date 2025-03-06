@@ -122,14 +122,14 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <h1>Sneak Mode</h1>
-        <img src="images/clever.png" onclick="changeAppearance('Clever', 'images/clever.png')" alt="Clever">
-        <img src="images/classroom.png" onclick="changeAppearance('Google Classroom', 'images/classroom.png')" alt="Google Classroom">
-        <img src="images/drive.png" onclick="changeAppearance('Google Drive', 'images/drive.png')" alt="Google Drive">
-        <img src="images/docs.png" onclick="changeAppearance('Google Docs', 'images/docs.png')" alt="Google Docs">
-        <img src="images/classdojo.png" onclick="changeAppearance('Class Dojo', 'images/classdojo.png')" alt="Class Dojo">
-        <img src="images/quizlet.png" onclick="changeAppearance('Quizlet', 'images/quizlet.png')" alt="Quizlet">
-        <img src="images/pear.png" onclick="changeAppearance('Pear Assessment', 'images/pear.png')" alt="Pear Assessment">
-        <img src="images/duolingo.png" onclick="changeAppearance('Duolingo', 'images/duolingo.png')" alt="Duolingo">
+        <img src="images/clever.png" onclick="openStealthTab('Clever', 'images/clever.png', 'about:blank')" alt="Clever">
+        <img src="images/classroom.png" onclick="openStealthTab('Google Classroom', 'images/classroom.png', 'about:blank')" alt="Google Classroom">
+        <img src="images/drive.png" onclick="openStealthTab('Google Drive', 'images/drive.png', 'about:blank')" alt="Google Drive">
+        <img src="images/docs.png" onclick="openStealthTab('Google Docs', 'images/docs.png', 'about:blank')" alt="Google Docs">
+        <img src="images/classdojo.png" onclick="openStealthTab('Class Dojo', 'images/classdojo.png', 'about:blank')" alt="Class Dojo">
+        <img src="images/quizlet.png" onclick="openStealthTab('Quizlet', 'images/quizlet.png', 'about:blank')" alt="Quizlet">
+        <img src="images/pear.png" onclick="openStealthTab('Pear Assessment', 'images/pear.png', 'about:blank')" alt="Pear Assessment">
+        <img src="images/duolingo.png" onclick="openStealthTab('Duolingo', 'images/duolingo.png', 'about:blank')" alt="Duolingo">
     </div>
 
     <!-- Main Content -->
@@ -138,24 +138,17 @@
         <p>Your go-to hub for all things gaming. Play, explore, and stay ahead of the game.</p>
         <p>Access hidden gaming portals with ease!</p>
         <a href="aboutblank/index.html" target="_blank">
-            <button class="button" onclick="openGame('aboutblank/index.html')">AboutBlank Games</button>
+            <button class="button">AboutBlank Games</button>
         </a>
         <a href="Proxies/index.html" target="_blank">
-            <button class="button" onclick="openGame('Proxies/index.html')">Proxies</button>
+            <button class="button">Proxies</button>
         </a>
-        <button class="button" id="toggleIframe">Enable Stealth Mode</button>
     </div>
 
     <div id="notification" class="notification">Allow pop-ups and reload for this feature to work!</div>
 
     <script>
-        let aboutBlankEnabled = localStorage.getItem("aboutBlankEnabled") === "true";
-        let iframeSource = "";
         let stealthTab = null;
-
-        function updateButtonText() {
-            document.getElementById('toggleIframe').textContent = aboutBlankEnabled ? "Disable Stealth Mode" : "Enable Stealth Mode";
-        }
 
         function showNotification() {
             const notification = document.getElementById("notification");
@@ -165,81 +158,37 @@
             }, 5000);
         }
 
-        document.getElementById('toggleIframe').addEventListener('click', function() {
-            aboutBlankEnabled = !aboutBlankEnabled;
-            localStorage.setItem("aboutBlankEnabled", aboutBlankEnabled);
-            updateButtonText();
-            if (aboutBlankEnabled) {
-                showNotification();
-            }
-        });
-
-        function openGame(url) {
-            if (aboutBlankEnabled) {
-                if (!stealthTab || stealthTab.closed) {
-                    stealthTab = window.open("about:blank", "_blank");
-                    stealthTab.document.write(`
-                        <html>
-                            <head>
-                                <title>404 Games</title>
-                                <link id="favicon" rel="icon" type="image/png" href="favicon.ico">
-                            </head>
-                            <body style="margin:0;height:100vh;overflow:hidden;">
-                                <iframe id="gameFrame" src="" style="border:none;width:100%;height:100%;"></iframe>
-                            </body>
-                        </html>
-                    `);
-                    stealthTab.document.close();
-                    // Set the URL of the iframe after the document is fully loaded
-                    stealthTab.onload = function() {
-                        stealthTab.document.getElementById('gameFrame').src = url;
-                    };
-                } else {
-                    // Update title and favicon in stealth tab
-                    stealthTab.document.title = "404 Games";
-                    stealthTab.document.getElementById("favicon").href = "favicon.ico";
-                }
-            } else {
-                window.open(url, "_blank");
-            }
-        }
-
-        function changeAppearance(name, imageSrc) {
-            // Change tab title
-            document.title = name;
-            // Change favicon
-            let favicon = document.getElementById("favicon");
-            favicon.href = imageSrc;
-
-            // Also update stealth mode tab if it's open
+        function openStealthTab(title, favicon, url) {
             if (stealthTab && !stealthTab.closed) {
-                let doc = stealthTab.document;
-                doc.title = name;
-                let faviconInStealth = doc.getElementById("favicon");
-                faviconInStealth.href = imageSrc;
-            }
-        }
-
-        window.onload = function() {
-            if (aboutBlankEnabled) {
-                showNotification();
+                // If the stealth tab is already open, forcefully update it
+                stealthTab.document.title = title;
+                stealthTab.document.getElementById("favicon").href = favicon;
+                stealthTab.location.href = url;
+            } else {
+                // Open a new about:blank tab and customize it
                 stealthTab = window.open("about:blank", "_blank");
                 stealthTab.document.write(`
                     <html>
                         <head>
-                            <title>404 Games</title>
-                            <link id="favicon" rel="icon" type="image/png" href="favicon.ico">
+                            <title>${title}</title>
+                            <link id="favicon" rel="icon" type="image/png" href="${favicon}">
                         </head>
                         <body style="margin:0;height:100vh;overflow:hidden;">
-                            <iframe id="gameFrame" src="" style="border:none;width:100%;height:100%;"></iframe>
+                            <iframe id="gameFrame" src="${url}" style="border:none;width:100%;height:100%;"></iframe>
                         </body>
                     </html>
                 `);
                 stealthTab.document.close();
             }
-        };
+        }
 
-        updateButtonText();
+        function showNotification() {
+            const notification = document.getElementById("notification");
+            notification.style.display = "block";
+            setTimeout(() => {
+                notification.style.display = "none";
+            }, 5000);
+        }
     </script>
 </body>
 </html>
