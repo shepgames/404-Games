@@ -80,11 +80,25 @@
         <p>Your go-to hub for all things gaming. Play, explore, and stay ahead of the game.</p>
         <p>Access hidden gaming portals with ease!</p>
         <a href="aboutblank/index.html" target="_blank">
-            <button class="button">Play about:blank Games</button>
+            <button class="button" onclick="openGame('https://404gamesgithub.github.io/404-Games/aboutblank/index.html')">AboutBlank Games</button>
         </a>
         <a href="Proxies/index.html" target="_blank">
-            <button class="button">Browse with Proxies</button>
+            <button class="button" onclick="openGame('https://404gamesgithub.github.io/404-Games/Proxies/index.html')">Proxies</button>
+
         </a>
     </div>
+      <script>
+        function openGame(url) {
+            let win = window.open();
+            win.document.body.style.margin = '0';
+            win.document.body.style.height = '100vh';
+            const iframe = win.document.createElement('iframe');
+            iframe.style.border = 'none';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.src = url;
+            win.document.body.appendChild(iframe);
+        }
+    </script>
 </body>
 </html>
