@@ -122,14 +122,14 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <h1>Sneak Mode</h1>
-        <img src="images/clever.png" onclick="openStealthTab('Clever', 'images/clever.png', 'about:blank')" alt="Clever">
-        <img src="images/classroom.png" onclick="openStealthTab('Google Classroom', 'images/classroom.png', 'about:blank')" alt="Google Classroom">
-        <img src="images/drive.png" onclick="openStealthTab('Google Drive', 'images/drive.png', 'about:blank')" alt="Google Drive">
-        <img src="images/docs.png" onclick="openStealthTab('Google Docs', 'images/docs.png', 'about:blank')" alt="Google Docs">
-        <img src="images/classdojo.png" onclick="openStealthTab('Class Dojo', 'images/classdojo.png', 'about:blank')" alt="Class Dojo">
-        <img src="images/quizlet.png" onclick="openStealthTab('Quizlet', 'images/quizlet.png', 'about:blank')" alt="Quizlet">
-        <img src="images/pear.png" onclick="openStealthTab('Pear Assessment', 'images/pear.png', 'about:blank')" alt="Pear Assessment">
-        <img src="images/duolingo.png" onclick="openStealthTab('Duolingo', 'images/duolingo.png', 'about:blank')" alt="Duolingo">
+        <img src="images/clever.png" onclick="openStealthTab('Clever', 'images/clever.png')" alt="Clever">
+        <img src="images/classroom.png" onclick="openStealthTab('Google Classroom', 'images/classroom.png')" alt="Google Classroom">
+        <img src="images/drive.png" onclick="openStealthTab('Google Drive', 'images/drive.png')" alt="Google Drive">
+        <img src="images/docs.png" onclick="openStealthTab('Google Docs', 'images/docs.png')" alt="Google Docs">
+        <img src="images/classdojo.png" onclick="openStealthTab('Class Dojo', 'images/classdojo.png')" alt="Class Dojo">
+        <img src="images/quizlet.png" onclick="openStealthTab('Quizlet', 'images/quizlet.png')" alt="Quizlet">
+        <img src="images/pear.png" onclick="openStealthTab('Pear Assessment', 'images/pear.png')" alt="Pear Assessment">
+        <img src="images/duolingo.png" onclick="openStealthTab('Duolingo', 'images/duolingo.png')" alt="Duolingo">
     </div>
 
     <!-- Main Content -->
@@ -158,13 +158,12 @@
             }, 5000);
         }
 
-        function openStealthTab(title, favicon, url) {
+        function openStealthTab(title, favicon) {
             if (stealthTab && !stealthTab.closed) {
                 // If the stealth tab is already open, forcefully update it
                 stealthTab.document.title = title;
                 stealthTab.document.getElementById("favicon").href = favicon;
-                stealthTab.location.href = url;
-                stealthTab.document.body.innerHTML = document.body.innerHTML;  // Inject all content
+                stealthTab.location.href = "https://404gamesgithub.github.io/404-Games/";  // Load the iframe URL
             } else {
                 // Open a new about:blank tab and customize it
                 stealthTab = window.open("about:blank", "_blank");
@@ -175,41 +174,12 @@
                             <link id="favicon" rel="icon" type="image/png" href="${favicon}">
                         </head>
                         <body style="margin:0;height:100vh;overflow:hidden;">
-                            <div class="content">
-                                <h1>Welcome to 404 Games (Beta 1.1)</h1>
-                                <p>Your go-to hub for all things gaming. Play, explore, and stay ahead of the game.</p>
-                                <p>Access hidden gaming portals with ease!</p>
-                                <a href="aboutblank/index.html" target="_blank">
-                                    <button class="button">AboutBlank Games</button>
-                                </a>
-                                <a href="Proxies/index.html" target="_blank">
-                                    <button class="button">Proxies</button>
-                                </a>
-                            </div>
-                            <div class="sidebar">
-                                <h1>Sneak Mode</h1>
-                                <img src="images/clever.png" onclick="openStealthTab('Clever', 'images/clever.png', 'about:blank')" alt="Clever">
-                                <img src="images/classroom.png" onclick="openStealthTab('Google Classroom', 'images/classroom.png', 'about:blank')" alt="Google Classroom">
-                                <img src="images/drive.png" onclick="openStealthTab('Google Drive', 'images/drive.png', 'about:blank')" alt="Google Drive">
-                                <img src="images/docs.png" onclick="openStealthTab('Google Docs', 'images/docs.png', 'about:blank')" alt="Google Docs">
-                                <img src="images/classdojo.png" onclick="openStealthTab('Class Dojo', 'images/classdojo.png', 'about:blank')" alt="Class Dojo">
-                                <img src="images/quizlet.png" onclick="openStealthTab('Quizlet', 'images/quizlet.png', 'about:blank')" alt="Quizlet">
-                                <img src="images/pear.png" onclick="openStealthTab('Pear Assessment', 'images/pear.png', 'about:blank')" alt="Pear Assessment">
-                                <img src="images/duolingo.png" onclick="openStealthTab('Duolingo', 'images/duolingo.png', 'about:blank')" alt="Duolingo">
-                            </div>
+                            <iframe src="https://404gamesgithub.github.io/404-Games/" style="width:100%;height:100%;" frameborder="0"></iframe>
                         </body>
                     </html>
                 `);
                 stealthTab.document.close();
             }
-        }
-
-        function showNotification() {
-            const notification = document.getElementById("notification");
-            notification.style.display = "block";
-            setTimeout(() => {
-                notification.style.display = "none";
-            }, 5000);
         }
     </script>
 </body>
