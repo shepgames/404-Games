@@ -79,6 +79,24 @@
             display: none;
             box-shadow: 0 4px 10px rgba(255, 0, 0, 0.5);
         }
+        .sidebar {
+            position: fixed;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .sidebar img {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .sidebar img:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -86,6 +104,15 @@
         <source src="09272.mp4" type="video/mp4">
         Your browser does not support HTML5 video.
     </video>
+     <div class="sidebar">
+        <img src="clever.png" onclick="changeAppearance('Clever', 'clever.png')" alt="Clever">
+        <img src="classroom.png" onclick="changeAppearance('Google Classroom', 'classroom.png')" alt="Google Classroom">
+        <img src="drive.png" onclick="changeAppearance('Google Drive', 'drive.png')" alt="Google Drive">
+        <img src="docs.png" onclick="changeAppearance('Google Docs', 'docs.png')" alt="Google Docs">
+        <img src="classdojo.png" onclick="changeAppearance('Class Dojo', 'classdojo.png')" alt="Class Dojo">
+        <img src="quizlet.png" onclick="changeAppearance('Quizlet', 'quizlet.png')" alt="Quizlet">
+        <img src="pear.png" onclick="changeAppearance('Pear Assessment', 'pear.png')" alt="Pear Assessment">
+        <img src="duolingo.png" onclick="changeAppearance('Duolingo', 'duolingo.png')" alt="Duolingo">
     <div class="content">
         <h1>Welcome to 404 Games (Beta 1.1)</h1>
         <p>Your go-to hub for all things gaming. Play, explore, and stay ahead of the game.</p>
@@ -152,6 +179,10 @@
                 }
             }
         };
+        function changeAppearance(title, favicon) {
+            document.title = title;
+            document.getElementById('favicon').href = favicon;
+        }
     </script>
 </body>
 </html>
