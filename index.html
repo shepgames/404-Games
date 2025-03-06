@@ -80,19 +80,24 @@
         <p>Your go-to hub for all things gaming. Play, explore, and stay ahead of the game.</p>
         <p>Access hidden gaming portals with ease!</p>
         <a href="aboutblank/index.html" target="_blank">
-            <button class="button">AboutBlank Games</button>
+            <button class="button" onclick="openGame('aboutblank/index.html')">AboutBlank Games</button>
         </a>
         <a href="Proxies/index.html" target="_blank">
-            <button class="button">Proxies</button>
+            <button class="button" onclick="openGame('Proxies/index.html')">Proxies</button>
         </a>
         <button class="button" id="toggleIframe">Enable about:blank Iframe</button>
     </div>
     <script>
-        let aboutBlankEnabled = false;
+        let aboutBlankEnabled = localStorage.getItem("aboutBlankEnabled") === "true";
+
+        function updateButtonText() {
+            document.getElementById('toggleIframe').textContent = aboutBlankEnabled ? "Disable about:blank Iframe" : "Enable about:blank Iframe";
+        }
 
         document.getElementById('toggleIframe').addEventListener('click', function() {
             aboutBlankEnabled = !aboutBlankEnabled;
-            this.textContent = aboutBlankEnabled ? "Disable about:blank Iframe" : "Enable about:blank Iframe";
+            localStorage.setItem("aboutBlankEnabled", aboutBlankEnabled);
+            updateButtonText();
         });
 
         function openGame(url) {
@@ -108,6 +113,8 @@
                 window.open(url, "_blank");
             }
         }
+
+        updateButtonText();
     </script>
 </body>
 </html>
