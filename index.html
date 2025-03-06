@@ -165,21 +165,20 @@
                 stealthTab.document.getElementById("favicon").href = favicon;
                 stealthTab.location.href = "https://404gamesgithub.github.io/404-Games/";  // Load the iframe URL
             } else {
-                // Open a new tab with custom HTML content
-                stealthTab = window.open("data:text/html;charset=utf-8," + encodeURIComponent(`
-                    <!DOCTYPE html>
-                    <html lang="en">
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>${title}</title>
-                        <link rel="icon" href="${favicon}">
-                    </head>
-                    <body style="margin:0;height:100vh;overflow:hidden;">
-                        <iframe src="https://404gamesgithub.github.io/404-Games/" style="width:100%;height:100%;" frameborder="0"></iframe>
-                    </body>
+                // Open a new about:blank tab and customize it
+                stealthTab = window.open("about:blank", "_blank");
+                stealthTab.document.write(`
+                    <html>
+                        <head>
+                            <title>${title}</title>
+                            <link id="favicon" rel="icon" type="image/png" href="${favicon}">
+                        </head>
+                        <body style="margin:0;height:100vh;overflow:hidden;">
+                            <iframe src="https://404gamesgithub.github.io/404-Games/" style="width:100%;height:100%;" frameborder="0"></iframe>
+                        </body>
                     </html>
-                `), "_blank");
+                `);
+                stealthTab.document.close();
             }
         }
     </script>
