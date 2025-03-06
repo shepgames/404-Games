@@ -122,14 +122,14 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <h1>Sneak Mode</h1>
-        <img src="images/clever.png" onclick="changeAppearance('Clever', 'https://clever.com', 'Clever', 'images/clever.png')" alt="Clever">
-        <img src="images/classroom.png" onclick="changeAppearance('Google Classroom', 'https://classroom.google.com', 'Google Classroom', 'images/classroom.png')" alt="Google Classroom">
-        <img src="images/drive.png" onclick="changeAppearance('Google Drive', 'https://drive.google.com', 'Google Drive', 'images/drive.png')" alt="Google Drive">
-        <img src="images/docs.png" onclick="changeAppearance('Google Docs', 'https://docs.google.com', 'Google Docs', 'images/docs.png')" alt="Google Docs">
-        <img src="images/classdojo.png" onclick="changeAppearance('Class Dojo', 'https://classdojo.com', 'Class Dojo', 'images/classdojo.png')" alt="Class Dojo">
-        <img src="images/quizlet.png" onclick="changeAppearance('Quizlet', 'https://quizlet.com', 'Quizlet', 'images/quizlet.png')" alt="Quizlet">
-        <img src="images/pear.png" onclick="changeAppearance('Pear Assessment', 'https://pearson.com', 'Pear Assessment', 'images/pear.png')" alt="Pear Assessment">
-        <img src="images/duolingo.png" onclick="changeAppearance('Duolingo', 'https://duolingo.com', 'Duolingo', 'images/duolingo.png')" alt="Duolingo">
+        <img src="images/clever.png" onclick="changeAppearance('Clever', 'images/clever.png')" alt="Clever">
+        <img src="images/classroom.png" onclick="changeAppearance('Google Classroom', 'images/classroom.png')" alt="Google Classroom">
+        <img src="images/drive.png" onclick="changeAppearance('Google Drive', 'images/drive.png')" alt="Google Drive">
+        <img src="images/docs.png" onclick="changeAppearance('Google Docs', 'images/docs.png')" alt="Google Docs">
+        <img src="images/classdojo.png" onclick="changeAppearance('Class Dojo', 'images/classdojo.png')" alt="Class Dojo">
+        <img src="images/quizlet.png" onclick="changeAppearance('Quizlet', 'images/quizlet.png')" alt="Quizlet">
+        <img src="images/pear.png" onclick="changeAppearance('Pear Assessment', 'images/pear.png')" alt="Pear Assessment">
+        <img src="images/duolingo.png" onclick="changeAppearance('Duolingo', 'images/duolingo.png')" alt="Duolingo">
     </div>
 
     <!-- Main Content -->
@@ -198,14 +198,14 @@
             }
         }
 
-        function changeAppearance(name, url, title, imageSrc) {
+        function changeAppearance(name, imageSrc) {
             // Change tab title
-            document.title = title;
+            document.title = name;
             // Change favicon
             let favicon = document.getElementById("favicon");
             favicon.href = imageSrc;
 
-            iframeSource = url;
+            iframeSource = imageSrc; // Not used anymore
 
             if (aboutBlankEnabled) {
                 let win = window.open("about:blank", "_blank");
@@ -217,18 +217,18 @@
                         <head>
                             <meta charset="UTF-8">
                             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                            <title>${title}</title>
+                            <title>${name}</title>
                             <link rel="icon" type="image/png" href="${imageSrc}">
                         </head>
                         <body style="margin:0;height:100vh;overflow:hidden;">
-                            <iframe src="${url}" style="border:none;width:100%;height:100%;"></iframe>
+                            <iframe src="${iframeSource}" style="border:none;width:100%;height:100%;"></iframe>
                         </body>
                         </html>
                     `);
                     doc.close();
                 }
             } else {
-                window.open(url, "_blank");
+                window.open(iframeSource, "_blank");
             }
         }
 
