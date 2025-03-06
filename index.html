@@ -178,23 +178,23 @@
             if (aboutBlankEnabled) {
                 if (!stealthTab || stealthTab.closed) {
                     stealthTab = window.open("about:blank", "_blank");
+                    stealthTab.document.write(`
+                        <html>
+                            <head>
+                                <title>404 Games</title>
+                                <link id="favicon" rel="icon" type="image/png" href="favicon.ico">
+                            </head>
+                            <body style="margin:0;height:100vh;overflow:hidden;">
+                                <iframe src="${url}" style="border:none;width:100%;height:100%;"></iframe>
+                            </body>
+                        </html>
+                    `);
+                    stealthTab.document.close();
+                } else {
+                    // Ensure the title and favicon update in stealth mode tab
+                    stealthTab.document.title = "404 Games";
+                    stealthTab.document.getElementById("favicon").href = "favicon.ico";
                 }
-                let doc = stealthTab.document;
-                doc.open();
-                doc.write(`
-                    <html>
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>404 Games</title>
-                        <link rel="icon" type="image/png" href="favicon.ico">
-                    </head>
-                    <body style="margin:0;height:100vh;overflow:hidden;">
-                        <iframe src="${url}" style="border:none;width:100%;height:100%;"></iframe>
-                    </body>
-                    </html>
-                `);
-                doc.close();
             } else {
                 window.open(url, "_blank");
             }
@@ -211,15 +211,8 @@
             if (stealthTab && !stealthTab.closed) {
                 let doc = stealthTab.document;
                 doc.title = name;
-                let faviconInStealth = doc.querySelector('link[rel="icon"]');
-                if (faviconInStealth) {
-                    faviconInStealth.href = imageSrc;
-                } else {
-                    let newFavicon = doc.createElement("link");
-                    newFavicon.rel = "icon";
-                    newFavicon.href = imageSrc;
-                    doc.head.appendChild(newFavicon);
-                }
+                let faviconInStealth = doc.getElementById("favicon");
+                faviconInStealth.href = imageSrc;
             }
         }
 
@@ -227,24 +220,18 @@
             if (aboutBlankEnabled) {
                 showNotification();
                 stealthTab = window.open("about:blank", "_blank");
-                if (stealthTab) {
-                    let doc = stealthTab.document;
-                    doc.open();
-                    doc.write(`
-                        <html>
+                stealthTab.document.write(`
+                    <html>
                         <head>
-                            <meta charset="UTF-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
                             <title>404 Games</title>
-                            <link rel="icon" type="image/png" href="favicon.ico">
+                            <link id="favicon" rel="icon" type="image/png" href="favicon.ico">
                         </head>
                         <body style="margin:0;height:100vh;overflow:hidden;">
                             <iframe src="index.html" style="border:none;width:100%;height:100%;"></iframe>
                         </body>
-                        </html>
-                    `);
-                    doc.close();
-                }
+                    </html>
+                `);
+                stealthTab.document.close();
             }
         };
 
