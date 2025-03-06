@@ -151,6 +151,7 @@
     <script>
         let aboutBlankEnabled = localStorage.getItem("aboutBlankEnabled") === "true";
         let iframeSource = "";
+        let stealthTab = null;
 
         function updateButtonText() {
             document.getElementById('toggleIframe').textContent = aboutBlankEnabled ? "Disable Stealth Mode" : "Enable Stealth Mode";
@@ -175,24 +176,24 @@
 
         function openGame(url) {
             if (aboutBlankEnabled) {
-                let win = window.open("about:blank", "_blank");
-                if (win) {
-                    let doc = win.document;
-                    doc.open();
-                    doc.write(`
-                        <html>
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                            <title>404 Games</title>
-                        </head>
-                        <body style="margin:0;height:100vh;overflow:hidden;">
-                            <iframe src="${url}" style="border:none;width:100%;height:100%;"></iframe>
-                        </body>
-                        </html>
-                    `);
-                    doc.close();
+                if (!stealthTab || stealthTab.closed) {
+                    stealthTab = window.open("about:blank", "_blank");
                 }
+                let doc = stealthTab.document;
+                doc.open();
+                doc.write(`
+                    <html>
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>404 Games</title>
+                    </head>
+                    <body style="margin:0;height:100vh;overflow:hidden;">
+                        <iframe src="${url}" style="border:none;width:100%;height:100%;"></iframe>
+                    </body>
+                    </html>
+                `);
+                doc.close();
             } else {
                 window.open(url, "_blank");
             }
@@ -204,14 +205,24 @@
             // Change favicon
             let favicon = document.getElementById("favicon");
             favicon.href = imageSrc;
+
+            // Also update stealth mode tab if it's open
+            if (stealthTab && !stealthTab.closed) {
+                let doc = stealthTab.document;
+                doc.title = name;
+                let faviconInStealth = doc.querySelector('link[rel="icon"]');
+                if (faviconInStealth) {
+                    faviconInStealth.href = imageSrc;
+                }
+            }
         }
 
         window.onload = function() {
             if (aboutBlankEnabled) {
                 showNotification();
-                let win = window.open("about:blank", "_blank");
-                if (win) {
-                    let doc = win.document;
+                stealthTab = window.open("about:blank", "_blank");
+                if (stealthTab) {
+                    let doc = stealthTab.document;
                     doc.open();
                     doc.write(`
                         <html>
