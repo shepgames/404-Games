@@ -68,6 +68,17 @@
             box-shadow: 0 6px 15px rgba(255, 255, 255, 0.4);
             transform: translateY(-2px);
         }
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 0, 0, 0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -87,6 +98,7 @@
         </a>
         <button class="button" id="toggleIframe">Enable about:blank Iframe</button>
     </div>
+    <div id="notification" class="notification">Allow pop-ups for this feature to work!</div>
     <script>
         let aboutBlankEnabled = localStorage.getItem("aboutBlankEnabled") === "true";
 
@@ -94,10 +106,21 @@
             document.getElementById('toggleIframe').textContent = aboutBlankEnabled ? "Disable about:blank Iframe" : "Enable about:blank Iframe";
         }
 
+        function showNotification() {
+            const notification = document.getElementById("notification");
+            notification.style.display = "block";
+            setTimeout(() => {
+                notification.style.display = "none";
+            }, 5000);
+        }
+
         document.getElementById('toggleIframe').addEventListener('click', function() {
             aboutBlankEnabled = !aboutBlankEnabled;
             localStorage.setItem("aboutBlankEnabled", aboutBlankEnabled);
             updateButtonText();
+            if (aboutBlankEnabled) {
+                showNotification();
+            }
         });
 
         function openGame(url) {
@@ -119,6 +142,7 @@
         // Automatically open about:blank iframe on reload if enabled
         window.onload = function() {
             if (aboutBlankEnabled) {
+                showNotification();
                 let win = window.open("about:blank", "_blank");
                 if (win) {
                     let doc = win.document;
