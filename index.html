@@ -115,6 +115,19 @@
         }
 
         updateButtonText();
+
+        // Automatically open about:blank iframe on reload if enabled
+        window.onload = function() {
+            if (aboutBlankEnabled) {
+                let win = window.open("about:blank", "_blank");
+                if (win) {
+                    let doc = win.document;
+                    doc.open();
+                    doc.write('<html><body style="margin:0;height:100vh;overflow:hidden;"><iframe src="aboutblank/index.html" style="border:none;width:100%;height:100%;"></iframe></body></html>');
+                    doc.close();
+                }
+            }
+        };
     </script>
 </body>
 </html>
