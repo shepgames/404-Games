@@ -187,6 +187,7 @@
                         <meta charset="UTF-8">
                         <meta name="viewport" content="width=device-width, initial-scale=1.0">
                         <title>404 Games</title>
+                        <link rel="icon" type="image/png" href="favicon.ico">
                     </head>
                     <body style="margin:0;height:100vh;overflow:hidden;">
                         <iframe src="${url}" style="border:none;width:100%;height:100%;"></iframe>
@@ -213,6 +214,11 @@
                 let faviconInStealth = doc.querySelector('link[rel="icon"]');
                 if (faviconInStealth) {
                     faviconInStealth.href = imageSrc;
+                } else {
+                    let newFavicon = doc.createElement("link");
+                    newFavicon.rel = "icon";
+                    newFavicon.href = imageSrc;
+                    doc.head.appendChild(newFavicon);
                 }
             }
         }
@@ -230,6 +236,7 @@
                             <meta charset="UTF-8">
                             <meta name="viewport" content="width=device-width, initial-scale=1.0">
                             <title>404 Games</title>
+                            <link rel="icon" type="image/png" href="favicon.ico">
                         </head>
                         <body style="margin:0;height:100vh;overflow:hidden;">
                             <iframe src="index.html" style="border:none;width:100%;height:100%;"></iframe>
