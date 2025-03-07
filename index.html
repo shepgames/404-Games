@@ -124,7 +124,7 @@
         <p>Your go-to hub for all things gaming. Play, explore, and stay ahead of the game.</p>
         <p>Access hidden gaming portals with ease!</p>
         <button class="button" onclick="openGame('https://404gamesgithub.github.io/404-Games/Proxies/index.html')">Proxies</button>
-        <button class="button" onclick="openPage('https://404gamesgithub.github.io/404-Games/aboutblank/index.html')">About Blank Games</button>
+        <button class="button" onclick="openGame('https://404gamesgithub.github.io/404-Games/aboutblank/index.html')">About Blank Games</button>
     </div>
 
     <div id="notification" class="notification">Allow pop-ups and reload for this feature to work!</div>
@@ -143,8 +143,7 @@
             if (!newTab || newTab.closed || typeof newTab.closed == "undefined") { 
                 showNotification(); // Notify user if pop-ups are blocked
             }
-
-              function openGame(url) {
+        function openGame(url) {
             let win = window.open();
             win.document.body.style.margin = '0';
             win.document.body.style.height = '100vh';
