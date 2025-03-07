@@ -77,8 +77,8 @@
     </video>
     <div class="content">
         <h1>Welcome to Proxies!</h1>
-        <h2>Due to a recent GoGuardian block, all Vercel (My deployment center) apps are currently down, which means that the old proxies are going to get replaced before I get more subdomains on FreeDNS (The more you wait, the more proxies). However, these new proxies will be very fast and yes, we have finnaly included the REAL Roblox on our site. (Go to about:blank games) Enjoy!</h2>
-        <h3>I would highly reccomend getting <a href="https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm?hl=en">uBlock Origin</a> or <a href="https://chromewebstore.google.com/detail/adblock-%E2%80%94-block-ads-acros/gighmmpiobklfepjocnamgkkbiglidom?hl=en">AdBlock (Copy and paste the link)</a></h3>         
+        <h2>Due to a recent GoGuardian block, all Vercel (My deployment center) apps are currently down, which means that the old proxies are going to get replaced before I get more subdomains on FreeDNS (The more you wait, the more proxies). However, these new proxies will be very fast and yes, we have finally included the REAL Roblox on our site. (Go to about:blank games) Enjoy!</h2>
+        <h3>I would highly recommend getting <a href="https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm?hl=en">uBlock Origin</a> or <a href="https://chromewebstore.google.com/detail/adblock-%E2%80%94-block-ads-acros/gighmmpiobklfepjocnamgkkbiglidom?hl=en">AdBlock (Copy and paste the link)</a></h3>         
         <button class="button" onclick="openGame('https://forms.gle/YwyjVFPazMnQMLod7')">Issue/Game Suggestion</button>
         <h4>If something doesn't work keep opening it</h4>
         <p>Your portal to the best unblocked proxies online. Browse freely!</p>
@@ -93,17 +93,12 @@
     </div>
     <script>
         function openGame(url) {
-            let win = window.open();
-            win.document.body.style.margin = '0';
-            win.document.body.style.height = '100vh';
-            const iframe = win.document.createElement('iframe');
-            iframe.style.border = 'none';
-            iframe.style.width = '100%';
-            iframe.style.height = '100%';
-            iframe.src = url;
-            win.document.body.appendChild(iframe);
+            const win = window.open(url, '_blank');
+            if (!win) {
+                alert('Popup blocked! Please allow popups for this site.');
+            }
         }
-        
+
         const links = [
             'http://152.53.80.35.mine.bz',
             'http://24.162.121.7.69.mu',
@@ -424,20 +419,19 @@
             'http://xn--pokmon-dva.is-very.fun'
         ];
 
-        // Function to open a random web link
         function openRandomPage() {
             const randomIndex = Math.floor(Math.random() * links.length);
             const randomLink = links[randomIndex];
-            let win = window.open();
-            win.document.body.style.margin = '0';
-            win.document.body.style.height = '100vh';
-            const iframe = win.document.createElement('iframe');
-            iframe.style.border = 'none';
-            iframe.style.width = '100%';
-            iframe.style.height = '100%';
-            iframe.src = randomLink;
-            win.document.body.appendChild(iframe);
+            const win = window.open(randomLink, '_blank');
+            if (!win) {
+                alert('Popup blocked! Please allow popups for this site.');
+            }
         }
+
+        const video = document.querySelector('.video-background');
+        video.addEventListener('error', () => {
+            console.error('Error loading video. Ensure "09272.mp4" is in the correct directory or use a valid URL.');
+        });
     </script>
 </body>
 </html>
