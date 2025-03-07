@@ -68,6 +68,11 @@
             box-shadow: 0 6px 15px rgba(255, 255, 255, 0.4);
             transform: translateY(-2px);
         }
+        .button:disabled {
+            background: #444;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
     </style>
 </head>
 <body>
@@ -87,7 +92,7 @@
             <button class="button" onclick="openGame('https://realroblox-production.up.railway.app/')">NettleWeb (Includes Roblox!)</button>
             <button class="button" onclick="openGame('https://dogunbl.nerdinator.net')">Shadow</button>
             <button class="button" onclick="openGame('https://wavzzz.lab-net.com.ar/')">Waves</button>
-            <button class="button" onclick="openRandomPage()">NowGG (Keep opening if it doesn't work)</button>
+            <button id="nowggButton" class="button" onclick="openRandomPage()">NowGG (Keep opening if it doesn't work)</button>
             <button class="button" onclick="openGame('https://swftly.ishevchenko.net/proxy.html')">SWIFLY</button>
         </div>
     </div>
@@ -98,7 +103,6 @@
                 alert('Popup blocked! Please allow popups for this site.');
                 return;
             }
-            // Write the iframe directly to the new window's document
             win.document.write(`
                 <!DOCTYPE html>
                 <html>
@@ -113,7 +117,7 @@
                 </body>
                 </html>
             `);
-            win.document.close(); // Ensure the document is fully loaded
+            win.document.close();
         }
 
         const links = [
@@ -436,12 +440,16 @@
             'http://xn--pokmon-dva.is-very.fun'
         ];
 
+        const nowggButton = document.getElementById('nowggButton');
+
         function openRandomPage() {
+            nowggButton.disabled = true; // Disable button to prevent spam clicks
             const randomIndex = Math.floor(Math.random() * links.length);
             const randomLink = links[randomIndex];
             const win = window.open('about:blank', '_blank');
             if (!win) {
                 alert('Popup blocked! Please allow popups for this site.');
+                nowggButton.disabled = false;
                 return;
             }
             win.document.write(`
@@ -454,11 +462,13 @@
                     </style>
                 </head>
                 <body>
-                    <iframe src="${randomLink}" allowfullscreen></iframe>
+                    <iframe src="${randomLink}" allowfullscreen onload="window.parent.document.getElementById('nowggButton').disabled = false;" onerror="window.parent.document.getElementById('nowggButton').disabled = false;"></iframe>
                 </body>
                 </html>
             `);
             win.document.close();
+            // Fallback to re-enable button after 5 seconds if iframe events fail
+            setTimeout(() => { nowggButton.disabled = false; }, 5000);
         }
 
         const video = document.querySelector('.video-background');
