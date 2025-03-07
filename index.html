@@ -143,8 +143,14 @@
             if (!newTab || newTab.closed || typeof newTab.closed == "undefined") { 
                 showNotification(); // Notify user if pop-ups are blocked
             }
+        }
+
         function openGame(url) {
             let win = window.open();
+            if (!win || win.closed || typeof win.closed == "undefined") {
+                showNotification();
+                return;
+            }
             win.document.body.style.margin = '0';
             win.document.body.style.height = '100vh';
             const iframe = win.document.createElement('iframe');
