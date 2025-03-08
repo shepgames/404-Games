@@ -327,9 +327,9 @@
                 if (i < text.length) {
                     element.textContent += text.charAt(i);
                     i++;
-                    typingTimeout = setTimeout(type, 100); // Typing speed (100ms per character)
+                    typingTimeout = setTimeout(type, 50); // Typing speed (100ms per character)
                 } else {
-                    typingTimeout = setTimeout(() => backspaceText(text, element, callback), 3000); // Pause before backspacing
+                    typingTimeout = setTimeout(() => backspaceText(text, element, callback), 1500); // Pause before backspacing
                 }
             }
             type();
@@ -341,7 +341,7 @@
                 if (i >= 0) {
                     element.textContent = text.substring(0, i);
                     i--;
-                    typingTimeout = setTimeout(backspace, 100); // Backspace speed matches typing (100ms per character)
+                    typingTimeout = setTimeout(backspace, 50); // Backspace speed matches typing (100ms per character)
                 } else {
                     typingTimeout = setTimeout(callback, 500); // Brief pause before next phrase
                 }
