@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proxies</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@400;500&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
         }
 
         body, html {
@@ -50,7 +51,9 @@
             width: 100%;
             background: rgba(24, 24, 24, 0.85);
             padding: 8px 15px;
-            text-align: right;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             z-index: 3;
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
@@ -67,6 +70,9 @@
         .settings-bar a:hover {
             color: #ffffff;
         }
+
+        .settings-bar .left { flex: 1; text-align: left; }
+        .settings-bar .right { flex: 1; text-align: right; }
 
         .content {
             position: relative;
@@ -86,47 +92,13 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        h1 {
-            font-size: 2.2rem;
-            font-weight: 500;
-            color: #ffffff;
-            margin-bottom: 15px;
-        }
-
-        h2 {
-            font-size: 1.2rem;
-            color: #b0b0b0;
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-
-        h3 {
-            font-size: 1rem;
-            color: #a0a0a0;
-            margin-bottom: 15px;
-        }
-
-        h3 a {
-            color: #3e5a78;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        h3 a:hover {
-            color: #ffffff;
-        }
-
-        h4 {
-            font-size: 0.9rem;
-            color: #a0a0a0;
-            margin-bottom: 15px;
-        }
-
-        p {
-            font-size: 1rem;
-            color: #b0b0b0;
-            margin-bottom: 20px;
-        }
+        h1 { font-size: 2.2rem; font-weight: 500; color: #ffffff; margin-bottom: 15px; }
+        h2 { font-size: 1.2rem; color: #b0b0b0; margin-bottom: 15px; line-height: 1.5; }
+        h3 { font-size: 1rem; color: #a0a0a0; margin-bottom: 15px; }
+        h3 a { color: #3e5a78; text-decoration: none; transition: color 0.3s ease; }
+        h3 a:hover { color: #ffffff; }
+        h4 { font-size: 0.9rem; color: #a0a0a0; margin-bottom: 15px; }
+        p { font-size: 1rem; color: #b0b0b0; margin-bottom: 20px; }
 
         .button {
             background: #2c3e50;
@@ -167,11 +139,9 @@
             transition: right 0.5s ease;
         }
 
-        .popup.show {
-            right: 20px;
-        }
+        .popup.show { right: 20px; }
 
-        .name-menu {
+        .name-menu, .settings-menu {
             position: fixed;
             top: 50%;
             left: 50%;
@@ -184,13 +154,13 @@
             z-index: 4;
             opacity: 0;
             transition: opacity 0.3s ease;
+            width: 90%;
+            max-width: 400px;
         }
 
-        .name-menu.show {
-            opacity: 1;
-        }
+        .name-menu.show, .settings-menu.show { opacity: 1; }
 
-        .name-menu h2 {
+        .name-menu h2, .settings-menu h2 {
             font-size: 1.5rem;
             color: #ffffff;
             margin-bottom: 15px;
@@ -209,7 +179,7 @@
             outline: none;
         }
 
-        .name-menu button {
+        .name-menu button, .settings-menu button {
             background: #2c3e50;
             color: #d0d0d0;
             border: 1px solid #3e5a78;
@@ -220,29 +190,95 @@
             transition: all 0.3s ease;
         }
 
-        .name-menu button:hover {
+        .name-menu button:hover, .settings-menu button:hover {
             background: #3e5a78;
             color: #ffffff;
         }
 
+        .settings-menu select {
+            background: #3a3a3a;
+            border: 1px solid #4a4a4a;
+            color: #d0d0d0;
+            padding: 8px;
+            font-size: 1rem;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 250px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .settings-menu .mode-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .settings-menu .mode-buttons button {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+
+        .settings-menu .info {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            line-height: 1.5;
+        }
+
+        /* Appearance Modes */
+        body.light { background: linear-gradient(60deg, #e0e0e0, #f5f5f5, #e0e0e0); color: #333; }
+        body.light .settings-bar { background: rgba(230, 230, 230, 0.85); }
+        body.light .content { background: rgba(230, 230, 230, 0.9); border-color: #d0d0d0; }
+        body.light .button { background: #d0d0d0; color: #333; border-color: #b0b0b0; }
+        body.light .button:hover { background: #b0b0b0; color: #fff; }
+        body.light .settings-bar a { color: #666; }
+        body.light .settings-bar a:hover { color: #000; }
+        body.light .name-menu, body.light .settings-menu { background: rgba(230, 230, 230, 0.85); border-color: #d0d0d0; }
+        body.light .name-menu h2, body.light .settings-menu h2 { color: #333; }
+        body.light .name-menu input, body.light .settings-menu select { background: #fff; border-color: #b0b0b0; color: #333; }
+        body.light .name-menu button, body.light .settings-menu button { background: #d0d0d0; color: #333; border-color: #b0b0b0; }
+        body.light .name-menu button:hover, body.light .settings-menu button:hover { background: #b0b0b0; color: #fff; }
+        body.light .popup { background: rgba(230, 230, 230, 0.9); color: #333; border-color: #d0d0d0; }
+        body.light h1 { color: #333; }
+        body.light h2, body.light h3, body.light h4, body.light p { color: #666; }
+        body.light h3 a { color: #007bff; }
+        body.light h3 a:hover { color: #0056b3; }
+
+        body.blue { background: linear-gradient(60deg, #1e3a8a, #3b82f6, #1e3a8a); color: #e0e7ff; }
+        body.blue .settings-bar { background: rgba(30, 58, 138, 0.85); }
+        body.blue .content { background: rgba(30, 58, 138, 0.9); border-color: #1e40af; }
+        body.blue .button { background: #1e40af; color: #e0e7ff; border-color: #1e3a8a; }
+        body.blue .button:hover { background: #2563eb; color: #fff; }
+        body.blue .settings-bar a { color: #93c5fd; }
+        body.blue .settings-bar a:hover { color: #fff; }
+        body.blue .name-menu, body.blue .settings-menu { background: rgba(30, 58, 138, 0.85); border-color: #1e40af; }
+        body.blue .name-menu h2, body.blue .settings-menu h2 { color: #e0e7ff; }
+        body.blue .name-menu input, body.blue .settings-menu select { background: #1e40af; border-color: #1e3a8a; color: #e0e7ff; }
+        body.blue .name-menu button, body.blue .settings-menu button { background: #1e40af; color: #e0e7ff; border-color: #1e3a8a; }
+        body.blue .name-menu button:hover, body.blue .settings-menu button:hover { background: #2563eb; color: #fff; }
+        body.blue .popup { background: rgba(30, 58, 138, 0.9); color: #e0e7ff; border-color: #1e40af; }
+
+        body.ultraviolet { background: linear-gradient(60deg, #4c1d95, #7c3aed, #4c1d95); color: #ede9fe; }
+        body.ultraviolet .settings-bar { background: rgba(76, 29, 149, 0.85); }
+        body.ultraviolet .content { background: rgba(76, 29, 149, 0.9); border-color: #6d28d9; }
+        body.ultraviolet .button { background: #6d28d9; color: #ede9fe; border-color: #4c1d95; }
+        body.ultraviolet .button:hover { background: #8b5cf6; color: #fff; }
+        body.ultraviolet .settings-bar a { color: #c4b5fd; }
+        body.ultraviolet .settings-bar a:hover { color: #fff; }
+        body.ultraviolet .name-menu, body.ultraviolet .settings-menu { background: rgba(76, 29, 149, 0.85); border-color: #6d28d9; }
+        body.ultraviolet .name-menu h2, body.ultraviolet .settings-menu h2 { color: #ede9fe; }
+        body.ultraviolet .name-menu input, body.ultraviolet .settings-menu select { background: #6d28d9; border-color: #4c1d95; color: #ede9fe; }
+        body.ultraviolet .name-menu button, body.ultraviolet .settings-menu button { background: #6d28d9; color: #ede9fe; border-color: #4c1d95; }
+        body.ultraviolet .name-menu button:hover, body.ultraviolet .settings-menu button:hover { background: #8b5cf6; color: #fff; }
+        body.ultraviolet .popup { background: rgba(76, 29, 149, 0.9); color: #ede9fe; border-color: #6d28d9; }
+
         @media (max-width: 768px) {
-            .content {
-                width: 90%;
-                padding: 20px;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            h2 {
-                font-size: 1rem;
-            }
-
-            .button {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-            }
+            .content { width: 90%; padding: 20px; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1rem; }
+            .button { padding: 10px 20px; font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -253,8 +289,13 @@
     </video>
 
     <div class="settings-bar">
-        <a href="#" onclick="showSettings()">Settings</a>
-        <a href="#" onclick="showNameMenu()">Change Name</a>
+        <div class="left">
+            <a href="https://404gamesgithub.github.io/404-Games/">Back to Home</a>
+        </div>
+        <div class="right">
+            <a href="#" onclick="showSettings()">Settings</a>
+            <a href="#" onclick="showNameMenu()">Change Name</a>
+        </div>
     </div>
 
     <div class="content" id="mainContent" style="display: none;">
@@ -280,6 +321,25 @@
         <h2>Hi, let's get to know you!</h2>
         <input type="text" id="nameInput" placeholder="Enter your name">
         <button onclick="submitName()">Submit</button>
+    </div>
+
+    <div class="settings-menu" id="settingsMenu" style="display: none;">
+        <h2>Settings</h2>
+        <select id="fontSelect" onchange="changeFont()">
+            <option value="Roboto">Roboto</option>
+            <option value="Poppins">Poppins</option>
+            <option value="Open Sans">Open Sans</option>
+        </select>
+        <div class="mode-buttons">
+            <button onclick="setMode('dark')">Dark Mode</button>
+            <button onclick="setMode('light')">Light Mode</button>
+            <button onclick="setMode('blue')">Blue Mode</button>
+            <button onclick="setMode('ultraviolet')">Ultraviolet Mode</button>
+        </div>
+        <div class="info">
+            Created by [Your Name]. Contact: your.email@example.com. This site provides unblocked proxies for gaming and browsing. Enjoy responsibly!
+        </div>
+        <button onclick="closeSettings()">Close</button>
     </div>
 
     <script>
@@ -383,7 +443,16 @@
         const nameMenu = document.getElementById("nameMenu");
         const mainContent = document.getElementById("mainContent");
         const popup = document.getElementById("greetingPopup");
+        const settingsMenu = document.getElementById("settingsMenu");
+        const fontSelect = document.getElementById("fontSelect");
         const nowggButton = document.getElementById('nowggButton');
+
+        // Load saved settings
+        const savedFont = localStorage.getItem("font") || "Roboto";
+        const savedMode = localStorage.getItem("mode") || "dark";
+        document.body.style.fontFamily = `'${savedFont}', sans-serif`;
+        fontSelect.value = savedFont;
+        document.body.className = savedMode;
 
         if (!userName) {
             nameMenu.style.display = "block";
@@ -400,7 +469,7 @@
             setTimeout(() => {
                 nameMenu.style.display = "none";
                 showMainContent();
-            }, 300); // Matches transition duration
+            }, 300);
         }
 
         function showMainContent() {
@@ -408,9 +477,7 @@
             popup.textContent = `Hello, ${userName}`;
             setTimeout(() => {
                 popup.classList.add("show");
-                setTimeout(() => {
-                    popup.classList.remove("show");
-                }, 3000); // Popup stays for 3 seconds
+                setTimeout(() => popup.classList.remove("show"), 3000);
             }, 100);
         }
 
@@ -419,6 +486,31 @@
             document.getElementById("nameInput").value = userName;
             setTimeout(() => nameMenu.classList.add("show"), 100);
             mainContent.style.display = "none";
+        }
+
+        function showSettings() {
+            settingsMenu.style.display = "block";
+            setTimeout(() => settingsMenu.classList.add("show"), 100);
+            mainContent.style.display = "none";
+        }
+
+        function closeSettings() {
+            settingsMenu.classList.remove("show");
+            setTimeout(() => {
+                settingsMenu.style.display = "none";
+                mainContent.style.display = "block";
+            }, 300);
+        }
+
+        function changeFont() {
+            const font = fontSelect.value;
+            document.body.style.fontFamily = `'${font}', sans-serif`;
+            localStorage.setItem("font", font);
+        }
+
+        function setMode(mode) {
+            document.body.className = mode;
+            localStorage.setItem("mode", mode);
         }
 
         function openGame(url) {
@@ -456,10 +548,6 @@
             }
             win.location.href = randomLink;
             setTimeout(() => { nowggButton.disabled = false; }, 1000);
-        }
-
-        function showSettings() {
-            alert("Settings coming soon!");
         }
 
         const video = document.querySelector('.video-background');
