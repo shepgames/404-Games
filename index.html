@@ -41,7 +41,7 @@
             background: rgba(24, 24, 24, 0.85);
             padding: 8px 15px;
             text-align: right;
-            z-index: 2;
+            z-index: 3;
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
         }
@@ -137,6 +137,60 @@
             right: 20px;
         }
 
+        .name-menu {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(24, 24, 24, 0.85);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid #2a2a2a;
+            text-align: center;
+            z-index: 4;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .name-menu.show {
+            opacity: 1;
+        }
+
+        .name-menu h2 {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .name-menu input {
+            background: #3a3a3a;
+            border: 1px solid #4a4a4a;
+            color: #d0d0d0;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 250px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .name-menu button {
+            background: #2c3e50;
+            color: #d0d0d0;
+            border: 1px solid #3e5a78;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .name-menu button:hover {
+            background: #3e5a78;
+            color: #ffffff;
+        }
+
         @media (max-width: 768px) {
             .content {
                 width: 90%;
@@ -160,13 +214,18 @@
             .text-bar {
                 font-size: 0.8rem;
             }
+
+            .name-menu {
+                width: 90%;
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="settings-bar">
         <a href="#" onclick="showSettings()">Settings</a>
-        <a href="#" onclick="changeName()">Change Name</a>
+        <a href="#" onclick="showNameMenu()">Change Name</a>
     </div>
 
     <div class="content" id="mainContent" style="display: none;">
@@ -179,6 +238,12 @@
     </div>
 
     <div class="popup" id="greetingPopup"></div>
+
+    <div class="name-menu" id="nameMenu" style="display: none;">
+        <h2>Hi, let's get to know you!</h2>
+        <input type="text" id="nameInput" placeholder="Enter your name">
+        <button onclick="submitName()">Submit</button>
+    </div>
 
     <script>
         const statements = [
@@ -193,26 +258,46 @@
         ];
 
         let userName = localStorage.getItem("userName");
+        const nameMenu = document.getElementById("nameMenu");
+        const mainContent = document.getElementById("mainContent");
+        const popup = document.getElementById("greetingPopup");
 
         if (!userName) {
-            userName = prompt("Hi, first let's get to know you. What's your name?");
-            if (userName) {
-                localStorage.setItem("userName", userName);
-            } else {
-                userName = "Guest";
-                localStorage.setItem("userName", userName);
-            }
+            nameMenu.style.display = "block";
+            setTimeout(() => nameMenu.classList.add("show"), 100);
+        } else {
+            showMainContent();
         }
 
-        document.getElementById("mainContent").style.display = "block";
-        const popup = document.getElementById("greetingPopup");
-        popup.textContent = `Hello, ${userName}`;
-        setTimeout(() => {
-            popup.classList.add("show");
+        function submitName() {
+            const nameInput = document.getElementById("nameInput").value.trim();
+            userName = nameInput || "Guest";
+            localStorage.setItem("userName", userName);
+            nameMenu.classList.remove("show");
             setTimeout(() => {
-                popup.classList.remove("show");
-            }, 3000); // Popup stays for 3 seconds
-        }, 100);
+                nameMenu.style.display = "none";
+                showMainContent();
+            }, 300); // Matches transition duration
+        }
+
+        function showMainContent() {
+            mainContent.style.display = "block";
+            popup.textContent = `Hello, ${userName}`;
+            setTimeout(() => {
+                popup.classList.add("show");
+                setTimeout(() => {
+                    popup.classList.remove("show");
+                }, 3000); // Popup stays for 3 seconds
+            }, 100);
+            cycleText();
+        }
+
+        function showNameMenu() {
+            nameMenu.style.display = "block";
+            document.getElementById("nameInput").value = userName;
+            setTimeout(() => nameMenu.classList.add("show"), 100);
+            mainContent.style.display = "none";
+        }
 
         function typeText(text, element, callback) {
             element.textContent = "";
@@ -234,7 +319,6 @@
             const randomStatement = statements[Math.floor(Math.random() * statements.length)];
             typeText(randomStatement, textBar, cycleText);
         }
-        cycleText();
 
         function openGame(url) {
             let win = window.open();
@@ -250,21 +334,6 @@
             iframe.style.height = "100%";
             iframe.src = url;
             win.document.body.appendChild(iframe);
-        }
-
-        function changeName() {
-            const newName = prompt("Enter your new name:");
-            if (newName) {
-                localStorage.setItem("userName", newName);
-                popup.textContent = `Hello, ${newName}`;
-                popup.classList.remove("show");
-                setTimeout(() => {
-                    popup.classList.add("show");
-                    setTimeout(() => {
-                        popup.classList.remove("show");
-                    }, 3000); // Popup stays for 3 seconds after name change
-                }, 100);
-            }
         }
 
         function showSettings() {
