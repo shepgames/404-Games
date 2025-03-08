@@ -261,6 +261,7 @@
         const nameMenu = document.getElementById("nameMenu");
         const mainContent = document.getElementById("mainContent");
         const popup = document.getElementById("greetingPopup");
+        let typingTimeout = null;
 
         if (!userName) {
             nameMenu.style.display = "block";
@@ -300,15 +301,18 @@
         }
 
         function typeText(text, element, callback) {
+            if (typingTimeout) {
+                clearTimeout(typingTimeout); // Clear any existing typing
+            }
             element.textContent = "";
             let i = 0;
             function type() {
                 if (i < text.length) {
                     element.textContent += text.charAt(i);
                     i++;
-                    setTimeout(type, 50); // Typing speed (50ms per character)
+                    typingTimeout = setTimeout(type, 100); // Slower typing speed (100ms per character)
                 } else {
-                    setTimeout(callback, 2000); // Pause before next statement
+                    typingTimeout = setTimeout(callback, 3000); // Longer pause before next statement
                 }
             }
             type();
