@@ -207,7 +207,12 @@
         document.getElementById("mainContent").style.display = "block";
         const popup = document.getElementById("greetingPopup");
         popup.textContent = `Hello, ${userName}`;
-        setTimeout(() => popup.classList.add("show"), 100);
+        setTimeout(() => {
+            popup.classList.add("show");
+            setTimeout(() => {
+                popup.classList.remove("show");
+            }, 3000); // Popup stays for 3 seconds
+        }, 100);
 
         function typeText(text, element, callback) {
             element.textContent = "";
@@ -253,7 +258,12 @@
                 localStorage.setItem("userName", newName);
                 popup.textContent = `Hello, ${newName}`;
                 popup.classList.remove("show");
-                setTimeout(() => popup.classList.add("show"), 100);
+                setTimeout(() => {
+                    popup.classList.add("show");
+                    setTimeout(() => {
+                        popup.classList.remove("show");
+                    }, 3000); // Popup stays for 3 seconds after name change
+                }, 100);
             }
         }
 
