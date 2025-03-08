@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 Games</title>
     <link id="favicon" rel="icon" type="image/png" href="favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@400;500&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: background 0.3s ease, color 0.3s ease, border 0.3s ease; /* Smooth transitions */
         }
 
         body, html {
             height: 100%;
             width: 100%;
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(60deg, #1a1a1a, #2c2c2c, #1a1a1a);
+            font-family: 'Roboto', sans-serif; /* Default font */
+            background: linear-gradient(60deg, #1a1a1a, #2c2c2c, #1a1a1a); /* Default: Dark Mode */
             background-size: 300% 300%;
             animation: gradientSwoosh 12s ease infinite;
             display: flex;
@@ -114,11 +115,11 @@
             padding: 8px 15px;
             background: rgba(40, 40, 40, 0.85);
             border-radius: 15px;
-            height: 36px; /* Fixed height to prevent shrinking */
-            line-height: 20px; /* Centers text vertically */
+            height: 36px;
+            line-height: 20px;
             overflow: hidden;
             white-space: nowrap;
-            transition: height 0.3s ease; /* Smooth transition if height ever changes */
+            transition: height 0.3s ease;
         }
 
         .popup {
@@ -139,7 +140,7 @@
             right: 20px;
         }
 
-        .name-menu {
+        .name-menu, .settings-menu {
             position: fixed;
             top: 50%;
             left: 50%;
@@ -152,13 +153,15 @@
             z-index: 4;
             opacity: 0;
             transition: opacity 0.3s ease;
+            width: 90%;
+            max-width: 400px;
         }
 
-        .name-menu.show {
+        .name-menu.show, .settings-menu.show {
             opacity: 1;
         }
 
-        .name-menu h2 {
+        .name-menu h2, .settings-menu h2 {
             font-size: 1.5rem;
             color: #ffffff;
             margin-bottom: 15px;
@@ -177,7 +180,7 @@
             outline: none;
         }
 
-        .name-menu button {
+        .name-menu button, .settings-menu button {
             background: #2c3e50;
             color: #d0d0d0;
             border: 1px solid #3e5a78;
@@ -188,10 +191,88 @@
             transition: all 0.3s ease;
         }
 
-        .name-menu button:hover {
+        .name-menu button:hover, .settings-menu button:hover {
             background: #3e5a78;
             color: #ffffff;
         }
+
+        .settings-menu select {
+            background: #3a3a3a;
+            border: 1px solid #4a4a4a;
+            color: #d0d0d0;
+            padding: 8px;
+            font-size: 1rem;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 250px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .settings-menu .mode-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .settings-menu .mode-buttons button {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+
+        .settings-menu .info {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            line-height: 1.5;
+        }
+
+        /* Appearance Modes */
+        body.light { background: linear-gradient(60deg, #e0e0e0, #f5f5f5, #e0e0e0); color: #333; }
+        body.light .settings-bar { background: rgba(230, 230, 230, 0.85); }
+        body.light .content { background: rgba(230, 230, 230, 0.9); border-color: #d0d0d0; }
+        body.light .button { background: #d0d0d0; color: #333; border-color: #b0b0b0; }
+        body.light .button:hover { background: #b0b0b0; color: #fff; }
+        body.light .settings-bar a { color: #666; }
+        body.light .settings-bar a:hover { color: #000; }
+        body.light .name-menu, body.light .settings-menu { background: rgba(230, 230, 230, 0.85); border-color: #d0d0d0; }
+        body.light .name-menu h2, body.light .settings-menu h2 { color: #333; }
+        body.light .name-menu input, body.light .settings-menu select { background: #fff; border-color: #b0b0b0; color: #333; }
+        body.light .name-menu button, body.light .settings-menu button { background: #d0d0d0; color: #333; border-color: #b0b0b0; }
+        body.light .name-menu button:hover, body.light .settings-menu button:hover { background: #b0b0b0; color: #fff; }
+        body.light .popup { background: rgba(230, 230, 230, 0.9); color: #333; border-color: #d0d0d0; }
+        body.light .text-bar { background: rgba(200, 200, 200, 0.85); color: #666; }
+
+        body.blue { background: linear-gradient(60deg, #1e3a8a, #3b82f6, #1e3a8a); color: #e0e7ff; }
+        body.blue .settings-bar { background: rgba(30, 58, 138, 0.85); }
+        body.blue .content { background: rgba(30, 58, 138, 0.9); border-color: #1e40af; }
+        body.blue .button { background: #1e40af; color: #e0e7ff; border-color: #1e3a8a; }
+        body.blue .button:hover { background: #2563eb; color: #fff; }
+        body.blue .settings-bar a { color: #93c5fd; }
+        body.blue .settings-bar a:hover { color: #fff; }
+        body.blue .name-menu, body.blue .settings-menu { background: rgba(30, 58, 138, 0.85); border-color: #1e40af; }
+        body.blue .name-menu h2, body.blue .settings-menu h2 { color: #e0e7ff; }
+        body.blue .name-menu input, body.blue .settings-menu select { background: #1e40af; border-color: #1e3a8a; color: #e0e7ff; }
+        body.blue .name-menu button, body.blue .settings-menu button { background: #1e40af; color: #e0e7ff; border-color: #1e3a8a; }
+        body.blue .name-menu button:hover, body.blue .settings-menu button:hover { background: #2563eb; color: #fff; }
+        body.blue .popup { background: rgba(30, 58, 138, 0.9); color: #e0e7ff; border-color: #1e40af; }
+        body.blue .text-bar { background: rgba(40, 80, 160, 0.85); color: #93c5fd; }
+
+        body.ultraviolet { background: linear-gradient(60deg, #4c1d95, #7c3aed, #4c1d95); color: #ede9fe; }
+        body.ultraviolet .settings-bar { background: rgba(76, 29, 149, 0.85); }
+        body.ultraviolet .content { background: rgba(76, 29, 149, 0.9); border-color: #6d28d9; }
+        body.ultraviolet .button { background: #6d28d9; color: #ede9fe; border-color: #4c1d95; }
+        body.ultraviolet .button:hover { background: #8b5cf6; color: #fff; }
+        body.ultraviolet .settings-bar a { color: #c4b5fd; }
+        body.ultraviolet .settings-bar a:hover { color: #fff; }
+        body.ultraviolet .name-menu, body.ultraviolet .settings-menu { background: rgba(76, 29, 149, 0.85); border-color: #6d28d9; }
+        body.ultraviolet .name-menu h2, body.ultraviolet .settings-menu h2 { color: #ede9fe; }
+        body.ultraviolet .name-menu input, body.ultraviolet .settings-menu select { background: #6d28d9; border-color: #4c1d95; color: #ede9fe; }
+        body.ultraviolet .name-menu button, body.ultraviolet .settings-menu button { background: #6d28d9; color: #ede9fe; border-color: #4c1d95; }
+        body.ultraviolet .name-menu button:hover, body.ultraviolet .settings-menu button:hover { background: #8b5cf6; color: #fff; }
+        body.ultraviolet .popup { background: rgba(76, 29, 149, 0.9); color: #ede9fe; border-color: #6d28d9; }
+        body.ultraviolet .text-bar { background: rgba(100, 50, 180, 0.85); color: #c4b5fd; }
 
         @media (max-width: 768px) {
             .content {
@@ -215,10 +296,10 @@
 
             .text-bar {
                 font-size: 0.8rem;
-                height: 32px; /* Adjusted for smaller screens */
+                height: 32px;
             }
 
-            .name-menu {
+            .name-menu, .settings-menu {
                 width: 90%;
                 padding: 20px;
             }
@@ -246,6 +327,26 @@
         <h2>Hi, let's get to know you!</h2>
         <input type="text" id="nameInput" placeholder="Enter your name">
         <button onclick="submitName()">Submit</button>
+    </div>
+
+    <div class="settings-menu" id="settingsMenu" style="display: none;">
+        <h2>Settings</h2>
+        <select id="fontSelect" onchange="changeFont()">
+            <option value="Roboto">Roboto</option>
+            <option value="Poppins">Poppins</option>
+            <option value="Open Sans">Open Sans</option>
+        </select>
+        <div class="mode-buttons">
+            <button onclick="setMode('dark')">Dark Mode</button>
+            <button onclick="setMode('light')">Light Mode</button>
+            <button onclick="setMode('blue')">Blue Mode</button>
+            <button onclick="setMode('ultraviolet')">Ultraviolet Mode</button>
+        </div>
+        <div class="info">
+            <!-- Customize this section with your info -->
+            Created by [Your Name]. Contact: your.email@example.com. Welcome to 404 Games, your hub for unblocked gaming fun!
+        </div>
+        <button onclick="closeSettings()">Close</button>
     </div>
 
     <script>
@@ -278,7 +379,16 @@
         const nameMenu = document.getElementById("nameMenu");
         const mainContent = document.getElementById("mainContent");
         const popup = document.getElementById("greetingPopup");
+        const settingsMenu = document.getElementById("settingsMenu");
+        const fontSelect = document.getElementById("fontSelect");
         let typingTimeout = null;
+
+        // Load saved settings
+        const savedFont = localStorage.getItem("font") || "Roboto";
+        const savedMode = localStorage.getItem("mode") || "dark";
+        document.body.style.fontFamily = `'${savedFont}', sans-serif`;
+        fontSelect.value = savedFont;
+        document.body.className = savedMode;
 
         if (!userName) {
             nameMenu.style.display = "block";
@@ -295,7 +405,7 @@
             setTimeout(() => {
                 nameMenu.style.display = "none";
                 showMainContent();
-            }, 300); // Matches transition duration
+            }, 300);
         }
 
         function showMainContent() {
@@ -303,9 +413,7 @@
             popup.textContent = `Hello, ${userName}`;
             setTimeout(() => {
                 popup.classList.add("show");
-                setTimeout(() => {
-                    popup.classList.remove("show");
-                }, 3000); // Popup stays for 3 seconds
+                setTimeout(() => popup.classList.remove("show"), 3000);
             }, 100);
             cycleText();
         }
@@ -317,9 +425,34 @@
             mainContent.style.display = "none";
         }
 
+        function showSettings() {
+            settingsMenu.style.display = "block";
+            setTimeout(() => settingsMenu.classList.add("show"), 100);
+            mainContent.style.display = "none";
+        }
+
+        function closeSettings() {
+            settingsMenu.classList.remove("show");
+            setTimeout(() => {
+                settingsMenu.style.display = "none";
+                mainContent.style.display = "block";
+            }, 300);
+        }
+
+        function changeFont() {
+            const font = fontSelect.value;
+            document.body.style.fontFamily = `'${font}', sans-serif`;
+            localStorage.setItem("font", font);
+        }
+
+        function setMode(mode) {
+            document.body.className = mode;
+            localStorage.setItem("mode", mode);
+        }
+
         function typeText(text, element, callback) {
             if (typingTimeout) {
-                clearTimeout(typingTimeout); // Clear any existing typing
+                clearTimeout(typingTimeout);
             }
             element.textContent = "";
             let i = 0;
@@ -327,9 +460,9 @@
                 if (i < text.length) {
                     element.textContent += text.charAt(i);
                     i++;
-                    typingTimeout = setTimeout(type, 50); // Typing speed (100ms per character)
+                    typingTimeout = setTimeout(type, 50);
                 } else {
-                    typingTimeout = setTimeout(() => backspaceText(text, element, callback), 1500); // Pause before backspacing
+                    typingTimeout = setTimeout(() => backspaceText(text, element, callback), 1500);
                 }
             }
             type();
@@ -341,9 +474,9 @@
                 if (i >= 0) {
                     element.textContent = text.substring(0, i);
                     i--;
-                    typingTimeout = setTimeout(backspace, 50); // Backspace speed matches typing (100ms per character)
+                    typingTimeout = setTimeout(backspace, 50);
                 } else {
-                    typingTimeout = setTimeout(callback, 500); // Brief pause before next phrase
+                    typingTimeout = setTimeout(callback, 500);
                 }
             }
             backspace();
@@ -369,10 +502,6 @@
             iframe.style.height = "100%";
             iframe.src = url;
             win.document.body.appendChild(iframe);
-        }
-
-        function showSettings() {
-            alert("Settings coming soon!");
         }
     </script>
 </body>
