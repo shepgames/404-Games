@@ -1,104 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>404 Games</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-<style>
-body, html {
-margin: 0;
-padding: 0;
-height: 100%;
-width: 100%;
-font-family: 'Poppins', sans-serif;
-background: linear-gradient(to right, #121212, #2c2c2c);
-display: flex;
-justify-content: center;
-align-items: center;
-color: white;
-text-align: center;
-}
-.video-background {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-z-index: -1;
-object-fit: cover;
-filter: brightness(0.5);
-}
-.content {
-position: relative;
-z-index: 1;
-padding: 30px;
-background: rgba(0, 0, 0, 0.6);
-border-radius: 15px;
-box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-width: 90%;
-max-width: 800px;
-text-align: center;
-max-height: 80vh;
-overflow-y: auto;
-}
-h1 {
-color: #a0a0a0;
-font-size: 2.2rem;
-margin-bottom: 15px;
-font-weight: bold;
-}
-p {
-font-size: 1rem;
-margin-bottom: 20px;
-opacity: 0.9;
-}
-.button {
-background: linear-gradient(135deg, #333, #555);
-color: white;
-border: none;
-padding: 12px 25px;
-font-size: 16px;
-cursor: pointer;
-margin: 8px;
-transition: all 0.3s;
-border-radius: 8px;
-font-weight: bold;
-box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
-}
-.button:hover {
-background: linear-gradient(135deg, #555, #777);
-box-shadow: 0 6px 15px rgba(255, 255, 255, 0.4);
-transform: translateY(-2px);
-}
-.search-bar {
-margin: 20px;
-padding: 10px;
-font-size: 16px;
-width: 80%;
-max-width: 600px;
-border-radius: 8px;
-}
-.no-results {
-display: none;
-color: red;
-font-size: 1.2rem;
-margin-top: 10px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Games</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background 0.3s ease, color 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            font-family: 'Poppins', sans-serif; /* Default font */
+            background: linear-gradient(to right, #121212, #2c2c2c); /* Default: Dark Mode */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            filter: brightness(0.5);
+        }
+
+        .settings-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 8px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 3;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .settings-bar a {
+            color: #a0a0a0;
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .settings-bar a:hover {
+            color: #ffffff;
+        }
+
+        .settings-bar .left { flex: 1; text-align: left; }
+        .settings-bar .right { flex: 1; text-align: right; }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        h1 {
+            color: #a0a0a0;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .button {
+            background: linear-gradient(135deg, #333, #555);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 8px;
+            transition: all 0.3s;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .button:hover {
+            background: linear-gradient(135deg, #555, #777);
+            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .search-bar {
+            margin: 20px;
+            padding: 10px;
+            font-size: 16px;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+            background: rgba(50, 50, 50, 0.8);
+            color: white;
+            border: none;
+            outline: none;
+        }
+
+        .no-results {
+            display: none;
+            color: red;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .settings-menu {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.6);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            text-align: center;
+            z-index: 4;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .settings-menu.show {
+            opacity: 1;
+        }
+
+        .settings-menu h2 {
+            font-size: 1.5rem;
+            color: #a0a0a0;
+            margin-bottom: 15px;
+        }
+
+        .settings-menu select {
+            background: rgba(50, 50, 50, 0.8);
+            border: none;
+            color: white;
+            padding: 8px;
+            font-size: 1rem;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 250px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .settings-menu .mode-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .settings-menu .mode-buttons button {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+
+        .settings-menu .info {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        /* Appearance Modes */
+        body.light { background: linear-gradient(to right, #e0e0e0, #f5f5f5); color: #333; }
+        body.light .settings-bar { background: rgba(230, 230, 230, 0.85); }
+        body.light .content { background: rgba(230, 230, 230, 0.9); box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); }
+        body.light .button { background: linear-gradient(135deg, #d0d0d0, #b0b0b0); color: #333; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); }
+        body.light .button:hover { background: linear-gradient(135deg, #b0b0b0, #999); color: #fff; box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); }
+        body.light .settings-bar a { color: #666; }
+        body.light .settings-bar a:hover { color: #000; }
+        body.light .search-bar { background: rgba(255, 255, 255, 0.8); color: #333; }
+        body.light h1, body.light .settings-menu h2 { color: #333; }
+        body.light p, body.light .settings-menu .info { color: #666; }
+        body.light .settings-menu { background: rgba(230, 230, 230, 0.9); box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); }
+        body.light .settings-menu select { background: rgba(255, 255, 255, 0.8); color: #333; }
+
+        body.blue { background: linear-gradient(to right, #1e3a8a, #3b82f6); color: #e0e7ff; }
+        body.blue .settings-bar { background: rgba(30, 58, 138, 0.85); }
+        body.blue .content { background: rgba(30, 58, 138, 0.9); box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); }
+        body.blue .button { background: linear-gradient(135deg, #1e40af, #2563eb); color: #e0e7ff; box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2); }
+        body.blue .button:hover { background: linear-gradient(135deg, #2563eb, #1e40af); box-shadow: 0 6px 15px rgba(255, 255, 255, 0.4); }
+        body.blue .settings-bar a { color: #93c5fd; }
+        body.blue .settings-bar a:hover { color: #fff; }
+        body.blue .search-bar { background: rgba(40, 80, 160, 0.8); color: #e0e7ff; }
+        body.blue h1, body.blue .settings-menu h2 { color: #e0e7ff; }
+        body.blue p, body.blue .settings-menu .info { color: #93c5fd; }
+        body.blue .settings-menu { background: rgba(30, 58, 138, 0.9); }
+        body.blue .settings-menu select { background: rgba(40, 80, 160, 0.8); color: #e0e7ff; }
+
+        body.ultraviolet { background: linear-gradient(to right, #4c1d95, #7c3aed); color: #ede9fe; }
+        body.ultraviolet .settings-bar { background: rgba(76, 29, 149, 0.85); }
+        body.ultraviolet .content { background: rgba(76, 29, 149, 0.9); box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); }
+        body.ultraviolet .button { background: linear-gradient(135deg, #6d28d9, #8b5cf6); color: #ede9fe; box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2); }
+        body.ultraviolet .button:hover { background: linear-gradient(135deg, #8b5cf6, #6d28d9); box-shadow: 0 6px 15px rgba(255, 255, 255, 0.4); }
+        body.ultraviolet .settings-bar a { color: #c4b5fd; }
+        body.ultraviolet .settings-bar a:hover { color: #fff; }
+        body.ultraviolet .search-bar { background: rgba(100, 50, 180, 0.8); color: #ede9fe; }
+        body.ultraviolet h1, body.ultraviolet .settings-menu h2 { color: #ede9fe; }
+        body.ultraviolet p, body.ultraviolet .settings-menu .info { color: #c4b5fd; }
+        body.ultraviolet .settings-menu { background: rgba(76, 29, 149, 0.9); }
+        body.ultraviolet .settings-menu select { background: rgba(100, 50, 180, 0.8); color: #ede9fe; }
+    </style>
 </head>
 <body>
-<video class="video-background" autoplay loop muted>
-<source src="09272.mp4" type="video/mp4">
-Your browser does not support HTML5 video.
-</video>
-<div class="content">
-<h1>Welcome to about:blank Games!</h1>
-<p>Your portal to the best unblocked games online. Play now!</p>
-         <button class="button" onclick="randomGame()">Random Game</button>
-         <button class="button" onclick="openGame('https://forms.gle/YwyjVFPazMnQMLod7')">Issue/Game Suggestion</button>
-<input type="text" class="search-bar" id="search" placeholder="Search for a game..." onkeyup="searchGames()">
-<div id="gamebuttons">
+    <video class="video-background" autoplay loop muted>
+        <source src="09272.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <div class="settings-bar">
+        <div class="left">
+            <a href="https://404gamesgithub.github.io/404-Games/">Back to Main Menu</a>
+        </div>
+        <div class="right">
+            <a href="#" onclick="showSettings()">Settings</a>
+        </div>
+    </div>
+
+    <div class="content" id="mainContent">
+        <h1>Welcome to about:blank Games!</h1>
+        <p>Your portal to the best unblocked games online. Play now!</p>
+        <button class="button" onclick="randomGame()">Random Game</button>
+        <button class="button" onclick="openGame('https://forms.gle/YwyjVFPazMnQMLod7')">Issue/Game Suggestion</button>
+        <input type="text" class="search-bar" id="search" placeholder="Search for a game..." onkeyup="searchGames()">
+        <div id="gamebuttons">
 <button class="button" onclick="openGame('https://404gamesgithub.github.io/1on1soccer/')">1 on 1 Soccer</button>
 <button class="button" onclick="openGame('https://404gamesgithub.github.io/1v1lol/')">1v1.lol</button>
 <button class="button" onclick="openGame('https://404gamesgithub.github.io/offBrandFortnite/')">Off Brand Fortnite</button>
@@ -344,56 +501,107 @@ Your browser does not support HTML5 video.
 <button class="button" onclick="openGame('https://404gamesgithub.github.io/stealingthediamond/')">Stealing The Diamond</button>
 <button class="button" onclick="openGame('https://404gamesgithub.github.io/stickmanboost/')">Stickman Boost</button>
 <button class="button" onclick="openGame('https://404gamesgithub.github.io/stickmanclimb/')">Stickman Climb</button>
-</div>
-<p id="noResults" class="no-results">No results found</p>
-</div>
-<script>
-function openGame(url) {
-let win = window.open();
-win.document.body.style.margin = '0';
-win.document.body.style.height = '100vh';
-const iframe = win.document.createElement('iframe');
-iframe.style.border = 'none';
-iframe.style.width = '100%';
-iframe.style.height = '100%';
-iframe.src = url;
-win.document.body.appendChild(iframe);
-}
+        </div>
+        <p id="noResults" class="no-results">No results found</p>
+    </div>
 
-function searchGames() {
-const input = document.getElementById('search').value.toLowerCase();
-const buttons = document.querySelectorAll('#gamebuttons .button:not(#randomGameButton)');
-let visibleCount = 0;
+    <div class="settings-menu" id="settingsMenu" style="display: none;">
+        <h2>Settings</h2>
+        <select id="fontSelect" onchange="changeFont()">
+            <option value="Poppins">Poppins</option>
+            <option value="Roboto">Roboto</option>
+            <option value="Open Sans">Open Sans</option>
+        </select>
+        <div class="mode-buttons">
+            <button class="button" onclick="setMode('dark')">Dark Mode</button>
+            <button class="button" onclick="setMode('light')">Light Mode</button>
+            <button class="button" onclick="setMode('blue')">Blue Mode</button>
+            <button class="button" onclick="setMode('ultraviolet')">Ultraviolet Mode</button>
+        </div>
+        <div class="info">
+            Created by [Your Name]. Contact: your.email@example.com. Welcome to about:blank Games, your hub for unblocked gaming fun!
+        </div>
+        <button class="button" onclick="closeSettings()">Close</button>
+    </div>
 
-buttons.forEach(button => {
-const buttonText = button.textContent.toLowerCase();
-if (buttonText.includes(input)) {
-button.style.display = 'inline-block';
-visibleCount++;
-} else {
-button.style.display = 'none';
-}
-});
+    <script>
+        // Load saved settings
+        const savedFont = localStorage.getItem("font") || "Poppins";
+        const savedMode = localStorage.getItem("mode") || "dark";
+        document.body.style.fontFamily = `'${savedFont}', sans-serif`;
+        document.getElementById("fontSelect").value = savedFont;
+        document.body.className = savedMode;
 
-const randomGameButton = document.getElementById('randomGameButton');
-const noResults = document.getElementById('noResults');
+        const mainContent = document.getElementById("mainContent");
+        const settingsMenu = document.getElementById("settingsMenu");
 
-if (visibleCount === 0) {
-randomGameButton.style.display = 'none';
-noResults.style.display = 'block';
-} else {
-randomGameButton.style.display = 'inline-block';
-noResults.style.display = 'none';
-}
-}
+        function openGame(url) {
+            let win = window.open();
+            if (!win || win.closed || typeof win.closed === "undefined") {
+                alert("Please allow pop-ups and reload!");
+                return;
+            }
+            win.document.body.style.margin = "0";
+            win.document.body.style.height = "100vh";
+            const iframe = win.document.createElement("iframe");
+            iframe.style.border = "none";
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            iframe.src = url;
+            win.document.body.appendChild(iframe);
+        }
 
-function randomGame() {
-const gameButtons = document.querySelectorAll('#gamebuttons .button:not(#randomGameButton):not([style*="display: none"])');
-if (gameButtons.length > 0) {
-const randomIndex = Math.floor(Math.random() * gameButtons.length);
-gameButtons[randomIndex].click();
-}
-}
-</script>
+        function searchGames() {
+            const input = document.getElementById("search").value.toLowerCase();
+            const buttons = document.querySelectorAll("#gamebuttons .button");
+            let visibleCount = 0;
+
+            buttons.forEach(button => {
+                const buttonText = button.textContent.toLowerCase();
+                if (buttonText.includes(input)) {
+                    button.style.display = "inline-block";
+                    visibleCount++;
+                } else {
+                    button.style.display = "none";
+                }
+            });
+
+            const noResults = document.getElementById("noResults");
+            noResults.style.display = visibleCount === 0 ? "block" : "none";
+        }
+
+        function randomGame() {
+            const gameButtons = document.querySelectorAll("#gamebuttons .button:not([style*='display: none'])");
+            if (gameButtons.length > 0) {
+                const randomIndex = Math.floor(Math.random() * gameButtons.length);
+                gameButtons[randomIndex].click();
+            }
+        }
+
+        function showSettings() {
+            settingsMenu.style.display = "block";
+            setTimeout(() => settingsMenu.classList.add("show"), 100);
+            mainContent.style.display = "none";
+        }
+
+        function closeSettings() {
+            settingsMenu.classList.remove("show");
+            setTimeout(() => {
+                settingsMenu.style.display = "none";
+                mainContent.style.display = "block";
+            }, 300);
+        }
+
+        function changeFont() {
+            const font = document.getElementById("fontSelect").value;
+            document.body.style.fontFamily = `'${font}', sans-serif`;
+            localStorage.setItem("font", font);
+        }
+
+        function setMode(mode) {
+            document.body.className = mode;
+            localStorage.setItem("mode", mode);
+        }
+    </script>
 </body>
 </html>
