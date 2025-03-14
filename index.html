@@ -7,7 +7,303 @@
     <link id="favicon" rel="icon" type="image/png" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@400;500&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* [Previous CSS remains unchanged] */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(60deg, #1a1a1a, #2c2c2c, #1a1a1a);
+            background-size: 300% 300%;
+            animation: gradientSwoosh 12s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #c0c0c0;
+            overflow: hidden;
+        }
+
+        @keyframes gradientSwoosh {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .settings-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(24, 24, 24, 0.85);
+            padding: 8px 15px;
+            text-align: right;
+            z-index: 3;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .settings-bar a {
+            color: #a0a0a0;
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .settings-bar a:hover {
+            color: #ffffff;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 25px;
+            background: rgba(24, 24, 24, 0.9);
+            border-radius: 20px;
+            width: 80%;
+            max-width: 480px;
+            text-align: center;
+            border: 1px solid #2a2a2a;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 1.9rem;
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 25px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .button {
+            background: #2c3e50;
+            color: #d0d0d0;
+            border: 1px solid #3e5a78;
+            padding: 10px 35px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background: #3e5a78;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .text-bar {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            padding: 8px 15px;
+            background: rgba(40, 40, 40, 0.85);
+            border-radius: 15px;
+            height: 36px;
+            line-height: 20px;
+            overflow: hidden;
+            white-space: nowrap;
+            transition: height 0.3s ease;
+        }
+
+        .popup {
+            position: fixed;
+            top: 20px;
+            right: -300px;
+            background: rgba(24, 24, 24, 0.9);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 15px;
+            border: 1px solid #2a2a2a;
+            font-size: 1rem;
+            z-index: 2;
+            transition: right 0.5s ease;
+        }
+
+        .popup.show {
+            right: 20px;
+        }
+
+        .username-menu, .settings-menu {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(24, 24, 24, 0.85);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid #2a2a2a;
+            text-align: center;
+            z-index: 4;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .username-menu.show, .settings-menu.show {
+            opacity: 1;
+        }
+
+        .username-menu h2, .settings-menu h2 {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .username-menu input {
+            background: #3a3a3a;
+            border: 1px solid #4a4a4a;
+            color: #d0d0d0;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 250px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .username-menu button, .settings-menu button {
+            background: #2c3e50;
+            color: #d0d0d0;
+            border: 1px solid #3e5a78;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .username-menu button:hover, .settings-menu button:hover {
+            background: #3e5a78;
+            color: #ffffff;
+        }
+
+        .settings-menu select {
+            background: #3a3a3a;
+            border: 1px solid #4a4a4a;
+            color: #d0d0d0;
+            padding: 8px;
+            font-size: 1rem;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 250px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .settings-menu .mode-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .settings-menu .mode-buttons button {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+
+        .settings-menu .info {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            line-height: 1.5;
+        }
+
+        /* Appearance Modes */
+        body.light { background: linear-gradient(60deg, #e0e0e0, #f5f5f5, #e0e0e0); color: #333; }
+        body.light .settings-bar { background: rgba(230, 230, 230, 0.85); }
+        body.light .content { background: rgba(230, 230, 230, 0.9); border-color: #d0d0d0; }
+        body.light .button { background: #d0d0d0; color: #333; border-color: #b0b0b0; }
+        body.light .button:hover { background: #b0b0b0; color: #fff; }
+        body.light .settings-bar a { color: #666; }
+        body.light .settings-bar a:hover { color: #000; }
+        body.light .username-menu, body.light .settings-menu { background: rgba(230, 230, 230, 0.85); border-color: #d0d0d0; }
+        body.light .username-menu h2, body.light .settings-menu h2 { color: #333; }
+        body.light .username-menu input, body.light .settings-menu select { background: #fff; border-color: #b0b0b0; color: #333; }
+        body.light .username-menu button, body.light .settings-menu button { background: #d0d0d0; color: #333; border-color: #b0b0b0; }
+        body.light .username-menu button:hover, body.light .settings-menu button:hover { background: #b0b0b0; color: #fff; }
+        body.light .popup { background: rgba(230, 230, 230, 0.9); color: #333; border-color: #d0d0d0; }
+        body.light .text-bar { background: rgba(200, 200, 200, 0.85); color: #666; }
+
+        body.blue { background: linear-gradient(60deg, #1e3a8a, #3b82f6, #1e3a8a); color: #e0e7ff; }
+        body.blue .settings-bar { background: rgba(30, 58, 138, 0.85); }
+        body.blue .content { background: rgba(30, 58, 138, 0.9); border-color: #1e40af; }
+        body.blue .button { background: #1e40af; color: #e0e7ff; border-color: #1e3a8a; }
+        body.blue .button:hover { background: #2563eb; color: #fff; }
+        body.blue .settings-bar a { color: #93c5fd; }
+        body.blue .settings-bar a:hover { color: #fff; }
+        body.blue .username-menu, body.blue .settings-menu { background: rgba(30, 58, 138, 0.85); border-color: #1e40af; }
+        body.blue .username-menu h2, body.blue .settings-menu h2 { color: #e0e7ff; }
+        body.blue .username-menu input, body.blue .settings-menu select { background: #1e40af; border-color: #1e3a8a; color: #e0e7ff; }
+        body.blue .username-menu button, body.blue .settings-menu button { background: #1e40af; color: #e0e7ff; border-color: #1e3a8a; }
+        body.blue .username-menu button:hover, body.blue .settings-menu button:hover { background: #2563eb; color: #fff; }
+        body.blue .popup { background: rgba(30, 58, 138, 0.9); color: #e0e7ff; border-color: #1e40af; }
+        body.blue .text-bar { background: rgba(40, 80, 160, 0.85); color: #93c5fd; }
+
+        body.ultraviolet { background: linear-gradient(60deg, #4c1d95, #7c3aed, #4c1d95); color: #ede9fe; }
+        body.ultraviolet .settings-bar { background: rgba(76, 29, 149, 0.85); }
+        body.ultraviolet .content { background: rgba(76, 29, 149, 0.9); border-color: #6d28d9; }
+        body.ultraviolet .button { background: #6d28d9; color: #ede9fe; border-color: #4c1d95; }
+        body.ultraviolet .button:hover { background: #8b5cf6; color: #fff; }
+        body.ultraviolet .settings-bar a { color: #c4b5fd; }
+        body.ultraviolet .settings-bar a:hover { color: #fff; }
+        body.ultraviolet .username-menu, body.ultraviolet .settings-menu { background: rgba(76, 29, 149, 0.85); border-color: #6d28d9; }
+        body.ultraviolet .username-menu h2, body.ultraviolet .settings-menu h2 { color: #ede9fe; }
+        body.ultraviolet .username-menu input, body.ultraviolet .settings-menu select { background: #6d28d9; border-color: #4c1d95; color: #ede9fe; }
+        body.ultraviolet .username-menu button, body.ultraviolet .settings-menu button { background: #6d28d9; color: #ede9fe; border-color: #4c1d95; }
+        body.ultraviolet .username-menu button:hover, body.ultraviolet .settings-menu button:hover { background: #8b5cf6; color: #fff; }
+        body.ultraviolet .popup { background: rgba(76, 29, 149, 0.9); color: #ede9fe; border-color: #6d28d9; }
+        body.ultraviolet .text-bar { background: rgba(100, 50, 180, 0.85); color: #c4b5fd; }
+
+        @media (max-width: 768px) {
+            .content {
+                width: 90%;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .button {
+                padding: 8px 25px;
+                font-size: 0.9rem;
+            }
+
+            .text-bar {
+                font-size: 0.8rem;
+                height: 32px;
+            }
+
+            .username-menu, .settings-menu {
+                width: 90%;
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -30,7 +326,7 @@
 
     <div class="popup" id="greetingPopup"></div>
 
-    <div class="name-menu" id="usernameMenu" style="display: none;">
+    <div class="username-menu" id="usernameMenu" style="display: none;">
         <h2>Hi, let's get your username!</h2>
         <input type="text" id="usernameInput" placeholder="Enter your username">
         <button onclick="submitUsername()">Submit</button>
@@ -90,7 +386,6 @@
         const fontSelect = document.getElementById("fontSelect");
         let typingTimeout = null;
 
-        // Load saved settings
         const savedFont = localStorage.getItem("font") || "Roboto";
         const savedMode = localStorage.getItem("mode") || "dark";
         document.body.style.fontFamily = `'${savedFont}', sans-serif`;
