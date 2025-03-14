@@ -78,11 +78,11 @@
         .content {
             position: relative;
             z-index: 1;
-            padding: 25px;
+            padding: 30px;
             background: rgba(24, 24, 24, 0.9);
             border-radius: 20px;
-            width: 80%;
-            max-width: 480px;
+            width: 90%;
+            max-width: 800px;
             text-align: center;
             border: 1px solid #2a2a2a;
             animation: fadeIn 1s ease;
@@ -93,47 +93,13 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        h1 {
-            font-size: 1.9rem;
-            font-weight: 500;
-            color: #ffffff;
-            margin-bottom: 25px;
-        }
-
-        h2 {
-            font-size: 1.2rem;
-            color: #b0b0b0;
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-
-        h3 {
-            font-size: 1rem;
-            color: #a0a0a0;
-            margin-bottom: 15px;
-        }
-
-        h3 a {
-            color: #3e5a78;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        h3 a:hover {
-            color: #ffffff;
-        }
-
-        h4 {
-            font-size: 0.9rem;
-            color: #a0a0a0;
-            margin-bottom: 15px;
-        }
-
-        p {
-            font-size: 1rem;
-            color: #b0b0b0;
-            margin-bottom: 20px;
-        }
+        h1 { font-size: 2.2rem; font-weight: 500; color: #ffffff; margin-bottom: 15px; }
+        h2 { font-size: 1.2rem; color: #b0b0b0; margin-bottom: 15px; line-height: 1.5; }
+        h3 { font-size: 1rem; color: #a0a0a0; margin-bottom: 15px; }
+        h3 a { color: #3e5a78; text-decoration: none; transition: color 0.3s ease; }
+        h3 a:hover { color: #ffffff; }
+        h4 { font-size: 0.9rem; color: #a0a0a0; margin-bottom: 15px; }
+        p { font-size: 1rem; color: #b0b0b0; margin-bottom: 20px; }
 
         .buttons {
             display: flex;
@@ -147,12 +113,13 @@
             background: #2c3e50;
             color: #d0d0d0;
             border: 1px solid #3e5a78;
-            padding: 10px 35px;
+            padding: 12px 25px;
             font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
             border-radius: 12px;
             transition: all 0.3s ease;
+            margin: 8px;
         }
 
         .button:hover {
@@ -194,9 +161,7 @@
             transition: right 0.5s ease;
         }
 
-        .popup.show {
-            right: 20px;
-        }
+        .popup.show { right: 20px; }
 
         .username-menu, .settings-menu {
             position: fixed;
@@ -215,9 +180,7 @@
             max-width: 400px;
         }
 
-        .username-menu.show, .settings-menu.show {
-            opacity: 1;
-        }
+        .username-menu.show, .settings-menu.show { opacity: 1; }
 
         .username-menu h2, .settings-menu h2 {
             font-size: 1.5rem;
@@ -337,13 +300,11 @@
         body.ultraviolet .text-bar { background: rgba(100, 50, 180, 0.85); color: #c4b5fd; }
 
         @media (max-width: 768px) {
-            .content {
-                width: 90%;
-                padding: 20px;
-            }
-            h1 { font-size: 1.6rem; }
+            .content { width: 90%; padding: 20px; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1rem; }
             .buttons { flex-direction: column; gap: 12px; }
-            .button { padding: 8px 25px; font-size: 0.9rem; }
+            .button { padding: 10px 20px; font-size: 0.9rem; }
             .text-bar { font-size: 0.8rem; height: 32px; }
             .username-menu, .settings-menu { width: 90%; padding: 20px; }
         }
@@ -369,9 +330,10 @@
         <h1>Welcome to Proxies!</h1>
         <h2>ALL PROXIES DON'T WORK (OTHER THAN NETTLEWEB)</h2>
         <h3>I would highly recommend getting <a href="https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm?hl=en">uBlock Origin</a> or <a href="https://chromewebstore.google.com/detail/adblock-%E2%80%94-block-ads-acros/gighmmpiobklfepjocnamgkkbiglidom?hl=en">AdBlock</a> (Copy and paste the link)</h3>
+        <button class="button" onclick="openGame('https://forms.gle/YwyjVFPazMnQMLod7')">Issue/Game Suggestion</button>
+        <h4>If something doesn't work keep opening it</h4>
         <p>Your portal to the best unblocked proxies online. Browse freely!</p>
         <div class="buttons">
-            <button class="button" onclick="openGame('https://forms.gle/YwyjVFPazMnQMLod7')">Issue/Game Suggestion</button>
             <button class="button" onclick="openGame('https://grimace-shake.skibidi-rizz-gyatt-fanum-tax-sigma-ohio.ct.ws/')">Space</button>
             <button class="button" onclick="openGame('https://realroblox-production.up.railway.app/')">NettleWeb (Includes Roblox!)</button>
             <button class="button" onclick="openGame('https://dogunbl.nerdinator.net')">Shadow</button>
@@ -438,7 +400,7 @@
 
         const links = [
             'http://152.53.80.35.mine.bz', 'http://24.162.121.7.69.mu', 'http://62626648.mindhackers.org', 'http://99kfcfoods.hst-ltd.com',
-            // ... (keeping the full list of NowGG links as in your original code) ...
+            // ... (keeping the full list of NowGG links as in your original code, shortened here for brevity) ...
             'http://xn--pokmon-dva.is-very.fun'
         ];
 
