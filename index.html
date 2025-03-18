@@ -385,12 +385,23 @@
         const settingsMenu = document.getElementById("settingsMenu");
         const fontSelect = document.getElementById("fontSelect");
         let typingTimeout = null;
+        let isTabActive = document.visibilityState === "visible"; // Track tab visibility
 
         const savedFont = localStorage.getItem("font") || "Roboto";
         const savedMode = localStorage.getItem("mode") || "dark";
         document.body.style.fontFamily = `'${savedFont}', sans-serif`;
         fontSelect.value = savedFont;
         document.body.className = savedMode;
+
+        // Listen for visibility changes to pause/resume text cycling
+        document.addEventListener("visibilitychange", () => {
+            isTabActive = document.visibilityState === "visible";
+            if (isTabActive && mainContent.style.display === "block") {
+                cycleText();
+            } else if (typingTimeout) {
+                clearTimeout(typingTimeout); // Stop any ongoing animation
+            }
+        });
 
         if (!userUsername) {
             usernameMenu.style.display = "block";
@@ -417,7 +428,7 @@
                 popup.classList.add("show");
                 setTimeout(() => popup.classList.remove("show"), 3000);
             }, 100);
-            cycleText();
+            if (isTabActive) cycleText(); // Start cycling only if tab is active
         }
 
         function showUsernameMenu() {
@@ -438,6 +449,7 @@
             setTimeout(() => {
                 settingsMenu.style.display = "none";
                 mainContent.style.display = "block";
+                if (isTabActive) cycleText(); // Resume cycling if tab is active
             }, 300);
         }
 
@@ -453,12 +465,12 @@
         }
 
         function typeText(text, element, callback) {
-            if (typingTimeout) {
-                clearTimeout(typingTimeout);
-            }
+            if (!isTabActive) return; // Skip if tab is not active
+            if (typingTimeout) clearTimeout(typingTimeout);
             element.textContent = "";
             let i = 0;
             function type() {
+                if (!isTabActive) return; // Stop if tab becomes inactive
                 if (i < text.length) {
                     element.textContent += text.charAt(i);
                     i++;
@@ -471,8 +483,10 @@
         }
 
         function backspaceText(text, element, callback) {
+            if (!isTabActive) return; // Skip if tab is not active
             let i = text.length;
             function backspace() {
+                if (!isTabActive) return; // Stop if tab becomes inactive
                 if (i >= 0) {
                     element.textContent = text.substring(0, i);
                     i--;
@@ -485,14 +499,14 @@
         }
 
         function cycleText() {
+            if (!isTabActive) return; // Only cycle if tab is active
             const textBar = document.getElementById("textBar");
             const randomStatement = statements[Math.floor(Math.random() * statements.length)];
             typeText(randomStatement, textBar, cycleText);
         }
 
         function openGame(url) {
-            // Open the game in the current tab instead of a new window
-            window.location.href = url;
+            window.location.href = url; // Open in current tab
         }
     </script>
 </body>
