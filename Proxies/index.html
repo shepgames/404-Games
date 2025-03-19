@@ -398,17 +398,22 @@
     </div>
 
     <script>
-        // Obfuscated credentials (Base64 encoded)
-        const ENCODED_USERNAME = "TmVvblByb3h5"; // "NeonProxy"
-        const ENCODED_PASSWORD = "eEc0bTNyWl80MDQ="; // "xG4m3rZ_404"
+        const CREDENTIALS = [
+            { username: "QWRtaW4=", password: "U2xpcHBlcnlTbGVlcHlTZWFsc0VhdFdhZmZsZXM=" },
+            { username: "Vg==", password: "ODNVVkxJR0hU" },
+            { username: "Qg==", password: "emRjLnRyYjdwbm5wNDlk" }
+        ];
 
         // Decode function
         function decodeCredentials(encoded) {
             return atob(encoded);
         }
 
-        const VALID_USERNAME = decodeCredentials(ENCODED_USERNAME);
-        const VALID_PASSWORD = decodeCredentials(ENCODED_PASSWORD);
+        // Map decoded credentials
+        const VALID_CREDENTIALS = CREDENTIALS.map(cred => ({
+            username: decodeCredentials(cred.username),
+            password: decodeCredentials(cred.password)
+        }));
 
         const statements = [
             "Losers never win, if they keep losing.",
@@ -490,7 +495,11 @@
             const username = document.getElementById("loginUsername").value.trim();
             const password = document.getElementById("loginPassword").value.trim();
 
-            if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+            const isValid = VALID_CREDENTIALS.some(cred => 
+                cred.username === username && cred.password === password
+            );
+
+            if (isValid) {
                 localStorage.setItem("isAuthenticated", "true");
                 loginMenu.classList.remove("show");
                 setTimeout(() => {
