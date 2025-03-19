@@ -7,38 +7,191 @@
     <link id="favicon" rel="icon" type="image/png" href="../favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@400;500&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* Existing styles remain unchanged */
-        /* Adding styles for login menu */
-        .login-menu {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(60deg, #1a1a1a, #2c2c2c, #1a1a1a);
+            background-size: 300% 300%;
+            animation: gradientSwoosh 12s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #c0c0c0;
+            overflow: hidden;
+        }
+
+        @keyframes gradientSwoosh {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            filter: brightness(0.5);
+        }
+
+        .settings-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(24, 24, 24, 0.85);
+            padding: 8px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 3;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .settings-bar a {
+            color: #a0a0a0;
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .settings-bar a:hover {
+            color: #ffffff;
+        }
+
+        .settings-bar .left { flex: 1; text-align: left; }
+        .settings-bar .right { flex: 1; text-align: right; }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 30px;
+            background: rgba(24, 24, 24, 0.9);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+            border: 1px solid #2a2a2a;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 { font-size: 2.2rem; font-weight: 500; color: #ffffff; margin-bottom: 15px; }
+        h2 { font-size: 1.2rem; color: #b0b0b0; margin-bottom: 15px; line-height: 1.5; }
+        h3 { font-size: 1rem; color: #a0a0a0; margin-bottom: 15px; }
+        h3 a { color: #3e5a78; text-decoration: none; transition: color 0.3s ease; }
+        h3 a:hover { color: #ffffff; }
+        h4 { font-size: 0.9rem; color: #a0a0a0; margin-bottom: 15px; }
+        p { font-size: 1rem; color: #b0b0b0; margin-bottom: 20px; }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            background: #2c3e50;
+            color: #d0d0d0;
+            border: 1px solid #3e5a78;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            margin: 8px;
+        }
+
+        .button:hover {
+            background: #3e5a78;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .button:disabled {
+            background: #444;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .text-bar {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            padding: 8px 15px;
+            background: rgba(40, 40, 40, 0.85);
+            border-radius: 15px;
+            height: 36px;
+            line-height: 20px;
+            overflow: hidden;
+            white-space: nowrap;
+            transition: height 0.3s ease;
+        }
+
+        .popup {
+            position: fixed;
+            top: 20px;
+            right: -300px;
+            background: rgba(24, 24, 24, 0.9);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 15px;
+            border: 1px solid #2a2a2a;
+            font-size: 1rem;
+            z-index: 2;
+            transition: right 0.5s ease;
+        }
+
+        .popup.show { right: 20px; }
+
+        .username-menu, .settings-menu, .login-menu {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(24, 24, 24, 0.95);
-            padding: 30px;
+            background: rgba(24, 24, 24, 0.85);
+            padding: 25px;
             border-radius: 20px;
             border: 1px solid #2a2a2a;
             text-align: center;
-            z-index: 5;
+            z-index: 4;
             opacity: 0;
             transition: opacity 0.3s ease;
             width: 90%;
             max-width: 400px;
-            display: none;
         }
 
-        .login-menu.show { 
+        .username-menu.show, .settings-menu.show, .login-menu.show { 
             opacity: 1; 
             display: block;
         }
 
-        .login-menu h2 {
+        .username-menu h2, .settings-menu h2, .login-menu h2 {
             font-size: 1.5rem;
             color: #ffffff;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
-        .login-menu input {
+        .username-menu input, .login-menu input {
             background: #3a3a3a;
             border: 1px solid #4a4a4a;
             color: #d0d0d0;
@@ -51,7 +204,7 @@
             outline: none;
         }
 
-        .login-menu button {
+        .username-menu button, .settings-menu button, .login-menu button {
             background: #2c3e50;
             color: #d0d0d0;
             border: 1px solid #3e5a78;
@@ -62,9 +215,46 @@
             transition: all 0.3s ease;
         }
 
-        .login-menu button:hover {
+        .username-menu button:hover, .settings-menu button:hover, .login-menu button:hover {
             background: #3e5a78;
             color: #ffffff;
+        }
+
+        .settings-menu select {
+            background: #3a3a3a;
+            border: 1px solid #4a4a4a;
+            color: #d0d0d0;
+            padding: 8px;
+            font-size: 1rem;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 250px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .settings-menu .mode-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .settings-menu .mode-buttons button {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+
+        .settings-menu .info {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            line-height: 1.5;
+        }
+
+        .login-menu {
+            background: rgba(24, 24, 24, 0.95);
+            z-index: 5;
         }
 
         .login-menu .error {
@@ -74,27 +264,68 @@
             display: none;
         }
 
-        /* Mode-specific styles for login menu */
-        body.light .login-menu { background: rgba(230, 230, 230, 0.95); border-color: #d0d0d0; }
-        body.light .login-menu h2 { color: #333; }
-        body.light .login-menu input { background: #fff; border-color: #b0b0b0; color: #333; }
-        body.light .login-menu button { background: #d0d0d0; color: #333; border-color: #b0b0b0; }
-        body.light .login-menu button:hover { background: #b0b0b0; color: #fff; }
+        /* Appearance Modes */
+        body.light { background: linear-gradient(60deg, #e0e0e0, #f5f5f5, #e0e0e0); color: #333; }
+        body.light .settings-bar { background: rgba(230, 230, 230, 0.85); }
+        body.light .content { background: rgba(230, 230, 230, 0.9); border-color: #d0d0d0; }
+        body.light .button { background: #d0d0d0; color: #333; border-color: #b0b0b0; }
+        body.light .button:hover { background: #b0b0b0; color: #fff; }
+        body.light .settings-bar a { color: #666; }
+        body.light .settings-bar a:hover { color: #000; }
+        body.light .username-menu, body.light .settings-menu, body.light .login-menu { background: rgba(230, 230, 230, 0.85); border-color: #d0d0d0; }
+        body.light .username-menu h2, body.light .settings-menu h2, body.light .login-menu h2 { color: #333; }
+        body.light .username-menu input, body.light .settings-menu select, body.light .login-menu input { background: #fff; border-color: #b0b0b0; color: #333; }
+        body.light .username-menu button, body.light .settings-menu button, body.light .login-menu button { background: #d0d0d0; color: #333; border-color: #b0b0b0; }
+        body.light .username-menu button:hover, body.light .settings-menu button:hover, body.light .login-menu button:hover { background: #b0b0b0; color: #fff; }
+        body.light .popup { background: rgba(230, 230, 230, 0.9); color: #333; border-color: #d0d0d0; }
+        body.light .text-bar { background: rgba(200, 200, 200, 0.85); color: #666; }
+        body.light h1 { color: #333; }
+        body.light h2, body.light h3, body.light h4, body.light p { color: #666; }
+        body.light h3 a { color: #007bff; }
+        body.light h3 a:hover { color: #0056b3; }
         body.light .login-menu .error { color: #e63946; }
 
-        body.blue .login-menu { background: rgba(30, 58, 138, 0.95); border-color: #1e40af; }
-        body.blue .login-menu h2 { color: #e0e7ff; }
-        body.blue .login-menu input { background: #1e40af; border-color: #1e3a8a; color: #e0e7ff; }
-        body.blue .login-menu button { background: #1e40af; color: #e0e7ff; border-color: #1e3a8a; }
-        body.blue .login-menu button:hover { background: #2563eb; color: #fff; }
+        body.blue { background: linear-gradient(60deg, #1e3a8a, #3b82f6, #1e3a8a); color: #e0e7ff; }
+        body.blue .settings-bar { background: rgba(30, 58, 138, 0.85); }
+        body.blue .content { background: rgba(30, 58, 138, 0.9); border-color: #1e40af; }
+        body.blue .button { background: #1e40af; color: #e0e7ff; border-color: #1e3a8a; }
+        body.blue .button:hover { background: #2563eb; color: #fff; }
+        body.blue .settings-bar a { color: #93c5fd; }
+        body.blue .settings-bar a:hover { color: #fff; }
+        body.blue .username-menu, body.blue .settings-menu, body.blue .login-menu { background: rgba(30, 58, 138, 0.85); border-color: #1e40af; }
+        body.blue .username-menu h2, body.blue .settings-menu h2, body.blue .login-menu h2 { color: #e0e7ff; }
+        body.blue .username-menu input, body.blue .settings-menu select, body.blue .login-menu input { background: #1e40af; border-color: #1e3a8a; color: #e0e7ff; }
+        body.blue .username-menu button, body.blue .settings-menu button, body.blue .login-menu button { background: #1e40af; color: #e0e7ff; border-color: #1e3a8a; }
+        body.blue .username-menu button:hover, body.blue .settings-menu button:hover, body.blue .login-menu button:hover { background: #2563eb; color: #fff; }
+        body.blue .popup { background: rgba(30, 58, 138, 0.9); color: #e0e7ff; border-color: #1e40af; }
+        body.blue .text-bar { background: rgba(40, 80, 160, 0.85); color: #93c5fd; }
         body.blue .login-menu .error { color: #93c5fd; }
 
-        body.ultraviolet .login-menu { background: rgba(76, 29, 149, 0.95); border-color: #6d28d9; }
-        body.ultraviolet .login-menu h2 { color: #ede9fe; }
-        body.ultraviolet .login-menu input { background: #6d28d9; border-color: #4c1d95; color: #ede9fe; }
-        body.ultraviolet .login-menu button { background: #6d28d9; color: #ede9fe; border-color: #4c1d95; }
-        body.ultraviolet .login-menu button:hover { background: #8b5cf6; color: #fff; }
+        body.ultraviolet { background: linear-gradient(60deg, #4c1d95, #7c3aed, #4c1d95); color: #ede9fe; }
+        body.ultraviolet .settings-bar { background: rgba(76, 29, 149, 0.85); }
+        body.ultraviolet .content { background: rgba(76, 29, 149, 0.9); border-color: #6d28d9; }
+        body.ultraviolet .button { background: #6d28d9; color: #ede9fe; border-color: #4c1d95; }
+        body.ultraviolet .button:hover { background: #8b5cf6; color: #fff; }
+        body.ultraviolet .settings-bar a { color: #c4b5fd; }
+        body.ultraviolet .settings-bar a:hover { color: #fff; }
+        body.ultraviolet .username-menu, body.ultraviolet .settings-menu, body.ultraviolet .login-menu { background: rgba(76, 29, 149, 0.85); border-color: #6d28d9; }
+        body.ultraviolet .username-menu h2, body.ultraviolet .settings-menu h2, body.ultraviolet .login-menu h2 { color: #ede9fe; }
+        body.ultraviolet .username-menu input, body.ultraviolet .settings-menu select, body.ultraviolet .login-menu input { background: #6d28d9; border-color: #4c1d95; color: #ede9fe; }
+        body.ultraviolet .username-menu button, body.ultraviolet .settings-menu button, body.ultraviolet .login-menu button { background: #6d28d9; color: #ede9fe; border-color: #4c1d95; }
+        body.ultraviolet .username-menu button:hover, body.ultraviolet .settings-menu button:hover, body.ultraviolet .login-menu button:hover { background: #8b5cf6; color: #fff; }
+        body.ultraviolet .popup { background: rgba(76, 29, 149, 0.9); color: #ede9fe; border-color: #6d28d9; }
+        body.ultraviolet .text-bar { background: rgba(100, 50, 180, 0.85); color: #c4b5fd; }
         body.ultraviolet .login-menu .error { color: #c4b5fd; }
+
+        @media (max-width: 768px) {
+            .content { width: 90%; padding: 20px; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1rem; }
+            .buttons { flex-direction: column; gap: 12px; }
+            .button { padding: 10px 20px; font-size: 0.9rem; }
+            .text-bar { font-size: 0.8rem; height: 32px; }
+            .username-menu, .settings-menu, .login-menu { width: 90%; padding: 20px; }
+        }
     </style>
 </head>
 <body>
@@ -104,7 +335,7 @@
     </video>
 
     <!-- Login Menu -->
-    <div class="login-menu" id="loginMenu">
+    <div class="login-menu" id="loginMenu" style="display: none;">
         <h2>Access Required</h2>
         <input type="text" id="loginUsername" placeholder="Username">
         <input type="password" id="loginPassword" placeholder="Password">
@@ -112,7 +343,6 @@
         <div class="error" id="loginError">Invalid credentials!</div>
     </div>
 
-    <!-- Rest of your HTML remains unchanged until the script section -->
     <div class="settings-bar">
         <div class="left">
             <a href="https://404gamesgithub.github.io/404-Games/">Back to Home</a>
@@ -124,39 +354,128 @@
     </div>
 
     <div class="content" id="mainContent" style="display: none;">
-        <!-- Existing content unchanged -->
+        <h1>Welcome to Proxies!</h1>
+        <h2>OUR TEAM IS NOT RESPONSIBLE FOR ANY TROUBLE CAUSED BY USING THESE!</h2>
+        <h3>I would highly recommend getting <a href="https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm?hl=en">uBlock Origin</a> or <a href="https://chromewebstore.google.com/detail/adblock-%E2%80%94-block-ads-acros/gighmmpiobklfepjocnamgkkbiglidom?hl=en">AdBlock</a> (Copy and paste the link)</h3>
+        <button class="button" onclick="openGame('https://forms.gle/YwyjVFPazMnQMLod7')">Issue/Game Suggestion</button>
+        <h4>If something doesn't work keep opening it</h4>
+        <p>Your portal to the best unblocked proxies online. Browse freely!</p>
+        <div class="buttons">
+            <button class="button" onclick="openGame('https://realroblox-production.up.railway.app/')">NettleWeb (Includes Roblox!)</button>
+            <button class="button" onclick="openGame('https://nebulasucks.lol/')">Nebula</button>
+            <button class="button" onclick="openGame('https://cowmain.gammavortex.com/')">Doge Unblocker</button>
+            <button class="button" onclick="openGame('https://portal.eron2.ipv64.net/')">Shadow</button>
+            <button id="nowggButton" class="button" onclick="openRandomPage()">Roblox (Under Maintenance)</button>
+        </div>
+        <div class="text-bar" id="textBar"></div>
     </div>
 
     <div class="popup" id="greetingPopup"></div>
+
     <div class="username-menu" id="usernameMenu" style="display: none;">
-        <!-- Existing username menu unchanged -->
+        <h2>Hi, let's get your username!</h2>
+        <input type="text" id="usernameInput" placeholder="Enter your username">
+        <button onclick="submitUsername()">Submit</button>
     </div>
+
     <div class="settings-menu" id="settingsMenu" style="display: none;">
-        <!-- Existing settings menu unchanged -->
+        <h2>Settings</h2>
+        <select id="fontSelect" onchange="changeFont()">
+            <option value="Roboto">Roboto</option>
+            <option value="Poppins">Poppins</option>
+            <option value="Open Sans">Open Sans</option>
+        </select>
+        <div class="mode-buttons">
+            <button onclick="setMode('dark')">Dark Mode</button>
+            <button onclick="setMode('light')">Light Mode</button>
+            <button onclick="setMode('blue')">Blue Mode</button>
+            <button onclick="setMode('ultraviolet')">Ultraviolet Mode</button>
+        </div>
+        <div class="info">
+            Created by LebronLover369. Contact: spambreather@gmail.com play responsibly not my problem if you get in trouble :/
+        </div>
+        <button onclick="closeSettings()">Close</button>
     </div>
 
     <script>
-        // Predefined cool username and password (customize these!)
-        const VALID_USERNAME = "NeonProxy";
-        const VALID_PASSWORD = "xG4m3rZ_404";
+        // Obfuscated credentials (Base64 encoded)
+        const ENCODED_USERNAME = "TmVvblByb3h5"; // "NeonProxy"
+        const ENCODED_PASSWORD = "eEc0bTNyWl80MDQ="; // "xG4m3rZ_404"
 
-        const loginMenu = document.getElementById("loginMenu");
-        const loginError = document.getElementById("loginError");
-        const mainContent = document.getElementById("mainContent");
-        const usernameMenu = document.getElementById("usernameMenu");
-        const popup = document.getElementById("greetingPopup");
-        const settingsMenu = document.getElementById("settingsMenu");
+        // Decode function
+        function decodeCredentials(encoded) {
+            return atob(encoded);
+        }
+
+        const VALID_USERNAME = decodeCredentials(ENCODED_USERNAME);
+        const VALID_PASSWORD = decodeCredentials(ENCODED_PASSWORD);
+
+        const statements = [
+            "Losers never win, if they keep losing.",
+            "Sometimes it's better to be on the good side, not the great side",
+            "You like jazz?",
+            "One time this guy walked up to me and said...",
+            "Unlimited Games and Proxies here at your service o7",
+            "Will we ever see the end of the universe?",
+            "Hate from Poland",
+            "Smooth Jazz is like hard rock, except it isn't",
+            "Rocks are awesome",
+            "Did you know that over 1 mosquito gets killed each year?",
+            "10+10-10-10-10-10+10+10=0",
+            "Do your homework",
+            "Only 1̶9̶.̶9̶5̶  FREE!",
+            "If you paid for this, I'm sorry",
+            "Only real ones know about the original HTML code",
+            "I can name 50 animals on the top of my head. Ready?",
+            "'Best site out there' - Nobody",
+            "We put the SCOO from SCHOOL in SCOOby Doo",
+            "Sometimes people say 10+10=20, but it actually is...",
+            "Congrats, you got this message, you get nothing :O",
+            "Sometimes I wonder how the brain operates",
+            "Not one speling eror in the site",
+            "Okay who said a link was broken?!"
+        ];
+
+        const links = [
+            'http://educationbluesky.com/',
+            'http://mathstutor.life/',
+            'http://maths.news/',
+            'http://maths.media/',
+            'http://websitesball.com/',
+            'http://nowgg.usercontent.motorcycles/',
+            'http://next-level.is-very.fun/',
+            'http://mathwork-for-science-class.tutorz0.usercontent.motorcycles/',
+            'http://shuttle.lol/apps/roblox-corporation/5349/roblox.html',
+            'http://alan-turing-wa1z.onrender.com/',
+            'http://doctoraux.com',
+            'http://biology.prs7.org/students/lesson/hvtrs8%2F-nmweg%2Cnn%2Frlcy-rmbnoz-aoppmrctkol%2F7369-rmbnoz',
+            'http://perfect-lamb-wear.cyclic.app/',
+            'http://mathsspot.com/',
+            'http://websitesball.com/',
+            'http://oceanstudies.lat/uv/service/hvtrs8%2F-mctjsqpmt%2Ccmm-',
+            'http://skibidirizzzzzzer.global.ssl.fastly.net/',
+            'http://bentleysucksatgetawayshootout.yourmom.eu.org/'
+        ];
 
         let userUsername = localStorage.getItem("userUsername");
-        let isAuthenticated = localStorage.getItem("isAuthenticated");
+        const loginMenu = document.getElementById("loginMenu");
+        const loginError = document.getElementById("loginError");
+        const usernameMenu = document.getElementById("usernameMenu");
+        const mainContent = document.getElementById("mainContent");
+        const popup = document.getElementById("greetingPopup");
+        const settingsMenu = document.getElementById("settingsMenu");
+        const fontSelect = document.getElementById("fontSelect");
+        const nowggButton = document.getElementById('nowggButton');
+        let typingTimeout = null;
 
         const savedFont = localStorage.getItem("font") || "Roboto";
         const savedMode = localStorage.getItem("mode") || "dark";
         document.body.style.fontFamily = `'${savedFont}', sans-serif`;
-        document.getElementById("fontSelect").value = savedFont;
+        fontSelect.value = savedFont;
         document.body.className = savedMode;
 
-        // Check authentication status
+        let isAuthenticated = localStorage.getItem("isAuthenticated");
+
         if (!isAuthenticated) {
             loginMenu.style.display = "block";
             setTimeout(() => loginMenu.classList.add("show"), 100);
@@ -210,17 +529,112 @@
             cycleText();
         }
 
-        // Rest of your existing JavaScript remains unchanged
-        function showUsernameMenu() { /* unchanged */ }
-        function showSettings() { /* unchanged */ }
-        function closeSettings() { /* unchanged */ }
-        function changeFont() { /* unchanged */ }
-        function setMode(mode) { /* unchanged */ }
-        function typeText(text, element, callback) { /* unchanged */ }
-        function backspaceText(text, element, callback) { /* unchanged */ }
-        function cycleText() { /* unchanged */ }
-        function openGame(url) { /* unchanged */ }
-        function openRandomPage() { /* unchanged */ }
+        function showUsernameMenu() {
+            usernameMenu.style.display = "block";
+            document.getElementById("usernameInput").value = userUsername;
+            setTimeout(() => usernameMenu.classList.add("show"), 100);
+            mainContent.style.display = "none";
+        }
+
+        function showSettings() {
+            settingsMenu.style.display = "block";
+            setTimeout(() => settingsMenu.classList.add("show"), 100);
+            mainContent.style.display = "none";
+        }
+
+        function closeSettings() {
+            settingsMenu.classList.remove("show");
+            setTimeout(() => {
+                settingsMenu.style.display = "none";
+                mainContent.style.display = "block";
+            }, 300);
+        }
+
+        function changeFont() {
+            const font = fontSelect.value;
+            document.body.style.fontFamily = `'${font}', sans-serif`;
+            localStorage.setItem("font", font);
+        }
+
+        function setMode(mode) {
+            document.body.className = mode;
+            localStorage.setItem("mode", mode);
+        }
+
+        function typeText(text, element, callback) {
+            if (typingTimeout) {
+                clearTimeout(typingTimeout);
+            }
+            element.textContent = "";
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    typingTimeout = setTimeout(type, 50);
+                } else {
+                    typingTimeout = setTimeout(() => backspaceText(text, element, callback), 1500);
+                }
+            }
+            type();
+        }
+
+        function backspaceText(text, element, callback) {
+            let i = text.length;
+            function backspace() {
+                if (i >= 0) {
+                    element.textContent = text.substring(0, i);
+                    i--;
+                    typingTimeout = setTimeout(backspace, 50);
+                } else {
+                    typingTimeout = setTimeout(callback, 500);
+                }
+            }
+            backspace();
+        }
+
+        function cycleText() {
+            const textBar = document.getElementById("textBar");
+            const randomStatement = statements[Math.floor(Math.random() * statements.length)];
+            typeText(randomStatement, textBar, cycleText);
+        }
+
+        function openGame(url) {
+            let win = window.open();
+            if (!win || win.closed || typeof win.closed === "undefined") {
+                alert("Please allow pop-ups and reload!");
+                return;
+            }
+            win.document.body.style.margin = "0";
+            win.document.body.style.height = "100vh";
+            const iframe = win.document.createElement("iframe");
+            iframe.style.border = "none";
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            iframe.src = url;
+            win.document.body.appendChild(iframe);
+        }
+
+        function openRandomPage() {
+            nowggButton.disabled = true;
+            const randomIndex = Math.floor(Math.random() * links.length);
+            const randomLink = links[randomIndex];
+            let win = window.open();
+            if (!win || win.closed || typeof win.closed === "undefined") {
+                alert("Please allow pop-ups and reload!");
+                nowggButton.disabled = false;
+                return;
+            }
+            win.document.body.style.margin = "0";
+            win.document.body.style.height = "100vh";
+            const iframe = win.document.createElement("iframe");
+            iframe.style.border = "none";
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            iframe.src = randomLink;
+            win.document.body.appendChild(iframe);
+            setTimeout(() => { nowggButton.disabled = false; }, 1000);
+        }
 
         const video = document.querySelector('.video-background');
         video.addEventListener('error', () => {
