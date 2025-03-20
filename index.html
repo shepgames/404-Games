@@ -135,7 +135,7 @@
 
         .popup {
             position: fixed;
-            top: 20px;
+            top: 80px;
             right: -300px;
             background: rgba(24, 24, 24, 0.95);
             color: #ffffff;
@@ -522,7 +522,7 @@
 
         document.addEventListener("keydown", (event) => {
             if (event.key.toLowerCase() === panicKey.toLowerCase()) {
-                window.location.href = panicUrl;
+                window.open(panicUrl, '_blank');
             }
         });
 
