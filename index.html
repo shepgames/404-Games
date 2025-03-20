@@ -228,6 +228,29 @@
             line-height: 1.5;
         }
 
+        .panic-section {
+            margin: 20px 0;
+        }
+
+        .panic-section h3 {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .panic-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .panic-section small {
+            display: block;
+            margin-top: 10px;
+            color: #b0b0b0;
+        }
+
         /* Appearance Modes */
         body.light { background: linear-gradient(60deg, #e0e0e0, #f5f5f5, #e0e0e0); color: #333; }
         body.light .settings-bar { background: rgba(230, 230, 230, 0.85); }
@@ -243,6 +266,8 @@
         body.light .username-menu button:hover, body.light .settings-menu button:hover { background: #b0b0b0; color: #fff; }
         body.light .popup { background: rgba(230, 230, 230, 0.9); color: #333; border-color: #d0d0d0; }
         body.light .text-bar { background: rgba(200, 200, 200, 0.85); color: #666; }
+        body.light .panic-section h3 { color: #333; }
+        body.light .panic-section small { color: #666; }
 
         body.blue { background: linear-gradient(60deg, #1e3a8a, #3b82f6, #1e3a8a); color: #e0e7ff; }
         body.blue .settings-bar { background: rgba(30, 58, 138, 0.85); }
@@ -258,6 +283,8 @@
         body.blue .username-menu button:hover, body.blue .settings-menu button:hover { background: #2563eb; color: #fff; }
         body.blue .popup { background: rgba(30, 58, 138, 0.9); color: #e0e7ff; border-color: #1e40af; }
         body.blue .text-bar { background: rgba(40, 80, 160, 0.85); color: #93c5fd; }
+        body.blue .panic-section h3 { color: #e0e7ff; }
+        body.blue .panic-section small { color: #93c5fd; }
 
         body.ultraviolet { background: linear-gradient(60deg, #4c1d95, #7c3aed, #4c1d95); color: #ede9fe; }
         body.ultraviolet .settings-bar { background: rgba(76, 29, 149, 0.85); }
@@ -273,6 +300,8 @@
         body.ultraviolet .username-menu button:hover, body.ultraviolet .settings-menu button:hover { background: #8b5cf6; color: #fff; }
         body.ultraviolet .popup { background: rgba(76, 29, 149, 0.9); color: #ede9fe; border-color: #6d28d9; }
         body.ultraviolet .text-bar { background: rgba(100, 50, 180, 0.85); color: #c4b5fd; }
+        body.ultraviolet .panic-section h3 { color: #ede9fe; }
+        body.ultraviolet .panic-section small { color: #c4b5fd; }
 
         @media (max-width: 768px) {
             .content {
@@ -344,6 +373,19 @@
             <button onclick="setMode('blue')">Blue Mode</button>
             <button onclick="setMode('ultraviolet')">Ultraviolet Mode</button>
         </div>
+        <div class="panic-section">
+            <h3>Panic Button URL</h3>
+            <div class="panic-buttons">
+                <button onclick="setPanicUrl('https://classroom.google.com')">Google Classroom</button>
+                <button onclick="setPanicUrl('https://clever.com')">Clever</button>
+                <button onclick="setPanicUrl('https://edulastic.com')">Edulastic</button>
+                <button onclick="setPanicUrl('https://canva.com')">Canva</button>
+                <button onclick="setPanicUrl('https://docs.google.com')">Google Docs</button>
+                <button onclick="setPanicUrl('https://slides.google.com')">Google Slides</button>
+                <button onclick="setPanicUrl('https://drive.google.com')">Google Drive</button>
+            </div>
+            <small>Press 'P' to trigger panic redirect</small>
+        </div>
         <div class="info">
             Created by LebronLover369. Contact: spambreather@gmail.com play responsibly not my problem if you get in trouble :/
         </div>
@@ -384,7 +426,8 @@
         const settingsMenu = document.getElementById("settingsMenu");
         const fontSelect = document.getElementById("fontSelect");
         let typingTimeout = null;
-        let isTabActive = document.visibilityState === "visible"; // Track tab visibility
+        let isTabActive = document.visibilityState === "visible";
+        let panicUrl = localStorage.getItem("panicUrl") || "https://classroom.google.com";
 
         const savedFont = localStorage.getItem("font") || "Roboto";
         const savedMode = localStorage.getItem("mode") || "dark";
@@ -392,13 +435,18 @@
         fontSelect.value = savedFont;
         document.body.className = savedMode;
 
-        // Listen for visibility changes to pause/resume text cycling
         document.addEventListener("visibilitychange", () => {
             isTabActive = document.visibilityState === "visible";
             if (isTabActive && mainContent.style.display === "block") {
                 cycleText();
             } else if (typingTimeout) {
-                clearTimeout(typingTimeout); // Stop any ongoing animation
+                clearTimeout(typingTimeout);
+            }
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key.toLowerCase() === "p" && !usernameMenu.classList.contains("show") && !settingsMenu.classList.contains("show")) {
+                window.location.href = panicUrl;
             }
         });
 
@@ -427,7 +475,7 @@
                 popup.classList.add("show");
                 setTimeout(() => popup.classList.remove("show"), 3000);
             }, 100);
-            if (isTabActive) cycleText(); // Start cycling only if tab is active
+            if (isTabActive) cycleText();
         }
 
         function showUsernameMenu() {
@@ -448,7 +496,7 @@
             setTimeout(() => {
                 settingsMenu.style.display = "none";
                 mainContent.style.display = "block";
-                if (isTabActive) cycleText(); // Resume cycling if tab is active
+                if (isTabActive) cycleText();
             }, 300);
         }
 
@@ -463,13 +511,38 @@
             localStorage.setItem("mode", mode);
         }
 
+        function setPanicUrl(url) {
+            panicUrl = url;
+            localStorage.setItem("panicUrl", url);
+            showPopup(`Panic URL set to: ${getSiteName(url)}`);
+        }
+
+        function getSiteName(url) {
+            switch(url) {
+                case "https://classroom.google.com": return "Google Classroom";
+                case "https://clever.com": return "Clever";
+                case "https://edulastic.com": return "Edulastic";
+                case "https://canva.com": return "Canva";
+                case "https://docs.google.com": return "Google Docs";
+                case "https://slides.google.com": return "Google Slides";
+                case "https://drive.google.com": return "Google Drive";
+                default: return "Unknown";
+            }
+        }
+
+        function showPopup(message) {
+            popup.textContent = message;
+            popup.classList.add("show");
+            setTimeout(() => popup.classList.remove("show"), 2000);
+        }
+
         function typeText(text, element, callback) {
-            if (!isTabActive) return; // Skip if tab is not active
+            if (!isTabActive) return;
             if (typingTimeout) clearTimeout(typingTimeout);
             element.textContent = "";
             let i = 0;
             function type() {
-                if (!isTabActive) return; // Stop if tab becomes inactive
+                if (!isTabActive) return;
                 if (i < text.length) {
                     element.textContent += text.charAt(i);
                     i++;
@@ -482,10 +555,10 @@
         }
 
         function backspaceText(text, element, callback) {
-            if (!isTabActive) return; // Skip if tab is not active
+            if (!isTabActive) return;
             let i = text.length;
             function backspace() {
-                if (!isTabActive) return; // Stop if tab becomes inactive
+                if (!isTabActive) return;
                 if (i >= 0) {
                     element.textContent = text.substring(0, i);
                     i--;
@@ -498,14 +571,14 @@
         }
 
         function cycleText() {
-            if (!isTabActive) return; // Only cycle if tab is active
+            if (!isTabActive) return;
             const textBar = document.getElementById("textBar");
             const randomStatement = statements[Math.floor(Math.random() * statements.length)];
             typeText(randomStatement, textBar, cycleText);
         }
 
         function openGame(url) {
-            window.location.href = url; // Open in current tab
+            window.location.href = url;
         }
     </script>
 </body>
