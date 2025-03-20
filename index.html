@@ -523,6 +523,7 @@
         document.addEventListener("keydown", (event) => {
             if (event.key.toLowerCase() === panicKey.toLowerCase()) {
                 window.open(panicUrl, '_blank');
+                window.close();
             }
         });
 
@@ -596,7 +597,7 @@
 
         function setMode(mode) {
             document.body.className = mode;
-            localStorage.setItem("mode", mode);
+            localStorage.setItem("mode", panicKeymode);
         }
 
         function setPanicUrl(url) {
