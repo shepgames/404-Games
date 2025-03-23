@@ -457,318 +457,332 @@
         <button onclick="closeSettings()">Close</button>
     </div>
 
-    <script>
-        const CREDENTIALS = [
-            { username: "QWRtaW4=", password: "U2xpcHBlcnlTbGVlcHlTZWFsc0VhdFdhZmZsZXM=" },
-            { username: "Vg==", password: "ODNVVkxJR0hU" },
-            { username: "Qg==", password: "emRjLnRyYjdwbm5wNDlk" }
-        ];
+ <script>
+    const CREDENTIALS = [
+        { username: "QWRtaW4=", password: "U2xpcHBlcnlTbGVlcHlTZWFsc0VhdFdhZmZsZXM=" },
+        { username: "Vg==", password: "ODNVVkxJR0hU" },
+        { username: "Qg==", password: "emRjLnRyYjdwbm5wNDlk" }
+    ];
 
-        // Decode function
-        function decodeCredentials(encoded) {
-            return atob(encoded);
+    // Decode function
+    function decodeCredentials(encoded) {
+        return atob(encoded);
+    }
+
+    // Map decoded credentials
+    const VALID_CREDENTIALS = CREDENTIALS.map(cred => ({
+        username: decodeCredentials(cred.username),
+        password: decodeCredentials(cred.password)
+    }));
+
+    const statements = [
+        "Losers never win, if they keep losing.",
+        "Sometimes it's better to be on the good side, not the great side",
+        "You like jazz?",
+        "One time this guy walked up to me and said...",
+        "Unlimited Games and Proxies here at your service o7",
+        "Will we ever see the end of the universe?",
+        "Hate from Poland",
+        "Smooth Jazz is like hard rock, except it isn't",
+        "Rocks are awesome",
+        "Did you know that over 1 mosquito gets killed each year?",
+        "10+10-10-10-10-10+10+10=0",
+        "Do your homework",
+        "Only 1̶9̶.̶9̶5̶  FREE!",
+        "If you paid for this, I'm sorry",
+        "Only real ones know about the original HTML code",
+        "I can name 50 animals on the top of my head. Ready?",
+        "'Best site out there' - Nobody",
+        "We put the SCOO from SCHOOL in SCOOby Doo",
+        "Sometimes people say 10+10=20, but it actually is...",
+        "Congrats, you got this message, you get nothing :O",
+        "Sometimes I wonder how the brain operates",
+        "Not one speling eror in the site",
+        "Okay who said a link was broken?!"
+    ];
+
+    const links = [
+        'http://educationbluesky.com/',
+        'http://mathstutor.life/',
+        'http://maths.news/',
+        'http://maths.media/',
+        'http://websitesball.com/',
+        'http://nowgg.usercontent.motorcycles/',
+        'http://next-level.is-very.fun/',
+        'http://mathwork-for-science-class.tutorz0.usercontent.motorcycles/',
+        'http://shuttle.lol/apps/roblox-corporation/5349/roblox.html',
+        'http://alan-turing-wa1z.onrender.com/',
+        'http://doctoraux.com',
+        'http://biology.prs7.org/students/lesson/hvtrs8%2F-nmweg%2Cnn%2Frlcy-rmbnoz-aoppmrctkol%2F7369-rmbnoz',
+        'http://perfect-lamb-wear.cyclic.app/',
+        'http://mathsspot.com/',
+        'http://websitesball.com/',
+        'http://oceanstudies.lat/uv/service/hvtrs8%2F-mctjsqpmt%2Ccmm-',
+        'http://skibidirizzzzzzer.global.ssl.fastly.net/',
+        'http://bentleysucksatgetawayshootout.yourmom.eu.org/'
+    ];
+
+    let userUsername = localStorage.getItem("userUsername");
+    const loginMenu = document.getElementById("loginMenu");
+    const loginError = document.getElementById("loginError");
+    const usernameMenu = document.getElementById("usernameMenu");
+    const mainContent = document.getElementById("mainContent");
+    const popup = document.getElementById("greetingPopup");
+    const settingsMenu = document.getElementById("settingsMenu");
+    const fontSelect = document.getElementById("fontSelect");
+    const nowggButton = document.getElementById('nowggButton');
+    let typingTimeout = null;
+    let isTabActive = document.visibilityState === "visible";
+    let panicUrl = localStorage.getItem("panicUrl") || "https://classroom.google.com";
+    let panicKey = localStorage.getItem("panicKey") || "p";
+    let isCyclingText = false; // Add flag to prevent multiple cycles
+
+    const savedFont = localStorage.getItem("font") || "Roboto";
+    const savedMode = localStorage.getItem("mode") || "dark";
+    document.body.style.fontFamily = `'${savedFont}', sans-serif`;
+    fontSelect.value = savedFont;
+    document.body.className = savedMode;
+
+    let isAuthenticated = localStorage.getItem("isAuthenticated");
+
+    document.addEventListener("visibilitychange", () => {
+        isTabActive = document.visibilityState === "visible";
+        if (isTabActive && mainContent.style.display === "block" && !isCyclingText) {
+            cycleText();
+        } else if (typingTimeout) {
+            clearTimeout(typingTimeout);
         }
+    });
 
-        // Map decoded credentials
-        const VALID_CREDENTIALS = CREDENTIALS.map(cred => ({
-            username: decodeCredentials(cred.username),
-            password: decodeCredentials(cred.password)
-        }));
+    document.addEventListener("keydown", (event) => {
+        if (event.key.toLowerCase() === panicKey.toLowerCase()) {
+            window.open(panicUrl, '_blank');
+            // Avoid window.close() to prevent focus issues; let user close manually
+        }
+    });
 
-        const statements = [
-            "Losers never win, if they keep losing.",
-            "Sometimes it's better to be on the good side, not the great side",
-            "You like jazz?",
-            "One time this guy walked up to me and said...",
-            "Unlimited Games and Proxies here at your service o7",
-            "Will we ever see the end of the universe?",
-            "Hate from Poland",
-            "Smooth Jazz is like hard rock, except it isn't",
-            "Rocks are awesome",
-            "Did you know that over 1 mosquito gets killed each year?",
-            "10+10-10-10-10-10+10+10=0",
-            "Do your homework",
-            "Only 1̶9̶.̶9̶5̶  FREE!",
-            "If you paid for this, I'm sorry",
-            "Only real ones know about the original HTML code",
-            "I can name 50 animals on the top of my head. Ready?",
-            "'Best site out there' - Nobody",
-            "We put the SCOO from SCHOOL in SCOOby Doo",
-            "Sometimes people say 10+10=20, but it actually is...",
-            "Congrats, you got this message, you get nothing :O",
-            "Sometimes I wonder how the brain operates",
-            "Not one speling eror in the site",
-            "Okay who said a link was broken?!"
-        ];
+    if (!isAuthenticated) {
+        loginMenu.style.display = "block";
+        setTimeout(() => loginMenu.classList.add("show"), 100);
+    } else if (!userUsername) {
+        usernameMenu.style.display = "block";
+        setTimeout(() => usernameMenu.classList.add("show"), 100);
+    } else {
+        showMainContent();
+    }
 
-        const links = [
-            'http://educationbluesky.com/',
-            'http://mathstutor.life/',
-            'http://maths.news/',
-            'http://maths.media/',
-            'http://websitesball.com/',
-            'http://nowgg.usercontent.motorcycles/',
-            'http://next-level.is-very.fun/',
-            'http://mathwork-for-science-class.tutorz0.usercontent.motorcycles/',
-            'http://shuttle.lol/apps/roblox-corporation/5349/roblox.html',
-            'http://alan-turing-wa1z.onrender.com/',
-            'http://doctoraux.com',
-            'http://biology.prs7.org/students/lesson/hvtrs8%2F-nmweg%2Cnn%2Frlcy-rmbnoz-aoppmrctkol%2F7369-rmbnoz',
-            'http://perfect-lamb-wear.cyclic.app/',
-            'http://mathsspot.com/',
-            'http://websitesball.com/',
-            'http://oceanstudies.lat/uv/service/hvtrs8%2F-mctjsqpmt%2Ccmm-',
-            'http://skibidirizzzzzzer.global.ssl.fastly.net/',
-            'http://bentleysucksatgetawayshootout.yourmom.eu.org/'
-        ];
+    function checkLogin() {
+        const username = document.getElementById("loginUsername").value.trim();
+        const password = document.getElementById("loginPassword").value.trim();
 
-        let userUsername = localStorage.getItem("userUsername");
-        const loginMenu = document.getElementById("loginMenu");
-        const loginError = document.getElementById("loginError");
-        const usernameMenu = document.getElementById("usernameMenu");
-        const mainContent = document.getElementById("mainContent");
-        const popup = document.getElementById("greetingPopup");
-        const settingsMenu = document.getElementById("settingsMenu");
-        const fontSelect = document.getElementById("fontSelect");
-        const nowggButton = document.getElementById('nowggButton');
-        let typingTimeout = null;
-        let isTabActive = document.visibilityState === "visible";
-        let panicUrl = localStorage.getItem("panicUrl") || "https://classroom.google.com";
-        let panicKey = localStorage.getItem("panicKey") || "p";
+        const isValid = VALID_CREDENTIALS.some(cred => 
+            cred.username === username && cred.password === password
+        );
 
-        const savedFont = localStorage.getItem("font") || "Roboto";
-        const savedMode = localStorage.getItem("mode") || "dark";
-        document.body.style.fontFamily = `'${savedFont}', sans-serif`;
-        fontSelect.value = savedFont;
-        document.body.className = savedMode;
-
-        let isAuthenticated = localStorage.getItem("isAuthenticated");
-
-        document.addEventListener("visibilitychange", () => {
-            isTabActive = document.visibilityState === "visible";
-            if (isTabActive && mainContent.style.display === "block") {
-                cycleText();
-            } else if (typingTimeout) {
-                clearTimeout(typingTimeout);
-            }
-        });
-
-        document.addEventListener("keydown", (event) => {
-            if (event.key.toLowerCase() === panicKey.toLowerCase()) {
-                window.open(panicUrl, '_blank');
-                window.close();
-            }
-        });
-
-        if (!isAuthenticated) {
-            loginMenu.style.display = "block";
-            setTimeout(() => loginMenu.classList.add("show"), 100);
-        } else if (!userUsername) {
-            usernameMenu.style.display = "block";
-            setTimeout(() => usernameMenu.classList.add("show"), 100);
+        if (isValid) {
+            localStorage.setItem("isAuthenticated", "true");
+            loginMenu.classList.remove("show");
+            setTimeout(() => {
+                loginMenu.style.display = "none";
+                if (!userUsername) {
+                    usernameMenu.style.display = "block";
+                    setTimeout(() => usernameMenu.classList.add("show"), 100);
+                } else {
+                    showMainContent();
+                }
+            }, 300);
         } else {
+            loginError.style.display = "block";
+            setTimeout(() => loginError.style.display = "none", 2000);
+        }
+    }
+
+    function submitUsername() {
+        const usernameInput = document.getElementById("usernameInput").value.trim();
+        userUsername = usernameInput || "Guest";
+        localStorage.setItem("userUsername", userUsername);
+        usernameMenu.classList.remove("show");
+        setTimeout(() => {
+            usernameMenu.style.display = "none";
             showMainContent();
-        }
+        }, 300);
+    }
 
-        function checkLogin() {
-            const username = document.getElementById("loginUsername").value.trim();
-            const password = document.getElementById("loginPassword").value.trim();
-
-            const isValid = VALID_CREDENTIALS.some(cred => 
-                cred.username === username && cred.password === password
-            );
-
-            if (isValid) {
-                localStorage.setItem("isAuthenticated", "true");
-                loginMenu.classList.remove("show");
-                setTimeout(() => {
-                    loginMenu.style.display = "none";
-                    if (!userUsername) {
-                        usernameMenu.style.display = "block";
-                        setTimeout(() => usernameMenu.classList.add("show"), 100);
-                    } else {
-                        showMainContent();
-                    }
-                }, 300);
-            } else {
-                loginError.style.display = "block";
-                setTimeout(() => loginError.style.display = "none", 2000);
-            }
-        }
-
-        function submitUsername() {
-            const usernameInput = document.getElementById("usernameInput").value.trim();
-            userUsername = usernameInput || "Guest";
-            localStorage.setItem("userUsername", userUsername);
-            usernameMenu.classList.remove("show");
-            setTimeout(() => {
-                usernameMenu.style.display = "none";
-                showMainContent();
-            }, 300);
-        }
-
-        function showMainContent() {
-            mainContent.style.display = "block";
-            popup.textContent = `Hello, ${userUsername}`;
-            setTimeout(() => {
-                popup.classList.add("show");
-                setTimeout(() => popup.classList.remove("show"), 3000);
-            }, 100);
-            if (isTabActive) cycleText();
-        }
-
-        function showUsernameMenu() {
-            usernameMenu.style.display = "block";
-            document.getElementById("usernameInput").value = userUsername;
-            setTimeout(() => usernameMenu.classList.add("show"), 100);
-            mainContent.style.display = "none";
-        }
-
-        function showSettings() {
-            settingsMenu.style.display = "block";
-            setTimeout(() => {
-                settingsMenu.classList.add("show");
-                document.getElementById("panicKeyInput").value = panicKey;
-            }, 100);
-            mainContent.style.display = "none";
-        }
-
-        function closeSettings() {
-            settingsMenu.classList.remove("show");
-            setTimeout(() => {
-                settingsMenu.style.display = "none";
-                mainContent.style.display = "block";
-                if (isTabActive) cycleText();
-            }, 300);
-        }
-
-        function changeFont() {
-            const font = fontSelect.value;
-            document.body.style.fontFamily = `'${font}', sans-serif`;
-            localStorage.setItem("font", font);
-        }
-
-        function setMode(mode) {
-            document.body.className = mode;
-            localStorage.setItem("mode", mode);
-        }
-
-        function setPanicUrl(url) {
-            panicUrl = url;
-            localStorage.setItem("panicUrl", url);
-            showPopup(`Panic URL set to: ${getSiteName(url)}`);
-        }
-
-        function getSiteName(url) {
-            switch(url) {
-                case "https://classroom.google.com": return "Google Classroom";
-                case "https://clever.com": return "Clever";
-                case "https://edulastic.com": return "Edulastic";
-                case "https://canva.com": return "Canva";
-                case "https://docs.google.com": return "Google Docs";
-                case "https://slides.google.com": return "Google Slides";
-                case "https://drive.google.com": return "Google Drive";
-                default: return "Unknown";
-            }
-        }
-
-        function showPopup(message) {
-            popup.textContent = message;
+    function showMainContent() {
+        mainContent.style.display = "block";
+        popup.textContent = `Hello, ${userUsername}`;
+        setTimeout(() => {
             popup.classList.add("show");
-            setTimeout(() => popup.classList.remove("show"), 2000);
-        }
+            setTimeout(() => popup.classList.remove("show"), 3000);
+        }, 100);
+        if (isTabActive && !isCyclingText) cycleText();
+    }
 
-        function typeText(text, element, callback) {
-            if (!isTabActive) return;
-            if (typingTimeout) clearTimeout(typingTimeout);
-            element.textContent = "";
-            let i = 0;
-            function type() {
-                if (!isTabActive) return;
-                if (i < text.length) {
-                    element.textContent += text.charAt(i);
-                    i++;
-                    typingTimeout = setTimeout(type, 50);
-                } else {
-                    typingTimeout = setTimeout(() => backspaceText(text, element, callback), 1500);
-                }
-            }
-            type();
-        }
+    function showUsernameMenu() {
+        usernameMenu.style.display = "block";
+        document.getElementById("usernameInput").value = userUsername;
+        setTimeout(() => usernameMenu.classList.add("show"), 100);
+        mainContent.style.display = "none";
+    }
 
-        function backspaceText(text, element, callback) {
-            if (!isTabActive) return;
-            let i = text.length;
-            function backspace() {
-                if (!isTabActive) return;
-                if (i >= 0) {
-                    element.textContent = text.substring(0, i);
-                    i--;
-                    typingTimeout = setTimeout(backspace, 50);
-                } else {
-                    typingTimeout = setTimeout(callback, 500);
-                }
-            }
-            backspace();
-        }
+    function showSettings() {
+        settingsMenu.style.display = "block";
+        setTimeout(() => {
+            settingsMenu.classList.add("show");
+            document.getElementById("panicKeyInput").value = panicKey;
+        }, 100);
+        mainContent.style.display = "none";
+    }
 
-        function cycleText() {
-            if (!isTabActive) return;
-            const textBar = document.getElementById("textBar");
-            const randomStatement = statements[Math.floor(Math.random() * statements.length)];
-            typeText(randomStatement, textBar, cycleText);
-        }
+    function closeSettings() {
+        settingsMenu.classList.remove("show");
+        setTimeout(() => {
+            settingsMenu.style.display = "none";
+            mainContent.style.display = "block";
+            if (isTabActive && !isCyclingText) cycleText();
+        }, 300);
+    }
 
-        function openGame(url) {
-            let win = window.open();
-            if (!win || win.closed || typeof win.closed === "undefined") {
-                alert("Please allow pop-ups and reload!");
+    function changeFont() {
+        const font = fontSelect.value;
+        document.body.style.fontFamily = `'${font}', sans-serif`;
+        localStorage.setItem("font", font);
+    }
+
+    function setMode(mode) {
+        document.body.className = mode;
+        localStorage.setItem("mode", mode);
+    }
+
+    function setPanicUrl(url) {
+        panicUrl = url;
+        localStorage.setItem("panicUrl", url);
+        showPopup(`Panic URL set to: ${getSiteName(url)}`);
+    }
+
+    function getSiteName(url) {
+        switch(url) {
+            case "https://classroom.google.com": return "Google Classroom";
+            case "https://clever.com": return "Clever";
+            case "https://edulastic.com": return "Edulastic";
+            case "https://canva.com": return "Canva";
+            case "https://docs.google.com": return "Google Docs";
+            case "https://slides.google.com": return "Google Slides";
+            case "https://drive.google.com": return "Google Drive";
+            default: return "Unknown";
+        }
+    }
+
+    function showPopup(message) {
+        popup.textContent = message;
+        popup.classList.add("show");
+        setTimeout(() => popup.classList.remove("show"), 2000);
+    }
+
+    function typeText(text, element, callback) {
+        if (!isTabActive || isCyclingText) return;
+        isCyclingText = true;
+        if (typingTimeout) clearTimeout(typingTimeout);
+        element.textContent = "";
+        let i = 0;
+        function type() {
+            if (!isTabActive) {
+                isCyclingText = false;
                 return;
             }
-            win.document.body.style.margin = "0";
-            win.document.body.style.height = "100vh";
-            const iframe = win.document.createElement("iframe");
-            iframe.style.border = "none";
-            iframe.style.width = "100%";
-            iframe.style.height = "100%";
-            iframe.src = url;
-            win.document.body.appendChild(iframe);
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                typingTimeout = setTimeout(type, 50);
+            } else {
+                typingTimeout = setTimeout(() => backspaceText(text, element, callback), 1500);
+            }
         }
+        type();
+    }
 
-        function openRandomPage() {
-            nowggButton.disabled = true;
-            const randomIndex = Math.floor(Math.random() * links.length);
-            const randomLink = links[randomIndex];
-            let win = window.open();
-            if (!win || win.closed || typeof win.closed === "undefined") {
-                alert("Please allow pop-ups and reload!");
-                nowggButton.disabled = false;
+    function backspaceText(text, element, callback) {
+        if (!isTabActive || !isCyclingText) {
+            isCyclingText = false;
+            return;
+        }
+        let i = text.length;
+        function backspace() {
+            if (!isTabActive) {
+                isCyclingText = false;
                 return;
             }
-            win.document.body.style.margin = "0";
-            win.document.body.style.height = "100vh";
-            const iframe = win.document.createElement("iframe");
-            iframe.style.border = "none";
-            iframe.style.width = "100%";
-            iframe.style.height = "100%";
-            iframe.src = randomLink;
-            win.document.body.appendChild(iframe);
-            setTimeout(() => { nowggButton.disabled = false; }, 1000);
-        }
-
-        document.getElementById("panicKeyInput").addEventListener("input", function(e) {
-            if (this.value.length > 1) {
-                this.value = this.value.slice(0, 1);
+            if (i >= 0) {
+                element.textContent = text.substring(0, i);
+                i--;
+                typingTimeout = setTimeout(backspace, 50);
+            } else {
+                typingTimeout = setTimeout(() => {
+                    isCyclingText = false;
+                    callback();
+                }, 500);
             }
-            panicKey = this.value || "p";
-            localStorage.setItem("panicKey", panicKey);
-            showPopup(`Panic key set to: ${panicKey}`);
-        });
+        }
+        backspace();
+    }
 
-        const video = document.querySelector('.video-background');
-        video.addEventListener('error', () => {
-            console.error('Error loading video. Ensure "09272.mp4" is in the correct directory or use a valid URL.');
-        });
-    </script>
+    function cycleText() {
+        if (!isTabActive || isCyclingText) return;
+        const textBar = document.getElementById("textBar");
+        const randomStatement = statements[Math.floor(Math.random() * statements.length)];
+        typeText(randomStatement, textBar, cycleText);
+    }
+
+    function openGame(url) {
+        let win = window.open();
+        if (!win || win.closed || typeof win.closed === "undefined") {
+            alert("Please allow pop-ups and reload!");
+            return;
+        }
+        win.document.body.style.margin = "0";
+        win.document.body.style.height = "100vh";
+        const iframe = win.document.createElement("iframe");
+        iframe.style.border = "none";
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.src = url;
+        win.document.body.appendChild(iframe);
+    }
+
+    function openRandomPage() {
+        nowggButton.disabled = true;
+        const randomIndex = Math.floor(Math.random() * links.length);
+        const randomLink = links[randomIndex];
+        let win = window.open();
+        if (!win || win.closed || typeof win.closed === "undefined") {
+            alert("Please allow pop-ups and reload!");
+            nowggButton.disabled = false;
+            return;
+        }
+        win.document.body.style.margin = "0";
+        win.document.body.style.height = "100vh";
+        const iframe = win.document.createElement("iframe");
+        iframe.style.border = "none";
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.src = randomLink;
+        win.document.body.appendChild(iframe);
+        setTimeout(() => { nowggButton.disabled = false; }, 1000);
+    }
+
+    document.getElementById("panicKeyInput").addEventListener("input", function(e) {
+        if (this.value.length > 1) {
+            this.value = this.value.slice(0, 1);
+        }
+        panicKey = this.value || "p";
+        localStorage.setItem("panicKey", panicKey);
+        showPopup(`Panic key set to: ${panicKey}`);
+    });
+
+    const video = document.querySelector('.video-background');
+    video.addEventListener('error', () => {
+        console.error('Error loading video. Ensure "09272.mp4" is in the correct directory or use a valid URL.');
+    });
+</script>
 </body>
 </html>
