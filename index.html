@@ -467,217 +467,232 @@
         <button onclick="closeSettings()">Close</button>
     </div>
 
-    <script>
-        const statements = [
-            "Losers never win, if they keep losing.",
-            "Sometimes it's better to be on the good side, not the great side",
-            "You like jazz?",
-            "One time this guy walked up to me and said...",
-            "Unlimited Games and Proxies here at your service o7",
-            "Will we ever see the end of the universe?",
-            "Hate from Poland",
-            "Smooth Jazz is like hard rock, except it isn't",
-            "Rocks are awesome",
-            "Did you know that over 1 mosquito gets killed each year?",
-            "10+10-10-10-10-10+10+10=0",
-            "Do your homework",
-            "Only 1̶9̶.̶9̶5̶  FREE!",
-            "If you paid for this, I'm sorry",
-            "Only real ones know about the original HTML code",
-            "I can name 50 animals on the top of my head. Ready?",
-            "'Best site out there' - Nobody",
-            "We put the SCOO from SCHOOL in SCOOby Doo",
-            "Sometimes people say 10+10=20, but it actually is...",
-            "Congrats, you got this message, you get nothing :O",
-            "Sometimes I wonder how the brain operates",
-            "Not one speling eror in the site",
-            "Okay who said a link was broken?!"
-        ];
+<script>
+    const statements = [
+        "Losers never win, if they keep losing.",
+        "Sometimes it's better to be on the good side, not the great side",
+        "You like jazz?",
+        "One time this guy walked up to me and said...",
+        "Unlimited Games and Proxies here at your service o7",
+        "Will we ever see the end of the universe?",
+        "Hate from Poland",
+        "Smooth Jazz is like hard rock, except it isn't",
+        "Rocks are awesome",
+        "Did you know that over 1 mosquito gets killed each year?",
+        "10+10-10-10-10-10+10+10=0",
+        "Do your homework",
+        "Only 1̶9̶.̶9̶5̶  FREE!",
+        "If you paid for this, I'm sorry",
+        "Only real ones know about the original HTML code",
+        "I can name 50 animals on the top of my head. Ready?",
+        "'Best site out there' - Nobody",
+        "We put the SCOO from SCHOOL in SCOOby Doo",
+        "Sometimes people say 10+10=20, but it actually is...",
+        "Congrats, you got this message, you get nothing :O",
+        "Sometimes I wonder how the brain operates",
+        "Not one speling eror in the site",
+        "Okay who said a link was broken?!"
+    ];
 
-        let userUsername = localStorage.getItem("userUsername");
-        const usernameMenu = document.getElementById("usernameMenu");
-        const mainContent = document.getElementById("mainContent");
-        const popup = document.getElementById("greetingPopup");
-        const settingsMenu = document.getElementById("settingsMenu");
-        const fontSelect = document.getElementById("fontSelect");
-        let typingTimeout = null;
-        let isTabActive = document.visibilityState === "visible";
-        let panicUrl = localStorage.getItem("panicUrl") || "https://classroom.google.com";
-        let panicKey = localStorage.getItem("panicKey") || "p";
+    let userUsername = localStorage.getItem("userUsername");
+    const usernameMenu = document.getElementById("usernameMenu");
+    const mainContent = document.getElementById("mainContent");
+    const popup = document.getElementById("greetingPopup");
+    const settingsMenu = document.getElementById("settingsMenu");
+    const fontSelect = document.getElementById("fontSelect");
+    let typingTimeout = null;
+    let isTabActive = document.visibilityState === "visible";
+    let panicUrl = localStorage.getItem("panicUrl") || "https://classroom.google.com";
+    let panicKey = localStorage.getItem("panicKey") || "p";
+    let isCyclingText = false; // Add flag to prevent multiple cycles
 
-        const savedFont = localStorage.getItem("font") || "Roboto";
-        const savedMode = localStorage.getItem("mode") || "dark";
-        document.body.style.fontFamily = `'${savedFont}', sans-serif`;
-        fontSelect.value = savedFont;
-        document.body.className = savedMode;
+    const savedFont = localStorage.getItem("font") || "Roboto";
+    const savedMode = localStorage.getItem("mode") || "dark";
+    document.body.style.fontFamily = `'${savedFont}', sans-serif`;
+    fontSelect.value = savedFont;
+    document.body.className = savedMode;
 
-        document.addEventListener("visibilitychange", () => {
-            isTabActive = document.visibilityState === "visible";
-            if (isTabActive && mainContent.style.display === "block") {
-                cycleText();
-            } else if (typingTimeout) {
-                clearTimeout(typingTimeout);
-            }
-        });
+    // Handle visibility change without forcing focus
+    document.addEventListener("visibilitychange", () => {
+        isTabActive = document.visibilityState === "visible";
+        if (isTabActive && mainContent.style.display === "block" && !isCyclingText) {
+            cycleText();
+        } else if (typingTimeout) {
+            clearTimeout(typingTimeout);
+        }
+    });
 
-        document.addEventListener("keydown", (event) => {
-            if (event.key.toLowerCase() === panicKey.toLowerCase()) {
-                window.open(panicUrl, '_blank');
-                window.close();
-            }
-        });
+    document.addEventListener("keydown", (event) => {
+        if (event.key.toLowerCase() === panicKey.toLowerCase()) {
+            window.open(panicUrl, '_blank');
+            // Avoid window.close() as it may cause focus issues; let user close manually
+        }
+    });
 
-        if (!userUsername) {
-            usernameMenu.style.display = "block";
-            setTimeout(() => usernameMenu.classList.add("show"), 100);
-        } else {
+    if (!userUsername) {
+        usernameMenu.style.display = "block";
+        setTimeout(() => usernameMenu.classList.add("show"), 100);
+    } else {
+        showMainContent();
+    }
+
+    function submitUsername() {
+        const usernameInput = document.getElementById("usernameInput").value.trim();
+        userUsername = usernameInput || "Guest";
+        localStorage.setItem("userUsername", userUsername);
+        usernameMenu.classList.remove("show");
+        setTimeout(() => {
+            usernameMenu.style.display = "none";
             showMainContent();
-        }
+        }, 300);
+    }
 
-        function submitUsername() {
-            const usernameInput = document.getElementById("usernameInput").value.trim();
-            userUsername = usernameInput || "Guest";
-            localStorage.setItem("userUsername", userUsername);
-            usernameMenu.classList.remove("show");
-            setTimeout(() => {
-                usernameMenu.style.display = "none";
-                showMainContent();
-            }, 300);
-        }
-
-        function showMainContent() {
-            mainContent.style.display = "block";
-            popup.textContent = `Welcome, ${userUsername}`;
-            setTimeout(() => {
-                popup.classList.add("show");
-                setTimeout(() => popup.classList.remove("show"), 3000);
-            }, 100);
-            if (isTabActive) cycleText();
-        }
-
-        function showUsernameMenu() {
-            usernameMenu.style.display = "block";
-            document.getElementById("usernameInput").value = userUsername;
-            setTimeout(() => usernameMenu.classList.add("show"), 100);
-            mainContent.style.display = "none";
-        }
-
-        function showSettings() {
-            settingsMenu.style.display = "block";
-            setTimeout(() => {
-                settingsMenu.classList.add("show");
-                showTab('appearance');
-                document.getElementById("panicKeyInput").value = panicKey;
-            }, 100);
-            mainContent.style.display = "none";
-        }
-
-        function closeSettings() {
-            settingsMenu.classList.remove("show");
-            setTimeout(() => {
-                settingsMenu.style.display = "none";
-                mainContent.style.display = "block";
-                if (isTabActive) cycleText();
-            }, 300);
-        }
-
-        function showTab(tabId) {
-            const tabs = document.getElementsByClassName("tab-content");
-            for (let tab of tabs) {
-                tab.classList.remove("active");
-            }
-            document.getElementById(tabId).classList.add("active");
-        }
-
-        function changeFont() {
-            const font = fontSelect.value;
-            document.body.style.fontFamily = `'${font}', sans-serif`;
-            localStorage.setItem("font", font);
-        }
-
-        function setMode(mode) {
-            document.body.className = mode;
-            localStorage.setItem("mode", panicKeymode);
-        }
-
-        function setPanicUrl(url) {
-            panicUrl = url;
-            localStorage.setItem("panicUrl", url);
-            showPopup(`Panic URL set to: ${getSiteName(url)}`);
-        }
-
-        function getSiteName(url) {
-            switch(url) {
-                case "https://classroom.google.com": return "Google Classroom";
-                case "https://clever.com": return "Clever";
-                case "https://edulastic.com": return "Edulastic";
-                case "https://canva.com": return "Canva";
-                case "https://docs.google.com": return "Google Docs";
-                case "https://slides.google.com": return "Google Slides";
-                case "https://drive.google.com": return "Google Drive";
-                default: return "Unknown";
-            }
-        }
-
-        function showPopup(message) {
-            popup.textContent = message;
+    function showMainContent() {
+        mainContent.style.display = "block";
+        popup.textContent = `Welcome, ${userUsername}`;
+        setTimeout(() => {
             popup.classList.add("show");
-            setTimeout(() => popup.classList.remove("show"), 2000);
-        }
+            setTimeout(() => popup.classList.remove("show"), 3000);
+        }, 100);
+        if (isTabActive && !isCyclingText) cycleText();
+    }
 
-        function typeText(text, element, callback) {
-            if (!isTabActive) return;
-            if (typingTimeout) clearTimeout(typingTimeout);
-            element.textContent = "";
-            let i = 0;
-            function type() {
-                if (!isTabActive) return;
-                if (i < text.length) {
-                    element.textContent += text.charAt(i);
-                    i++;
-                    typingTimeout = setTimeout(type, 50);
-                } else {
-                    typingTimeout = setTimeout(() => backspaceText(text, element, callback), 1500);
-                }
+    function showUsernameMenu() {
+        usernameMenu.style.display = "block";
+        document.getElementById("usernameInput").value = userUsername;
+        setTimeout(() => usernameMenu.classList.add("show"), 100);
+        mainContent.style.display = "none";
+    }
+
+    function showSettings() {
+        settingsMenu.style.display = "block";
+        setTimeout(() => {
+            settingsMenu.classList.add("show");
+            showTab('appearance');
+            document.getElementById("panicKeyInput").value = panicKey;
+        }, 100);
+        mainContent.style.display = "none";
+    }
+
+    function closeSettings() {
+        settingsMenu.classList.remove("show");
+        setTimeout(() => {
+            settingsMenu.style.display = "none";
+            mainContent.style.display = "block";
+            if (isTabActive && !isCyclingText) cycleText();
+        }, 300);
+    }
+
+    function showTab(tabId) {
+        const tabs = document.getElementsByClassName("tab-content");
+        for (let tab of tabs) {
+            tab.classList.remove("active");
+        }
+        document.getElementById(tabId).classList.add("active");
+    }
+
+    function changeFont() {
+        const font = fontSelect.value;
+        document.body.style.fontFamily = `'${font}', sans-serif`;
+        localStorage.setItem("font", font);
+    }
+
+    function setMode(mode) {
+        document.body.className = mode;
+        localStorage.setItem("mode", mode); // Fixed typo: was "panicKeymode"
+    }
+
+    function setPanicUrl(url) {
+        panicUrl = url;
+        localStorage.setItem("panicUrl", url);
+        showPopup(`Panic URL set to: ${getSiteName(url)}`);
+    }
+
+    function getSiteName(url) {
+        switch(url) {
+            case "https://classroom.google.com": return "Google Classroom";
+            case "https://clever.com": return "Clever";
+            case "https://edulastic.com": return "Edulastic";
+            case "https://canva.com": return "Canva";
+            case "https://docs.google.com": return "Google Docs";
+            case "https://slides.google.com": return "Google Slides";
+            case "https://drive.google.com": return "Google Drive";
+            default: return "Unknown";
+        }
+    }
+
+    function showPopup(message) {
+        popup.textContent = message;
+        popup.classList.add("show");
+        setTimeout(() => popup.classList.remove("show"), 2000);
+    }
+
+    function typeText(text, element, callback) {
+        if (!isTabActive || isCyclingText) return;
+        isCyclingText = true;
+        if (typingTimeout) clearTimeout(typingTimeout);
+        element.textContent = "";
+        let i = 0;
+        function type() {
+            if (!isTabActive) {
+                isCyclingText = false;
+                return;
             }
-            type();
-        }
-
-        function backspaceText(text, element, callback) {
-            if (!isTabActive) return;
-            let i = text.length;
-            function backspace() {
-                if (!isTabActive) return;
-                if (i >= 0) {
-                    element.textContent = text.substring(0, i);
-                    i--;
-                    typingTimeout = setTimeout(backspace, 50);
-                } else {
-                    typingTimeout = setTimeout(callback, 500);
-                }
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                typingTimeout = setTimeout(type, 50);
+            } else {
+                typingTimeout = setTimeout(() => backspaceText(text, element, callback), 1500);
             }
-            backspace();
         }
+        type();
+    }
 
-        function cycleText() {
-            if (!isTabActive) return;
-            const textBar = document.getElementById("textBar");
-            const randomStatement = statements[Math.floor(Math.random() * statements.length)];
-            typeText(randomStatement, textBar, cycleText);
+    function backspaceText(text, element, callback) {
+        if (!isTabActive || !isCyclingText) {
+            isCyclingText = false;
+            return;
         }
-
-        function openGame(url) {
-            window.location.href = url;
-        }
-
-        document.getElementById("panicKeyInput").addEventListener("input", function(e) {
-            if (this.value.length > 1) {
-                this.value = this.value.slice(0, 1);
+        let i = text.length;
+        function backspace() {
+            if (!isTabActive) {
+                isCyclingText = false;
+                return;
             }
-            panicKey = this.value || "p";
-            localStorage.setItem("panicKey", panicKey);
-            showPopup(`Panic key set to: ${panicKey}`);
-        });
-    </script>
+            if (i >= 0) {
+                element.textContent = text.substring(0, i);
+                i--;
+                typingTimeout = setTimeout(backspace, 50);
+            } else {
+                typingTimeout = setTimeout(() => {
+                    isCyclingText = false;
+                    callback();
+                }, 500);
+            }
+        }
+        backspace();
+    }
+
+    function cycleText() {
+        if (!isTabActive || isCyclingText) return;
+        const textBar = document.getElementById("textBar");
+        const randomStatement = statements[Math.floor(Math.random() * statements.length)];
+        typeText(randomStatement, textBar, cycleText);
+    }
+
+    function openGame(url) {
+        window.location.href = url;
+    }
+
+    document.getElementById("panicKeyInput").addEventListener("input", function(e) {
+        if (this.value.length > 1) {
+            this.value = this.value.slice(0, 1);
+        }
+        panicKey = this.value || "p";
+        localStorage.setItem("panicKey", panicKey);
+        showPopup(`Panic key set to: ${panicKey}`);
+    });
+</script>
 </body>
 </html>
