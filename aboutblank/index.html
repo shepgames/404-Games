@@ -842,24 +842,6 @@ body.ultraviolet .fullscreen-button:hover {
 let panicKey = 'p';
 let panicUrl = 'https://classroom.google.com';
 let originalContent = '';
-
-function openInAboutBlank() {
-    // Check if the current location is not already about:blank
-    if (window.location.href !== 'about:blank') {
-        // Store the current HTML content in localStorage or a variable to preserve it
-        const htmlContent = '<!DOCTYPE html>' + document.documentElement.outerHTML;
-        
-        // Open about:blank in the current window
-        window.location.href = 'about:blank';
-        
-        // Wait for the blank page to load, then write the content
-        setTimeout(() => {
-            document.open();
-            document.write(htmlContent);
-            document.close();
-        }, 100); // Small delay to ensure the blank page loads
-    }
-}
         }
     }
 }
@@ -996,7 +978,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('panicKeyInput').value = panicKey;
 
     updateGameCount();
-    openInAboutBlank(); // This stays as is
 });
         
 function setCloak(title, faviconPath) {
