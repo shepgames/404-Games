@@ -936,26 +936,30 @@
             }
         });
 
-        window.onload = function() {
-            const savedFont = localStorage.getItem('font') || 'Poppins';
-            const savedMode = localStorage.getItem('mode') || 'dark';
-            const savedPanicKey = localStorage.getItem('panicKey') || 'p';
-            const savedPanicUrl = localStorage.getItem('panicUrl') || 'https://classroom.google.com';
-
-            document.body.style.fontFamily = `'${savedFont}', sans-serif`;
-            document.getElementById('fontSelect').value = savedFont;
-            document.body.className = savedMode;
-            panicKey = savedPanicKey;
-            panicUrl = savedPanicUrl;
-            document.getElementById('panicKeyInput').value = panicKey;
-
-            openInAboutBlank();
-        };
-        function updateGameCount() {
+function updateGameCount() {
     const gameButtons = document.querySelectorAll('#gamebuttons .button');
     const gameCount = gameButtons.length;
     document.getElementById('gameCount').textContent = `Total Games: ${gameCount}`;
 }
+
+// Call the function when the page loads
+window.onload = function() {
+    const savedFont = localStorage.getItem('font') || 'Poppins';
+    const savedMode = localStorage.getItem('mode') || 'dark';
+    const savedPanicKey = localStorage.getItem('panicKey') || 'p';
+    const savedPanicUrl = localStorage.getItem('panicUrl') || 'https://classroom.google.com';
+
+    document.body.style.fontFamily = `'${savedFont}', sans-serif`;
+    document.getElementById('fontSelect').value = savedFont;
+    document.body.className = savedMode;
+    panicKey = savedPanicKey;
+    panicUrl = savedPanicUrl;
+    document.getElementById('panicKeyInput').value = panicKey;
+
+    openInAboutBlank();
+    updateGameCount(); // Add this line to update the game count on load
+};
+
     </script>
 </body>
 </html>
