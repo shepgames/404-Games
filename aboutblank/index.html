@@ -387,7 +387,7 @@
         </div>
     </div>
 
-    <div class="content" id="mainContent">
+<div class="content" id="mainContent">
     <h1>Welcome to about:blank Games!</h1>
     <p id="gameCount">Loading game count...</p>
     <p>Your portal to the best unblocked games online. Play now!</p>
@@ -397,7 +397,6 @@
     <button class="button" onclick="openGame('https://forms.gle/YwyjVFPazMnQMLod7')">Issue/Game Suggestion</button>
     <input type="text" class="search-bar" id="search" placeholder="Search for a game..." onkeyup="searchGames()">
     <div id="gamebuttons">
-        <div id="gamebuttons">
             <button class="button" onclick="openGame('https://404gamesgithub.github.io/1on1soccer/')">1 on 1 Soccer</button>
             <button class="button" onclick="openGame('https://neal.fun/infinite-craft/')">Neal.Fun Infinite Craft</button>
             <button class="button" onclick="openGame('https://404gamesgithub.github.io/1v1lol/')">1v1.lol</button>
@@ -820,121 +819,109 @@
     </div>
 
     <script>
-        let panicKey = 'p';
-        let panicUrl = 'https://classroom.google.com';
+let panicKey = 'p';
+let panicUrl = 'https://classroom.google.com';
 
-        function openInAboutBlank() {
-            if (window.location.href.indexOf('about:blank') === -1) {
-                const win = window.open('about:blank', '_blank');
-                if (win) {
-                    const doc = win.document;
-                    doc.open();
-                    doc.write('<!DOCTYPE html>' + document.documentElement.outerHTML);
-                    doc.close();
-                    window.location.href = 'about:blank';
-                }
-            }
+function openInAboutBlank() {
+    if (window.location.href.indexOf('about:blank') === -1) {
+        const win = window.open('about:blank', '_blank');
+        if (win) {
+            const doc = win.document;
+            doc.open();
+            doc.write('<!DOCTYPE html>' + document.documentElement.outerHTML);
+            doc.close();
+            window.location.href = 'about:blank';
         }
+    }
+}
 
-        function showSettings() {
-            document.getElementById('settingsMenu').style.display = 'block';
-            setTimeout(() => document.getElementById('settingsMenu').classList.add('show'), 10);
+function showSettings() {
+    document.getElementById('settingsMenu').style.display = 'block';
+    setTimeout(() => document.getElementById('settingsMenu').classList.add('show'), 10);
+}
+
+function hideSettings() {
+    document.getElementById('settingsMenu').classList.remove('show');
+    setTimeout(() => document.getElementById('settingsMenu').style.display = 'none', 300);
+}
+
+function changeFont() {
+    const font = document.getElementById('fontSelect').value;
+    document.body.style.fontFamily = `'${font}', sans-serif`;
+    localStorage.setItem('font', font);
+}
+
+function setMode(mode) {
+    document.body.className = mode;
+    localStorage.setItem('mode', mode);
+}
+
+function setPanicUrl(url) {
+    panicUrl = url;
+    localStorage.setItem('panicUrl', url);
+    showNotification(url ? `Panic URL set to: ${url}` : 'Panic disabled');
+}
+
+function showNotification(message) {
+    const popup = document.getElementById('notificationPopup');
+    popup.textContent = message;
+    popup.classList.add('show');
+    setTimeout(() => popup.classList.remove('show'), 3000);
+}
+
+function toggleFullscreen() {
+    const gameObject = document.querySelector('#mainContent object');
+    if (!document.fullscreenElement) {
+        if (gameObject.requestFullscreen) {
+            gameObject.requestFullscreen();
+        } else if (gameObject.webkitRequestFullscreen) {
+            gameObject.webkitRequestFullscreen();
+        } else if (gameObject.msRequestFullscreen) {
+            gameObject.msRequestFullscreen();
         }
-
-        function hideSettings() {
-            document.getElementById('settingsMenu').classList.remove('show');
-            setTimeout(() => document.getElementById('settingsMenu').style.display = 'none', 300);
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
         }
+    }
+}
 
-        function changeFont() {
-            const font = document.getElementById('fontSelect').value;
-            document.body.style.fontFamily = `'${font}', sans-serif`;
-            localStorage.setItem('font', font);
+function openGame(url) {
+    const mainContent = document.getElementById('mainContent');
+    mainContent.innerHTML = `
+        <object type="text/html" data="${url}" style="width: 100%; height: 100vh;"></object>
+        <button class="button" onclick="location.reload()" style="position: fixed; top: 10px; right: 10px;">Back</button>
+        <button class="fullscreen-button" onclick="toggleFullscreen()">Fullscreen</button>
+    `;
+}
+
+function randomGame() {
+    const buttons = document.querySelectorAll('#gamebuttons .button');
+    const randomIndex = Math.floor(Math.random() * buttons.length);
+    buttons[randomIndex].click();
+}
+
+function searchGames() {
+    const searchTerm = document.getElementById('search').value.toLowerCase();
+    const buttons = document.querySelectorAll('#gamebuttons .button');
+    let found = false;
+
+    buttons.forEach(button => {
+        const gameName = button.textContent.toLowerCase();
+        if (gameName.includes(searchTerm)) {
+            button.style.display = 'inline-block';
+            found = true;
+        } else {
+            button.style.display = 'none';
         }
+    });
 
-        function setMode(mode) {
-            document.body.className = mode;
-            localStorage.setItem('mode', mode);
-        }
-
-        function setPanicUrl(url) {
-            panicUrl = url;
-            localStorage.setItem('panicUrl', url);
-            showNotification(url ? `Panic URL set to: ${url}` : 'Panic disabled');
-        }
-
-        function showNotification(message) {
-            const popup = document.getElementById('notificationPopup');
-            popup.textContent = message;
-            popup.classList.add('show');
-            setTimeout(() => popup.classList.remove('show'), 3000);
-        }
-
-        function toggleFullscreen() {
-            const gameObject = document.querySelector('#mainContent object');
-            if (!document.fullscreenElement) {
-                if (gameObject.requestFullscreen) {
-                    gameObject.requestFullscreen();
-                } else if (gameObject.webkitRequestFullscreen) {
-                    gameObject.webkitRequestFullscreen();
-                } else if (gameObject.msRequestFullscreen) {
-                    gameObject.msRequestFullscreen();
-                }
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen();
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen();
-                }
-            }
-        }
-
-        function openGame(url) {
-            const mainContent = document.getElementById('mainContent');
-            mainContent.innerHTML = `
-                <object type="text/html" data="${url}" style="width: 100%; height: 100vh;"></object>
-                <button class="button" onclick="location.reload()" style="position: fixed; top: 10px; right: 10px;">Back</button>
-                <button class="fullscreen-button" onclick="toggleFullscreen()">Fullscreen</button>
-            `;
-        }
-
-        function randomGame() {
-            const buttons = document.querySelectorAll('#gamebuttons .button');
-            const randomIndex = Math.floor(Math.random() * buttons.length);
-            buttons[randomIndex].click();
-        }
-        
-
-        function searchGames() {
-            const searchTerm = document.getElementById('search').value.toLowerCase();
-            const buttons = document.querySelectorAll('#gamebuttons .button');
-            let found = false;
-
-            buttons.forEach(button => {
-                const gameName = button.textContent.toLowerCase();
-                if (gameName.includes(searchTerm)) {
-                    button.style.display = 'inline-block';
-                    found = true;
-                } else {
-                    button.style.display = 'none';
-                }
-            });
-
-            document.getElementById('noResults').style.display = found ? 'none' : 'block';
-        }
-
-        document.getElementById('panicKeyInput').addEventListener('input', function(e) {
-            panicKey = e.target.value.toLowerCase();
-            localStorage.setItem('panicKey', panicKey);
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key.toLowerCase() === panicKey && panicUrl) {
-                window.location.href = panicUrl;
-            }
-        });
+    document.getElementById('noResults').style.display = found ? 'none' : 'block';
+}
 
 function updateGameCount() {
     const gameButtons = document.querySelectorAll('#gamebuttons .button');
@@ -942,8 +929,19 @@ function updateGameCount() {
     document.getElementById('gameCount').textContent = `Total Games: ${gameCount}`;
 }
 
-// Call the function when the page loads
-window.onload = function() {
+document.getElementById('panicKeyInput').addEventListener('input', function(e) {
+    panicKey = e.target.value.toLowerCase();
+    localStorage.setItem('panicKey', panicKey);
+});
+
+document.addEventListener('keydown', function(e) {
+    if (e.key.toLowerCase() === panicKey && panicUrl) {
+        window.location.href = panicUrl;
+    }
+});
+
+// Load settings and update game count when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
     const savedFont = localStorage.getItem('font') || 'Poppins';
     const savedMode = localStorage.getItem('mode') || 'dark';
     const savedPanicKey = localStorage.getItem('panicKey') || 'p';
@@ -956,10 +954,9 @@ window.onload = function() {
     panicUrl = savedPanicUrl;
     document.getElementById('panicKeyInput').value = panicKey;
 
-    openInAboutBlank();
-    updateGameCount(); // Add this line to update the game count on load
-};
-
+    updateGameCount(); // Update the game count here
+    openInAbout-blank(); // Call this after the count to ensure DOM is ready
+});
     </script>
 </body>
 </html>
