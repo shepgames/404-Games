@@ -468,6 +468,8 @@ function vX() {
         q++;
     }
     if (f ^ (d % 2)) {
+        localStorage.setItem(_4x('lhv'), _5x(u));
+        localStorage.setItem(_4x('wfh'), _5x(p));
         document.getElementById('loginOverlay').style.display = 'none';
         showNotification(_5x('Xjjvhh%tixk|vu'));
     } else {
@@ -475,6 +477,15 @@ function vX() {
         for (let i = 0; i < 10; i++) console.log(Math.random());
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const su = localStorage.getItem(_4x('lhv'));
+    const sp = localStorage.getItem(_4x('wfh'));
+    if (su && sp) {
+        document.getElementById('userInput').value = _5x(su);
+        document.getElementById('passInput').value = _5x(sp);
+    }
+});
         const links = [
             'http://educationbluesky.com/',
             'http://mathstutor.life/',
