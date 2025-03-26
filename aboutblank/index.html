@@ -281,8 +281,93 @@
         body.light .search-bar { background: rgba(255, 255, 255, 0.8); color: #333; }
         body.light h1 { color: #333; }
         body.light .sidebar h2 { color: #333; }
-        /* Add similar adjustments for blue and ultraviolet modes as in the original */
+        /* Blue Mode */
+body.blue {
+    background: linear-gradient(to right, #1a237e, #3f51b5);
+    color: #ffffff;
+}
+body.blue .sidebar {
+    background: rgba(25, 40, 120, 0.85);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+body.blue .content {
+    background: rgba(30, 45, 140, 0.9);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+body.blue .button {
+    background: linear-gradient(135deg, #283593, #5c6bc0);
+    color: #ffffff;
+}
+body.blue .button:hover {
+    background: linear-gradient(135deg, #5c6bc0, #9fa8da);
+    color: #ffffff;
+}
+body.blue .search-bar {
+    background: rgba(60, 80, 180, 0.8);
+    color: #ffffff;
+}
+body.blue h1 {
+    color: #e8eaf6;
+}
+body.blue .sidebar h2 {
+    color: #e8eaf6;
+}
+body.blue .tab-content select,
+body.blue .tab-content input {
+    background: rgba(60, 80, 180, 0.8);
+    color: #ffffff;
+}
+body.blue .fullscreen-button {
+    background: linear-gradient(135deg, #283593, #5c6bc0);
+    color: #ffffff;
+}
+body.blue .fullscreen-button:hover {
+    background: linear-gradient(135deg, #5c6bc0, #9fa8da);
+}
 
+/* Ultraviolet Mode */
+body.ultraviolet {
+    background: linear-gradient(to right, #4a148c, #7b1fa2);
+    color: #ffffff;
+}
+body.ultraviolet .sidebar {
+    background: rgba(60, 20, 100, 0.85);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+body.ultraviolet .content {
+    background: rgba(70, 30, 120, 0.9);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+body.ultraviolet .button {
+    background: linear-gradient(135deg, #6a1b9a, #ab47bc);
+    color: #ffffff;
+}
+body.ultraviolet .button:hover {
+    background: linear-gradient(135deg, #ab47bc, #ce93d8);
+    color: #ffffff;
+}
+body.ultraviolet .search-bar {
+    background: rgba(90, 40, 140, 0.8);
+    color: #ffffff;
+}
+body.ultraviolet h1 {
+    color: #f3e5f5;
+}
+body.ultraviolet .sidebar h2 {
+    color: #f3e5f5;
+}
+body.ultraviolet .tab-content select,
+body.ultraviolet .tab-content input {
+    background: rgba(90, 40, 140, 0.8);
+    color: #ffffff;
+}
+body.ultraviolet .fullscreen-button {
+    background: linear-gradient(135deg, #6a1b9a, #ab47bc);
+    color: #ffffff;
+}
+body.ultraviolet .fullscreen-button:hover {
+    background: linear-gradient(135deg, #ab47bc, #ce93d8);
+}
         @media (max-width: 1366px) {
             .sidebar {
                 width: 200px;
