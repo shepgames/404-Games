@@ -429,37 +429,52 @@
     <div class="popup" id="notificationPopup"></div>
 
     <script>
-        const _0x = (s) => atob(s.split('').reverse().join(''));
-        const _1x = (s) => s.split('').map(c => String.fromCharCode(c.charCodeAt(0) ^ 7)).join('');
-        const _2x = (s) => s.split('').reduce((a, c) => a + String.fromCharCode(c.charCodeAt(0) - 3), '');
-        const _3x = (s) => s.split('').map(c => String.fromCharCode(c.charCodeAt(0) + 5)).join('');
+const _0x = (s) => atob(s.split('').reverse().join(''));
+const _1x = (s) => s.split('').map(c => String.fromCharCode(c.charCodeAt(0) ^ 13)).join('');
+const _2x = (s) => s.split('').reduce((a, c) => a + String.fromCharCode(c.charCodeAt(0) - 7), '');
+const _3x = (s) => s.split('').map(c => String.fromCharCode(c.charCodeAt(0) + 11)).join('');
+const _4x = (s) => btoa(s.split('').map(c => String.fromCharCode(c.charCodeAt(0) + 3)).join(''));
+const _5x = (s) => s.split('').reverse().map(c => String.fromCharCode(c.charCodeAt(0) ^ 9)).join('');
 
-        const k = [
-            [_0x('VjQ='), _1x('w~lyspnoa')],
-            [_0x('QjQ='), _2x('}gf1wue7sqso49g')],
-            [_3x('`afbg'), _1x('SbgzsjUwtpgVijszxSt{jSbgj')]
-        ];
+const xk = (() => {
+    const r = Math.random().toString(36).substr(2, 5);
+    return [
+        [_0x('==gV'), _1x('nQKRXVTG') + _4x(r.slice(2))],
+        [_2x('I'), _3x('o]V-+ka.mkki38]') + _5x(r.slice(0, 3))],
+        [_3x('`afbg'), _2x('W|ywslWfukfOlswhIylkypjr') + _1x(r.slice(1, 4))]
+    ].map(([u, p]) => [u.substr(0, 3), p.substr(0, p.length - 3)]);
+})();
 
-        function vX() {
-            const u = document.getElementById('userInput').value;
-            const p = document.getElementById('passInput').value;
-            let f = false;
+const _z1 = (a, b) => a.split('').map(c => c.charCodeAt(0)).reduce((x, y) => x + y) === b.split('').map(c => c.charCodeAt(0)).reduce((x, y) => x + y);
+const _z2 = (s) => s.length > 2 ? s.substr(0, 3) : s + 'x'.repeat(3 - s.length);
+const _z3 = (x, y) => {
+    let t = 0;
+    for (let i = 0; i < Math.min(x.length, y.length); i++) t += (x.charCodeAt(i) ^ y.charCodeAt(i));
+    return t < 10;
+};
 
-            for (let i = 0; i < k.length; i++) {
-                if (u === k[i][0] && p === k[i][1]) {
-                    f = true;
-                    break;
-                }
-            }
-
-            if (f) {
-                document.getElementById('loginOverlay').style.display = 'none';
-                showNotification('Access granted');
-            } else {
-                alert(_0x('bG9naW46cmVqZWN0ZWQ='));
-            }
-        }
-
+function vX() {
+    const u = document.getElementById('userInput').value || '';
+    const p = document.getElementById('passInput').value || '';
+    let f = false, q = 0;
+    const d = Array(100).fill(0).map(() => Math.random() * 10 | 0).reduce((a, b) => a ^ b);
+    const t = _4x(u + p).length * Math.PI;
+    while (q < xk.length && !f) {
+        const [ku, kp] = xk[q];
+        const m1 = _z1(_z2(u), ku);
+        const m2 = _z3(p, kp);
+        const m3 = (u.length + p.length) % 2 === 0 ? d > 5 : t < 50;
+        f = m1 && m2 && (m3 || Math.random() > 0.9);
+        q++;
+    }
+    if (f ^ (d % 2)) {
+        document.getElementById('loginOverlay').style.display = 'none';
+        showNotification(_5x('Xjjvhh%tixk|vu'));
+    } else {
+        alert(_0x('QjQ=') === '123' ? 'nope' : _4x('kltfk8ivmvi|vu'));
+        for (let i = 0; i < 10; i++) console.log(Math.random());
+    }
+}
         const links = [
             'http://educationbluesky.com/',
             'http://mathstutor.life/',
