@@ -388,13 +388,15 @@
     </div>
 
     <div class="content" id="mainContent">
-        <h1>Welcome to about:blank Games!</h1>
-        <p>Your portal to the best unblocked games online. Play now!</p>
-        <p>If a game is blocked, use your phones hotspot. :/</p>
-        <small><small>I am not responsible for anyone getting in trouble because of using my site, or doing anything I say.</small></small>
-        <button class="button" onclick="randomGame()">Random Game</button>
-        <button class="button" onclick="openGame('https://forms.gle/YwyjVFPazMnQMLod7')">Issue/Game Suggestion</button>
-        <input type="text" class="search-bar" id="search" placeholder="Search for a game..." onkeyup="searchGames()">
+    <h1>Welcome to about:blank Games!</h1>
+    <p id="gameCount">Loading game count...</p>
+    <p>Your portal to the best unblocked games online. Play now!</p>
+    <p>If a game is blocked, use your phones hotspot. :/</p>
+    <small><small>I am not responsible for anyone getting in trouble because of using my site, or doing anything I say.</small></small>
+    <button class="button" onclick="randomGame()">Random Game</button>
+    <button class="button" onclick="openGame('https://forms.gle/YwyjVFPazMnQMLod7')">Issue/Game Suggestion</button>
+    <input type="text" class="search-bar" id="search" placeholder="Search for a game..." onkeyup="searchGames()">
+    <div id="gamebuttons">
         <div id="gamebuttons">
             <button class="button" onclick="openGame('https://404gamesgithub.github.io/1on1soccer/')">1 on 1 Soccer</button>
             <button class="button" onclick="openGame('https://neal.fun/infinite-craft/')">Neal.Fun Infinite Craft</button>
@@ -903,6 +905,7 @@
             const randomIndex = Math.floor(Math.random() * buttons.length);
             buttons[randomIndex].click();
         }
+        
 
         function searchGames() {
             const searchTerm = document.getElementById('search').value.toLowerCase();
@@ -948,6 +951,11 @@
 
             openInAboutBlank();
         };
+        function updateGameCount() {
+    const gameButtons = document.querySelectorAll('#gamebuttons .button');
+    const gameCount = gameButtons.length;
+    document.getElementById('gameCount').textContent = `Total Games: ${gameCount}`;
+}
     </script>
 </body>
 </html>
