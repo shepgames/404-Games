@@ -16,8 +16,8 @@
         body, html {
             height: 100%;
             width: 100%;
-            font-family: 'Poppins', sans-serif; /* Default font */
-            background: linear-gradient(to right, #121212, #2c2c2c); /* Default: Dark Mode */
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #121212, #2c2c2c);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -78,11 +78,10 @@
             text-align: center;
             max-height: 80vh;
             overflow-y: auto;
-            scrollbar-width: thin; /* Firefox */
-            scrollbar-color: #555 #333; /* Firefox */
+            scrollbar-width: thin;
+            scrollbar-color: #555 #333;
         }
 
-        /* Custom Scrollbar for WebKit Browsers */
         .content::-webkit-scrollbar {
             width: 8px;
         }
@@ -323,6 +322,54 @@
         body.ultraviolet .settings-menu { background: rgba(76, 29, 149, 0.9); }
         body.ultraviolet .settings-menu select, body.ultraviolet .panic-key-input { background: rgba(100, 50, 180, 0.8); color: #ede9fe; }
         body.ultraviolet .popup { background: rgba(76, 29, 149, 0.9); color: #ede9fe; }
+
+        /* Fullscreen button styles */
+        .fullscreen-button {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background: linear-gradient(135deg, #333, #555);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+        }
+
+        .fullscreen-button:hover {
+            background: linear-gradient(135deg, #555, #777);
+            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        body.light .fullscreen-button { 
+            background: linear-gradient(135deg, #d0d0d0, #b0b0b0); 
+            color: #333; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+        }
+        body.light .fullscreen-button:hover { 
+            background: linear-gradient(135deg, #b0b0b0, #999); 
+            color: #fff; 
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); 
+        }
+        body.blue .fullscreen-button { 
+            background: linear-gradient(135deg, #1e40af, #2563eb); 
+            color: #e0e7ff; 
+        }
+        body.blue .fullscreen-button:hover { 
+            background: linear-gradient(135deg, #2563eb, #1e40af); 
+        }
+        body.ultraviolet .fullscreen-button { 
+            background: linear-gradient(135deg, #6d28d9, #8b5cf6); 
+            color: #ede9fe; 
+        }
+        body.ultraviolet .fullscreen-button:hover { 
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9); 
+        }
     </style>
 </head>
 <body>
@@ -349,7 +396,6 @@
         <button class="button" onclick="openGame('https://forms.gle/YwyjVFPazMnQMLod7')">Issue/Game Suggestion</button>
         <input type="text" class="search-bar" id="search" placeholder="Search for a game..." onkeyup="searchGames()">
         <div id="gamebuttons">
-            <!-- Original games from 404 Games -->
             <button class="button" onclick="openGame('https://404gamesgithub.github.io/1on1soccer/')">1 on 1 Soccer</button>
             <button class="button" onclick="openGame('https://neal.fun/infinite-craft/')">Neal.Fun Infinite Craft</button>
             <button class="button" onclick="openGame('https://404gamesgithub.github.io/1v1lol/')">1v1.lol</button>
@@ -758,9 +804,6 @@
             <div class="panic-buttons">
                 <button class="button" onclick="setPanicUrl('https://classroom.google.com')">Google Classroom</button>
                 <button class="button" onclick="setPanicUrl('https://clever.com')">Clever</button>
-                <button class="button"
-                <button class="button" onclick="setPanicUrl('https://classroom.google.com')">Google Classroom</button>
-                <button class="button" onclick="setPanicUrl('https://clever.com')">Clever</button>
                 <button class="button" onclick="setPanicUrl('https://edulastic.com')">Edulastic</button>
                 <button class="button" onclick="setPanicUrl('https://canva.com')">Canva</button>
                 <button class="button" onclick="setPanicUrl('https://docs.google.com')">Google Docs</button>
@@ -777,6 +820,19 @@
     <script>
         let panicKey = 'p';
         let panicUrl = 'https://classroom.google.com';
+
+        function openInAboutBlank() {
+            if (window.location.href.indexOf('about:blank') === -1) {
+                const win = window.open('about:blank', '_blank');
+                if (win) {
+                    const doc = win.document;
+                    doc.open();
+                    doc.write('<!DOCTYPE html>' + document.documentElement.outerHTML);
+                    doc.close();
+                    window.location.href = 'about:blank';
+                }
+            }
+        }
 
         function showSettings() {
             document.getElementById('settingsMenu').style.display = 'block';
@@ -812,11 +868,33 @@
             setTimeout(() => popup.classList.remove('show'), 3000);
         }
 
+        function toggleFullscreen() {
+            const gameObject = document.querySelector('#mainContent object');
+            if (!document.fullscreenElement) {
+                if (gameObject.requestFullscreen) {
+                    gameObject.requestFullscreen();
+                } else if (gameObject.webkitRequestFullscreen) {
+                    gameObject.webkitRequestFullscreen();
+                } else if (gameObject.msRequestFullscreen) {
+                    gameObject.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        }
+
         function openGame(url) {
             const mainContent = document.getElementById('mainContent');
             mainContent.innerHTML = `
                 <object type="text/html" data="${url}" style="width: 100%; height: 100vh;"></object>
                 <button class="button" onclick="location.reload()" style="position: fixed; top: 10px; right: 10px;">Back</button>
+                <button class="fullscreen-button" onclick="toggleFullscreen()">Fullscreen</button>
             `;
         }
 
@@ -855,7 +933,6 @@
             }
         });
 
-        // Load saved settings
         window.onload = function() {
             const savedFont = localStorage.getItem('font') || 'Poppins';
             const savedMode = localStorage.getItem('mode') || 'dark';
@@ -868,6 +945,8 @@
             panicKey = savedPanicKey;
             panicUrl = savedPanicUrl;
             document.getElementById('panicKeyInput').value = panicKey;
+
+            openInAboutBlank();
         };
     </script>
 </body>
