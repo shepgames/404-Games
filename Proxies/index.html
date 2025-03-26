@@ -240,7 +240,6 @@
             transform: translateY(-2px);
         }
 
-        /* Appearance Modes */
         body.light { background: linear-gradient(to right, #e0e0e0, #f5f5f5); color: #333; }
         body.light .sidebar { background: rgba(230, 230, 230, 0.85); }
         body.light .content { background: rgba(230, 230, 230, 0.9); box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); }
@@ -279,9 +278,67 @@
             .content { margin-left: 200px; }
             .fullscreen-button { left: 210px; }
         }
+
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .login-box {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .login-box input {
+            background: rgba(80, 80, 80, 0.8);
+            border: none;
+            color: white;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 8px;
+            width: 100%;
+            margin: 10px 0;
+            outline: none;
+        }
+
+        .login-box button {
+            background: linear-gradient(135deg, #333, #555);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .login-box button:hover {
+            background: linear-gradient(135deg, #555, #777);
+        }
     </style>
 </head>
 <body>
+    <div id="loginOverlay" class="login-overlay">
+        <div class="login-box">
+            <h2>Authentication Required</h2>
+            <input type="text" id="userInput" placeholder="Username" autocomplete="off">
+            <input type="password" id="passInput" placeholder="Password">
+            <button onclick="vX()">Submit</button>
+        </div>
+    </div>
+
     <video class="video-background" autoplay loop muted playsinline>
         <source src="09272.mp4" type="video/mp4">
         Your browser does not support HTML5 video.
@@ -317,7 +374,7 @@
                 <button class="button" onclick="setPanicUrl('https://classroom.google.com')">Google Classroom</button>
                 <button class="button" onclick="setPanicUrl('https://clever.com')">Clever</button>
                 <button class="button" onclick="setPanicUrl('https://edulastic.com')">Edulastic</button>
-                <button class="button" onclick="setPanicUrl('https://canvaVhcom')">Canva</button>
+                <button class="button" onclick="setPanicUrl('https://canva.com')">Canva</button>
                 <button class="button" onclick="setPanicUrl('https://docs.google.com')">Google Docs</button>
                 <button class="button" onclick="setPanicUrl('https://slides.google.com')">Google Slides</button>
                 <button class="button" onclick="setPanicUrl('https://drive.google.com')">Google Drive</button>
@@ -357,14 +414,13 @@
         <p>Your portal to the best unblocked proxies online. Browse freely!</p>
         <div class="buttons" id="proxyButtons">
             <button class="button" onclick="openGame('https://realroblox-production.up.railway.app/')">NettleWeb (Includes Roblox!)</button>
-<button class="button" onclick="openGame('https://html.cafe/x2dcf2854')">Helios Proxy</button>
+            <button class="button" onclick="openGame('https://html.cafe/x2dcf2854')">Helios Proxy</button>
             <button class="button" onclick="openGame('https://html.cafe/x40ceaed5')">Dingus Proxy</button>
             <button class="button" onclick="openGame('https://astroid.gg/')">Astroid.gg Games + Apps + Proxy</button>
             <button class="button" onclick="openGame('https://infinitetutoring.com.au/history/src/browser/')">Infinite Tutoring Proxy</button>
             <button class="button" onclick="openGame('https://nowgg.lol/apps/uncube/7074/now.html')">Android App Launcher</button>
             <button class="button" onclick="openGame('https://selenite-copy.pages.dev')">Selenite Method 2</button>
             <button class="button" onclick="openGame('https://html.cafe/gallery')">HTML.cafe Gallery</button>
-            <button class="button" onclick="openGame('https://html.cafe/x8a3e2b9b')">British Man Website (Roblox!)</button>
             <button class="button" onclick="openGame('https://selenite.cc/')">Selenite (fixed)</button>
             <button id="nowggButton" class="button" onclick="openRandomPage()">Roblox (Under Maintenance)</button>
         </div>
@@ -373,6 +429,37 @@
     <div class="popup" id="notificationPopup"></div>
 
     <script>
+        const _0x = (s) => atob(s.split('').reverse().join(''));
+        const _1x = (s) => s.split('').map(c => String.fromCharCode(c.charCodeAt(0) ^ 7)).join('');
+        const _2x = (s) => s.split('').reduce((a, c) => a + String.fromCharCode(c.charCodeAt(0) - 3), '');
+        const _3x = (s) => s.split('').map(c => String.fromCharCode(c.charCodeAt(0) + 5)).join('');
+
+        const k = [
+            [_0x('VjQ='), _1x('w~lyspnoa')],
+            [_0x('QjQ='), _2x('}gf1wue7sqso49g')],
+            [_3x('`afbg'), _1x('SbgzsjUwtpgVijszxSt{jSbgj')]
+        ];
+
+        function vX() {
+            const u = document.getElementById('userInput').value;
+            const p = document.getElementById('passInput').value;
+            let f = false;
+
+            for (let i = 0; i < k.length; i++) {
+                if (u === k[i][0] && p === k[i][1]) {
+                    f = true;
+                    break;
+                }
+            }
+
+            if (f) {
+                document.getElementById('loginOverlay').style.display = 'none';
+                showNotification('Access granted');
+            } else {
+                alert(_0x('bG9naW46cmVqZWN0ZWQ='));
+            }
+        }
+
         const links = [
             'http://educationbluesky.com/',
             'http://mathstutor.life/',
