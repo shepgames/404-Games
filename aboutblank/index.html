@@ -389,11 +389,33 @@ body.ultraviolet .fullscreen-button:hover {
 
     <div class="sidebar">
         <h2>Settings</h2>
-        <div class="tab-buttons">
-            <button class="active" onclick="showTab('appearance')">Appearance</button>
-            <button onclick="showTab('panic')">Panic Button</button>
-            <button onclick="showTab('info')">Info</button>
+        <div class="settings-menu" id="settingsMenu" style="display: none;">
+    <h2>Settings</h2>
+    <div class="tab-buttons">
+        <button onclick="showTab('appearance')">Appearance</button>
+        <button onclick="showTab('panic')">Panic Button</button>
+        <button onclick="showTab('cloaker')">Cloaker</button> <!-- New tab button -->
+        <button onclick="showTab('info')">Credits</button>
+    </div>
+    <!-- Existing tab contents remain unchanged -->
+    
+    <!-- Add new cloaker tab content -->
+    <div id="cloaker" class="tab-content">
+        <div class="panic-section">
+            <h3>Site Cloaker</h3>
+            <small>Changes site so teachers can't see</small>
+            <div class="panic-buttons">
+            <button onclick="setCloak('ClassDojo', '../images/classdojo.png')">ClassDojo</button>
+            <button onclick="setCloak('Google Classroom', '../images/classroom.png')">Google Classroom</button>
+            <button onclick="setCloak('Clever', '../images/clever.png')">Clever</button>
+            <button onclick="setCloak('Google Docs', '../images/docs.png')">Google Docs</button>
+            <button onclick="setCloak('Google Drive', '../images/drive.png')">Google Drive</button>
+            <button onclick="setCloak('Duolingo', '../images/duolingo.png')">Duolingo</button>
+            <button onclick="setCloak('Pear Assessment', '../images/pear.png')">Pear Assessment</button>
+            <button onclick="setCloak('Quizlet', '../images/quizlet.png')">Quizlet</button>
+            </div>
         </div>
+    </div>
 
         <div id="appearance" class="tab-content active">
             <select id="fontSelect" onchange="changeFont()">
@@ -970,6 +992,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
     updateGameCount();
     openInAboutBlank();
+});
+   function setCloak(title, faviconPath) {
+    // Change the document title
+    document.title = title;
+    
+    // Change the favicon
+    let favicon = document.getElementById("favicon");
+    favicon.href = faviconPath;
+    
+    // Save the settings to localStorage
+    localStorage.setItem("cloakTitle", title);
+    localStorage.setItem("cloakFavicon", faviconPath);
+    
+    // Show confirmation popup
+    showPopup(`Site cloaked as: ${title}`);
+}
+
+// Load saved cloak settings on page load
+window.addEventListener('load', function() {
+    const savedTitle = localStorage.getItem("cloakTitle");
+    const savedFavicon = localStorage.getItem("cloakFavicon");
+    
+    if (savedTitle && savedFavicon) {
+        document.title = savedTitle;
+        document.getElementById("favicon").href = savedFavicon;
+    }
 });
     </script>
 </body>
