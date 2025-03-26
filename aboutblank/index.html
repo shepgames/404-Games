@@ -844,15 +844,14 @@ let panicUrl = 'https://classroom.google.com';
 let originalContent = '';
 
 function openInAboutBlank() {
-    if (window.location.protocol !== 'about:') {
-        window.location.href = 'about:blank';
-        setTimeout(() => {
-            document.open();
-            document.write('<!DOCTYPE html>' + document.documentElement.outerHTML);
-            document.close();
-        }, 100); // Small delay to ensure the blank page loads
-    }
-}
+    if (window.location.href.indexOf('about:blank') === -1) {
+        const win = window.open('about:blank', '_blank');
+        if (win) {
+            const doc = win.document;
+            doc.open();
+            doc.write('<!DOCTYPE html>' + document.documentElement.outerHTML);
+            doc.close();
+            window.location.href = 'about:blank';
         }
     }
 }
