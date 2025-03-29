@@ -883,20 +883,56 @@
 
         gameButtonsDiv.innerHTML = gameHtml;
         updateGameCount(); // Update game count after loading
-    }
-
-    function openInAboutBlank() {
-        if (window.location.href.indexOf('about:blank') === -1) {
-            const win = window.open('about:blank', '_blank');
-            if (win) {
-                const doc = win.document;
-                doc.open();
-                doc.write('<!DOCTYPE html>' + document.documentElement.outerHTML);
-                doc.close();
-                window.location.href = 'about:blank';
-            }
+function openInAboutBlank() {
+    // Check if the page is not already in about:blank
+    if (window.location.href.indexOf('about:blank') === -1 && !localStorage.getItem('openedInBlank')) {
+        const win = window.open('about:blank', '_blank');
+        if (win) {
+            const doc = win.document;
+            doc.open();
+            doc.write('<!DOCTYPE html>' + document.documentElement.outerHTML);
+            doc.close();
+            // Set a flag to indicate it has been opened
+            localStorage.setItem('openedInBlank', 'true');
+            // Redirect the original window to about:blank
+            window.location.href = 'about:blank';
         }
     }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const savedFont = localStorage.getItem('font') || 'Poppins';
+    const savedMode = localStorage.getItem('mode') || 'dark';
+    const savedPanicKey = localStorage.getItem('panicKey') || ']';
+    const savedPanicUrl = localStorage.getItem('panicUrl') || 'https://classroom.google.com';
+
+    document.body.style.fontFamily = `'${savedFont}', sans-serif`;
+    document.getElementById('fontSelect').value = savedFont;
+    document.body.className = savedMode;
+    panicKey = savedPanicKey;
+    panicUrl = savedPanicUrl;
+
+    loadGames(); // Load games without favicons
+    
+    // Only call openInAboutBlank if not already in about:blank
+    if (window.location.href.indexOf('about:blank') === -1) {
+        openInAboutBlank();
+    }
+
+    const savedTitle = localStorage.getItem("cloakTitle");
+    const savedFavicon = localStorage.getItem("cloakFavicon");
+    if (savedTitle && savedFavicon) {
+        document.title = savedTitle;
+        document.getElementById("favicon").href = savedFavicon;
+    }
+});
+
+// Reset the flag when the original page is closed or refreshed
+window.addEventListener('unload', function() {
+    if (window.location.href.indexOf('about:blank') === -1) {
+        localStorage.removeItem('openedInBlank');
+    }
+});
 
     function showTab(tabId) {
         document.querySelectorAll('.tab-content').forEach(tab => {
