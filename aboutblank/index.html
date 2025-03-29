@@ -880,20 +880,51 @@
             const url = new URL(gameUrl);
             return `${url.origin}/favicon.ico`; // Default favicon path
         } catch (e) {
-            return "../images/default-icon.png"; // Fallback if URL is invalid
+            return null; // Return null if URL is invalid
         }
     }
 
-    // Function to load games with favicons
-    function loadGames() {
+    // Function to check if favicon exists
+    function checkFaviconExists(url) {
+        return new Promise((resolve) => {
+            if (!url) {
+                resolve(false);
+                return;
+            }
+            const img = new Image();
+            img.onload = () => resolve(true);
+            img.onerror = () => resolve(false);
+            img.src = url;
+            // Timeout to prevent hanging if the server doesn't respond
+            setTimeout(() => resolve(false), 2000); // 2-second timeout
+        });
+    }
+
+    // Function to load games with conditional favicon display
+    async function loadGames() {
         const gameButtonsDiv = document.getElementById('gamebuttons');
-        gameButtonsDiv.innerHTML = games.map(game => `
-            <div class="game-container">
-                <img src="${getFaviconUrl(game.url)}" alt="${game.name} Icon" 
-                     onerror="this.src='../images/default-icon.png';">
-                <button class="button" onclick="openGame('${game.url}')">${game.name}</button>
-            </div>
-        `).join('');
+        let gameHtml = '';
+
+        for (const game of games) {
+            const faviconUrl = getFaviconUrl(game.url);
+            let faviconHtml = '';
+
+            if (faviconUrl) {
+                const faviconExists = await checkFaviconExists(faviconUrl);
+                if (faviconExists) {
+                    faviconHtml = `<img src="${faviconUrl}" alt="${game.name} Icon" onerror="this.style.display='none';">`;
+                }
+            }
+
+            gameHtml += `
+                <div class="game-container">
+                    ${faviconHtml}
+                    <button class="button" onclick="openGame('${game.url}')">${game.name}</button>
+                </div>
+            `;
+        }
+
+        gameButtonsDiv.innerHTML = gameHtml;
         updateGameCount(); // Update game count after loading
     }
 
@@ -1069,7 +1100,7 @@
         panicKey = savedPanicKey;
         panicUrl = savedPanicUrl;
 
-        loadGames(); // Load games with favicons
+        loadGames(); // Load games with conditional favicons
         openInAboutBlank();
 
         const savedTitle = localStorage.getItem("cloakTitle");
