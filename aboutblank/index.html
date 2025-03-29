@@ -318,21 +318,15 @@
             display: block;
         }
         .game-container {
-    display: inline-block;
-    text-align: center;
-    margin: 10px;
-}
+            display: inline-block;
+            text-align: center;
+            margin: 10px;
+        }
 
-.game-container img {
-    width: 32px; /* Typical favicon size */
-    height: 32px;
-    margin-bottom: 5px;
-}
-
-.game-container .button {
-    display: block;
-    margin: 0 auto;
-}
+        .game-container .button {
+            display: block;
+            margin: 0 auto;
+        }
 
         /* Appearance Modes */
         body.light { background: linear-gradient(to right, #e0e0e0, #f5f5f5); color: #333; }
@@ -874,51 +868,14 @@
         { name: "Stumble guys (Server 2)", url: "https://nowgg.lol/apps/kitika-games/7999/stumble-guys.html" }
     ];
 
-    // Function to get favicon URL from a game URL
-    function getFaviconUrl(gameUrl) {
-        try {
-            const url = new URL(gameUrl);
-            return `${url.origin}/favicon.ico`; // Default favicon path
-        } catch (e) {
-            return null; // Return null if URL is invalid
-        }
-    }
-
-    // Function to check if favicon exists
-    function checkFaviconExists(url) {
-        return new Promise((resolve) => {
-            if (!url) {
-                resolve(false);
-                return;
-            }
-            const img = new Image();
-            img.onload = () => resolve(true);
-            img.onerror = () => resolve(false);
-            img.src = url;
-            // Timeout to prevent hanging if the server doesn't respond
-            setTimeout(() => resolve(false), 2000); // 2-second timeout
-        });
-    }
-
-    // Function to load games with conditional favicon display
-    async function loadGames() {
+    // Function to load games
+    function loadGames() {
         const gameButtonsDiv = document.getElementById('gamebuttons');
         let gameHtml = '';
 
         for (const game of games) {
-            const faviconUrl = getFaviconUrl(game.url);
-            let faviconHtml = '';
-
-            if (faviconUrl) {
-                const faviconExists = await checkFaviconExists(faviconUrl);
-                if (faviconExists) {
-                    faviconHtml = `<img src="${faviconUrl}" alt="${game.name} Icon" onerror="this.style.display='none';">`;
-                }
-            }
-
             gameHtml += `
                 <div class="game-container">
-                    ${faviconHtml}
                     <button class="button" onclick="openGame('${game.url}')">${game.name}</button>
                 </div>
             `;
@@ -1100,7 +1057,7 @@
         panicKey = savedPanicKey;
         panicUrl = savedPanicUrl;
 
-        loadGames(); // Load games with conditional favicons
+        loadGames(); // Load games without favicons
         openInAboutBlank();
 
         const savedTitle = localStorage.getItem("cloakTitle");
