@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 Games</title>
+    <title>Shep</title>
     <link id="favicon" rel="icon" type="image/png" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@400;500&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
-    <style>
+        <style>
         * {
             margin: 0;
             padding: 0;
@@ -395,7 +395,6 @@
             }
         }
     </style>
-</head>
 <body>
     <div class="settings-bar">
         <a href="#" onclick="showSettings()">Settings</a>
@@ -403,9 +402,9 @@
     </div>
 
     <div class="content" id="mainContent" style="display: none;">
-        <h1>404 Games</h1>
+        <h1>Shep</h1>
         <h2>Status: 🟢 All Systems Operational</h2>
-        <small><small>The 404 Games team is NOT responsible for anyone getting in trouble. By using our site you're agreeing to this.</small></small>
+        <small><small>The Shep team is NOT responsible for anyone getting in trouble. By using our site you're agreeing to this.</small></small>
         <div class="buttons">
             <button class="button" onclick="openGame('https://404gamesgithub.github.io/404-Games/aboutblank/index.html')">AboutBlank Games</button>
             <button class="button" onclick="openGame('https://404gamesgithub.github.io/404-Games/Proxies/index.html')">Proxies</button>
@@ -473,7 +472,7 @@
         "Sometimes it's better to be on the good side, not the great side",
         "You like jazz?",
         "One time this guy walked up to me and said...",
-        "Unlimited Games and Proxies here at your service o7",
+        "Unlimited Games and Proxies here at Shep o7",
         "Will we ever see the end of the universe?",
         "Hate from Poland",
         "Smooth Jazz is like hard rock, except it isn't",
@@ -504,7 +503,7 @@
     let isTabActive = document.visibilityState === "visible";
     let panicUrl = localStorage.getItem("panicUrl") || "https://classroom.google.com";
     let panicKey = localStorage.getItem("panicKey") || "p";
-    let isCyclingText = false; // Add flag to prevent multiple cycles
+    let isCyclingText = false;
 
     const savedFont = localStorage.getItem("font") || "Roboto";
     const savedMode = localStorage.getItem("mode") || "dark";
@@ -512,7 +511,6 @@
     fontSelect.value = savedFont;
     document.body.className = savedMode;
 
-    // Handle visibility change without forcing focus
     document.addEventListener("visibilitychange", () => {
         isTabActive = document.visibilityState === "visible";
         if (isTabActive && mainContent.style.display === "block" && !isCyclingText) {
@@ -525,7 +523,6 @@
     document.addEventListener("keydown", (event) => {
         if (event.key.toLowerCase() === panicKey.toLowerCase()) {
             window.open(panicUrl, '_blank');
-            // Avoid window.close() as it may cause focus issues; let user close manually
         }
     });
 
@@ -549,7 +546,7 @@
 
     function showMainContent() {
         mainContent.style.display = "block";
-        popup.textContent = `Welcome, ${userUsername}`;
+        popup.textContent = `Welcome to Shep, ${userUsername}`;
         setTimeout(() => {
             popup.classList.add("show");
             setTimeout(() => popup.classList.remove("show"), 3000);
@@ -599,7 +596,7 @@
 
     function setMode(mode) {
         document.body.className = mode;
-        localStorage.setItem("mode", mode); // Fixed typo: was "panicKeymode"
+        localStorage.setItem("mode", mode);
     }
 
     function setPanicUrl(url) {
