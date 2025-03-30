@@ -1182,13 +1182,9 @@ function openInAboutBlank() {
             setTimeout(() => popup.classList.remove('show'), 3000);
         }
         function loadInIframe() {
-    const frame = document.getElementById('contentFrame');
-    const doc = frame.contentDocument || frame.contentWindow.document;
-    doc.open();
-    doc.write('<!DOCTYPE html>' + document.documentElement.outerHTML);
-    doc.close();
-    // Hide the original content
-    document.getElementById('mainContent').style.display = 'none';
+const htmlContent = '<!DOCTYPE html>' + document.documentElement.outerHTML;
+    const dataUrl = 'data:text/html;charset=utf-8,' + encodeURIComponent(htmlContent);
+    window.open(dataUrl, '_blank');
 }
 
         function setCloak(title, faviconPath) {
