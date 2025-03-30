@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 Games</title>
+    <title>Shep</title>
     <link id="favicon" rel="icon" type="image/png" href="../images/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
     <style>
@@ -68,8 +68,8 @@
             background: rgba(0, 0, 0, 0.6);
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-            max-height: calc(100vh - 60px); /* Adjusted for settings bar height */
-            margin-top: 60px; /* Offset for settings bar */
+            max-height: calc(100vh - 60px);
+            margin-top: 60px;
             overflow-y: auto;
             scrollbar-width: thin;
             scrollbar-color: #555 #333;
@@ -164,7 +164,7 @@
 
         .back-button {
             position: fixed;
-            top: 70px; /* Adjusted for settings bar */
+            top: 70px;
             right: 20px;
             z-index: 5;
         }
@@ -316,6 +316,8 @@
             text-align: center;
             margin: 0 auto 20px;
             display: block;
+            outline: none;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         }
 
         /* Appearance Modes */
@@ -780,7 +782,6 @@
 <button class="button" onclick="openGame('https://nowgg.lol/apps/robtop-games/1400/geometry-dash.html')">Geometry dash (Real)</button>
 <button class="button" onclick="openGame('https://www.stumbleguys.com/play')">Stumble guys (Server 1)</button>
 <button class="button" onclick="openGame('https://nowgg.lol/apps/kitika-games/7999/stumble-guys.html')">Stumble guys (Server 2)</button>
-
         </div>
         <p id="noResults" class="no-results">No results found</p>
     </div>
@@ -843,7 +844,7 @@
             </div>
         </div>
         <div id="info" class="tab-content">
-            <p>Made by LebronLover369. I am not responsible for any damage, nor punishment due to YOU being on this site. :/</p>
+            <p>Made by LebronLover369. Shep and our team is not responsible for any damage, nor punishment due to YOU being on this site. :/</p>
         </div>
         <button onclick="closeSettings()">Close</button>
     </div>
@@ -1018,7 +1019,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const savedFont = localStorage.getItem('font') || 'Poppins';
             const savedMode = localStorage.getItem('mode') || 'dark';
-            const savedPanicKey = localStorage.getItem('panicKey') || ']';
+            const savedPanicKey = localStorage.getItem('panicKey') || 'p';
             const savedPanicUrl = localStorage.getItem('panicUrl') || 'https://classroom.google.com';
 
             document.body.style.fontFamily = `'${savedFont}', sans-serif`;
