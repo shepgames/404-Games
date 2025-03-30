@@ -175,10 +175,10 @@
             margin-bottom: 30px;
         }
 
-        .button {
-            background: #ffd700;
+.button {
+            background: #d4a017; /* Muted gold instead of bright yellow */
             color: #228b22;
-            border: 2px solid #daa520;
+            border: 2px solid #b8860b; /* Darker gold border */
             padding: 12px 40px;
             font-size: 1.2rem;
             font-weight: 500;
@@ -186,13 +186,13 @@
             border-radius: 10px;
             transform: perspective(500px) translateZ(10px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
         }
 
         .button:hover {
             transform: perspective(500px) translateZ(20px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            background: #ffec00;
+            background: #e6b923; /* Slightly brighter muted gold for hover */
         }
 
         .text-bar {
@@ -304,10 +304,10 @@
             color: #fff;
         }
 
-        .username-menu button, .settings-menu button {
-            background: #ffd700;
+.username-menu button, .settings-menu button {
+            background: #d4a017; /* Matching muted gold */
             color: #228b22;
-            border: 2px solid #daa520;
+            border: 2px solid #b8860b;
             padding: 10px 30px;
             font-size: 1rem;
             cursor: pointer;
@@ -318,7 +318,7 @@
 
         .username-menu button:hover, .settings-menu button:hover {
             transform: perspective(500px) translateZ(20px);
-            background: #ffec00;
+            background: #e6b923; /* Matching hover state */
         }
 
         @media (max-width: 768px) {
