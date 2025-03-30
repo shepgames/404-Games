@@ -1905,7 +1905,8 @@
         }
 
         function goBack() {
-            document.getElementById("mainContent").innerHTML = `
+            const mainContent = document.getElementById("mainContent");
+            mainContent.innerHTML = `
                 <h1>Welcome to about:blank Games!</h1>
                 <p>Game Count: 382</p>
                 <p>Your portal to the best unblocked games online. Play now!</p>
@@ -1916,23 +1917,31 @@
                 <input type="text" class="search-bar" id="search" placeholder="Search for a game..." onkeyup="searchGames()">
                 <div id="gamebuttons"></div>`;
             document.querySelector(".back-button").style.display = "none";
-            loadGames();
+            loadGames(); // Reload the game buttons
         }
 
+        // Preserve the original game buttons
+        let originalGameButtons = [];
+
+        window.onload = function () {
+            const savedTheme = localStorage.getItem("theme") || "dark";
+            document.body.className = savedTheme;
+            document.getElementById("theme").value = savedTheme;
+
+            // Store the original game buttons
+            const gameContainers = document.querySelectorAll(".game-container");
+            originalGameButtons = Array.from(gameContainers).map((game) => game.cloneNode(true));
+
+            loadGames();
+        };
+
         function loadGames() {
-            // Get all game containers from the main content
-            const mainContent = document.querySelector('.content');
-            const existingGames = mainContent.querySelectorAll('.game-container');
-            
-            // Get the gamebuttons container
             const gameButtons = document.getElementById("gamebuttons");
-            gameButtons.innerHTML = "";
-            
-            // Clone and append each game container
-            existingGames.forEach(game => {
-                // Deep clone to include event listeners
-                const clone = game.cloneNode(true);
-                gameButtons.appendChild(clone);
+            gameButtons.innerHTML = ""; // Clear existing buttons
+
+            // Append the preserved original game buttons
+            originalGameButtons.forEach((game) => {
+                gameButtons.appendChild(game);
             });
         }
 
