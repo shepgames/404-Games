@@ -1181,6 +1181,15 @@ function openInAboutBlank() {
             popup.classList.add('show');
             setTimeout(() => popup.classList.remove('show'), 3000);
         }
+        function loadInIframe() {
+    const frame = document.getElementById('contentFrame');
+    const doc = frame.contentDocument || frame.contentWindow.document;
+    doc.open();
+    doc.write('<!DOCTYPE html>' + document.documentElement.outerHTML);
+    doc.close();
+    // Hide the original content
+    document.getElementById('mainContent').style.display = 'none';
+}
 
         function setCloak(title, faviconPath) {
             document.title = title;
@@ -1215,7 +1224,7 @@ document.addEventListener('DOMContentLoaded', function() {
     panicUrl = savedPanicUrl;
 
     updateGameCount();
-    openInAboutBlank(); // This triggers the about:blank tab
+    loadInIframe(); // This triggers the about:blank tab
 });
 
         const savedTitle = localStorage.getItem("cloakTitle");
