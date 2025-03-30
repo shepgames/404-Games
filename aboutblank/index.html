@@ -946,18 +946,23 @@
         let originalContent = '';
         let userUsername = localStorage.getItem("userUsername") || "Guest";
 
-        function openInAboutBlank() {
-            if (window.location.href.indexOf('about:blank') === -1) {
-                const win = window.open('about:blank', '_blank');
-                if (win) {
-                    const doc = win.document;
-                    doc.open();
-                    doc.write('<!DOCTYPE html>' + document.documentElement.outerHTML);
-                    doc.close();
-                    window.location.href = 'about:blank';
-                }
-            }
+function openInAboutBlank() {
+    // Check if the current page is not already in about:blank
+    if (window.location.href.indexOf('about:blank') === -1) {
+        const win = window.open('about:blank', '_blank');
+        if (win) {
+            const doc = win.document;
+            doc.open();
+            // Write the full HTML content to the new about:blank tab
+            doc.write('<!DOCTYPE html>' + document.documentElement.outerHTML);
+            doc.close();
+            // Optionally, keep the original tab open or redirect it
+            // window.location.href = 'about:blank'; // Uncomment if you want the original tab to go blank
+        } else {
+            console.error("Failed to open about:blank tab. Check pop-up blocker settings.");
         }
+    }
+}
 
         document.addEventListener("visibilitychange", () => {
             isTabActive = document.visibilityState === "visible";
@@ -1197,22 +1202,21 @@
                 window.location.href = panicUrl;
             }
         });
+document.addEventListener('DOMContentLoaded', function() {
+    const savedFont = localStorage.getItem('font') || 'Poppins';
+    const savedMode = localStorage.getItem('mode') || 'dark';
+    const savedPanicKey = localStorage.getItem('panicKey') || 'p';
+    const savedPanicUrl = localStorage.getItem('panicUrl') || 'https://classroom.google.com';
 
+    document.body.style.fontFamily = `'${savedFont}', sans-serif`;
+    document.getElementById('fontSelect').value = savedFont;
+    document.body.className = savedMode;
+    panicKey = savedPanicKey;
+    panicUrl = savedPanicUrl;
 
-        document.addEventListener('DOMContentLoaded', function() {
-        const savedFont = localStorage.getItem('font') || 'Poppins';
-        const savedMode = localStorage.getItem('mode') || 'dark';
-        const savedPanicKey = localStorage.getItem('panicKey') || 'p';
-        const savedPanicUrl = localStorage.getItem('panicUrl') || 'https://classroom.google.com';
-
-        document.body.style.fontFamily = `'${savedFont}', sans-serif`;
-        document.getElementById('fontSelect').value = savedFont;
-        document.body.className = savedMode;
-        panicKey = savedPanicKey;
-        panicUrl = savedPanicUrl;
-
-        updateGameCount();
-        openInAboutBlank();
+    updateGameCount();
+    openInAboutBlank(); // This triggers the about:blank tab
+});
 
         const savedTitle = localStorage.getItem("cloakTitle");
         const savedFavicon = localStorage.getItem("cloakFavicon");
