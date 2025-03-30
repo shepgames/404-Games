@@ -1892,17 +1892,8 @@
 </div>
 
 <script>
-const games = [
-{ name: "1 on 1 Soccer", url: "https://404gamesgithub.github.io/1on1soccer/" },
-{ name: "Neal.Fun Infinite Craft", url: "https://neal.fun/infinite-craft/" },
-{ name: "1v1.lol", url: "https://404gamesgithub.github.io/1v1lol/" },
-{ name: "Off Brand Fortnite", url: "https://404gamesgithub.github.io/offBrandFortnite/" },
-{ name: "Achievement Unlocked", url: "https://404gamesgithub.github.io/achieveunlocked/" },
-// ... (The rest of the games array remains unchanged, matching the static HTML above)
-];
-
 let currentUrl = "";
-let panicKey = localStorage.getItem("panicKey") || "p";
+let panicKey = localStorage.getItem("panicKey") || "]";
 let panicUrl = localStorage.getItem("panicUrl") || "";
 document.getElementById("panicKey").value = panicKey;
 
