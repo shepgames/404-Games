@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shep</title>
-    <link id="favicon" rel="icon" type="image/png" href="sheep-favicon.ico"> <!-- Replace with a sheep favicon -->
+    <link id="favicon" rel="icon" type="image/png" href="sheep-favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -19,15 +21,30 @@
             width: 100%;
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
-            background: #87ceeb; /* Sky blue background */
-            color: #fff;
+            background: #87ceeb; /* Default light mode sky */
+            color: #333; /* Changed from white to dark gray for readability */
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
         }
 
-        /* Saturated Grass Layer */
+        /* Mode-specific styles */
+        body.dark-mode {
+            background: #1a2b45; /* Dark sky */
+            color: #fff;
+        }
+
+        body.blue-mode {
+            background: #1e90ff; /* Blue sky */
+            color: #fff;
+        }
+
+        body.ultraviolet-mode {
+            background: #4b0082; /* Purple sky */
+            color: #fff;
+        }
+
         .grass-layer {
             position: fixed;
             bottom: 0;
@@ -40,7 +57,6 @@
             box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.3);
         }
 
-        /* 3D Clouds */
         .cloud {
             position: absolute;
             background: rgba(255, 255, 255, 0.9);
@@ -49,6 +65,12 @@
             animation: float 20s infinite linear;
             transform: translateZ(0);
             z-index: 1;
+        }
+
+        body.dark-mode .cloud,
+        body.blue-mode .cloud,
+        body.ultraviolet-mode .cloud {
+            background: rgba(200, 200, 200, 0.7); /* Slightly darker clouds for dark modes */
         }
 
         .cloud:nth-child(1) { width: 150px; height: 100px; top: 10%; left: 20%; animation-duration: 25s; }
@@ -71,6 +93,14 @@
             z-index: 3;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(5px);
+            color: #228b22;
+        }
+
+        body.dark-mode .settings-bar,
+        body.blue-mode .settings-bar,
+        body.ultraviolet-mode .settings-bar {
+            background: rgba(50, 50, 50, 0.8);
+            color: #32cd32;
         }
 
         .settings-bar a {
@@ -80,6 +110,12 @@
             font-size: 1rem;
             font-weight: 500;
             transition: color 0.3s ease;
+        }
+
+        body.dark-mode .settings-bar a,
+        body.blue-mode .settings-bar a,
+        body.ultraviolet-mode .settings-bar a {
+            color: #32cd32;
         }
 
         .settings-bar a:hover {
@@ -97,7 +133,15 @@
             text-align: center;
             transform: perspective(1000px) rotateX(10deg);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            border: 3px solid #ffd700; /* Golden border */
+            border: 3px solid #ffd700;
+            color: #333; /* Changed from inherited white */
+        }
+
+        body.dark-mode .content,
+        body.blue-mode .content,
+        body.ultraviolet-mode .content {
+            background: rgba(50, 50, 50, 0.9);
+            color: #fff;
         }
 
         h1 {
@@ -114,7 +158,6 @@
             color: #32cd32;
         }
 
-        /* Sheep Video */
         .sheep-video {
             width: 100%;
             max-width: 300px;
@@ -133,7 +176,7 @@
         }
 
         .button {
-            background: #ffd700; /* Golden 3D blocks */
+            background: #ffd700;
             color: #228b22;
             border: 2px solid #daa520;
             padding: 12px 40px;
@@ -165,6 +208,13 @@
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         }
 
+        body.dark-mode .text-bar,
+        body.blue-mode .text-bar,
+        body.ultraviolet-mode .text-bar {
+            background: rgba(80, 80, 80, 0.7);
+            color: #32cd32;
+        }
+
         .popup {
             position: fixed;
             top: 80px;
@@ -178,6 +228,13 @@
             z-index: 3;
             transition: right 0.5s ease;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark-mode .popup,
+        body.blue-mode .popup,
+        body.ultraviolet-mode .popup {
+            background: rgba(50, 50, 50, 0.9);
+            color: #32cd32;
         }
 
         .popup.show {
@@ -198,8 +255,19 @@
             opacity: 0;
             transition: opacity 0.3s ease;
             width: 90%;
-            max-width: 500px;
+            max玩法max-width: 500px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            color: #333; /* Added for readability */
+        }
+
+        body.dark-mode .username-menu,
+        body.blue-mode .username-menu,
+        body.ultraviolet-mode .username-menu,
+        body.dark-mode .settings-menu,
+        body.blue-mode .settings-menu,
+        body.ultraviolet-mode .settings-menu {
+            background: rgba(50, 50, 50, 0.9);
+            color: #fff;
         }
 
         .username-menu.show, .settings-menu.show {
@@ -224,6 +292,16 @@
             max-width: 300px;
             margin-bottom: 25px;
             outline: none;
+        }
+
+        body.dark-mode .username-menu input,
+        body.blue-mode .username-menu input,
+        body.ultraviolet-mode .username-menu input,
+        body.dark-mode .settings-menu select,
+        body.blue-mode .settings-menu select,
+        body.ultraviolet-mode .settings-menu select {
+            background: #666;
+            color: #fff;
         }
 
         .username-menu button, .settings-menu button {
@@ -269,6 +347,7 @@
         }
     </style>
 </head>
+<body class="light-mode"> <!-- Default to light mode -->
 <body>
     <div class="grass-layer"></div>
     <div class="cloud"></div>
@@ -516,6 +595,27 @@
     function openGame(url) {
         window.location.href = url;
     }
+    function setMode(mode) {
+        document.body.classList.remove('light-mode', 'dark-mode', 'blue-mode', 'ultraviolet-mode');
+        document.body.classList.add(`${mode}-mode`);
+        localStorage.setItem('appearanceMode', mode);
+    }
+
+    function changeFont() {
+        const font = document.getElementById('fontSelect').value;
+        document.body.style.fontFamily = `'${font}', sans-serif`;
+        localStorage.setItem('fontFamily', font);
+    }
+
+    // Load saved settings on page load
+    window.addEventListener('load', () => {
+        const savedMode = localStorage.getItem('appearanceMode') || 'light';
+        const savedFont = localStorage.getItem('fontFamily') || 'Poppins';
+        
+        document.body.classList.add(`${savedMode}-mode`);
+        document.body.style.fontFamily = `'${savedFont}', sans-serif`;
+        document.getElementById('fontSelect').value = savedFont;
+    });
 </script>
 </body>
 </html>
