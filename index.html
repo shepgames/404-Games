@@ -44,7 +44,29 @@
             background: #4b0082; /* Purple sky */
             color: #fff;
         }
-
+ 
+        .panic-key-input {
+            background: #fff;
+            border: 2px solid #b8860b; /* Matches the button border color */
+            color: #228b22;
+            padding: 12px;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            width: 70%;
+            max-width: 100px; /* Smaller width since it's just one character */
+            margin: 10px auto;
+            display: block;
+            outline: none;
+            text-align: center;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+body.dark-mode .panic-key-input,
+        body.blue-mode .panic-key-input,
+        body.ultraviolet-mode .panic-key-input {
+            background: #666;
+            color: #fff;
+            border: 2px solid #e6b923; /* Matches the hover color for contrast */
+        }
         .grass-layer {
             position: fixed;
             bottom: 0;
@@ -281,9 +303,9 @@
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
         }
 
-        .username-menu input, .settings-menu select {
+.username-menu input, .settings-menu select, .settings-menu .panic-key-input {
             background: #fff;
-            border: 2px solid #ffd700;
+            border: 2px solid #b8860b;
             color: #228b22;
             padding: 12px;
             font-size: 1.1rem;
@@ -292,16 +314,21 @@
             max-width: 300px;
             margin-bottom: 25px;
             outline: none;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         }
 
-        body.dark-mode .username-menu input,
+body.dark-mode .username-menu input,
         body.blue-mode .username-menu input,
         body.ultraviolet-mode .username-menu input,
         body.dark-mode .settings-menu select,
         body.blue-mode .settings-menu select,
-        body.ultraviolet-mode .settings-menu select {
+        body.ultraviolet-mode .settings-menu select,
+        body.dark-mode .settings-menu .panic-key-input,
+        body.blue-mode .settings-menu .panic-key-input,
+        body.ultraviolet-mode .settings-menu .panic-key-input {
             background: #666;
             color: #fff;
+            border: 2px solid #e6b923;
         }
 
 .username-menu button, .settings-menu button {
