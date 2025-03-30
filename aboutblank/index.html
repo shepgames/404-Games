@@ -1893,15 +1893,6 @@
     </div>
 
     <script>
-        const games = [
-            { name: "1 on 1 Soccer", url: "https://404gamesgithub.github.io/1on1soccer/" },
-            { name: "Neal.Fun Infinite Craft", url: "https://neal.fun/infinite-craft/" },
-            { name: "1v1.lol", url: "https://404gamesgithub.github.io/1v1lol/" },
-            { name: "Off Brand Fortnite", url: "https://404gamesgithub.github.io/offBrandFortnite/" },
-            { name: "Achievement Unlocked", url: "https://404gamesgithub.github.io/achieveunlocked/" },
-            // ... (The rest of the games array remains unchanged, matching the static HTML above)
-        ];
-
         let currentUrl = "";
         let panicKey = localStorage.getItem("panicKey") || "p";
         let panicUrl = localStorage.getItem("panicUrl") || "";
@@ -1929,19 +1920,31 @@
         }
 
         function loadGames() {
+            // Get all game containers from the main content
+            const mainContent = document.querySelector('.content');
+            const existingGames = mainContent.querySelectorAll('.game-container');
+            
+            // Get the gamebuttons container
             const gameButtons = document.getElementById("gamebuttons");
             gameButtons.innerHTML = "";
-            games.forEach(game => {
-                const div = document.createElement("div");
-                div.className = "game-container";
-                div.innerHTML = `<button class="button" onclick="openGame('${game.url}')">${game.name}</button>`;
-                gameButtons.appendChild(div);
+            
+            // Clone and append each game container
+            existingGames.forEach(game => {
+                // Deep clone to include event listeners
+                const clone = game.cloneNode(true);
+                gameButtons.appendChild(clone);
             });
         }
 
         function randomGame() {
-            const randomIndex = Math.floor(Math.random() * games.length);
-            openGame(games[randomIndex].url);
+            // Get all game buttons
+            const gameButtons = document.querySelectorAll('.game-container button');
+            const randomIndex = Math.floor(Math.random() * gameButtons.length);
+            const randomButton = gameButtons[randomIndex];
+            
+            // Extract URL from onclick attribute
+            const url = randomButton.getAttribute('onclick').match(/'([^']+)'/)[1];
+            openGame(url);
         }
 
         function searchGames() {
