@@ -935,7 +935,7 @@
         let typingTimeout = null;
         let isTabActive = document.visibilityState === "visible";
         let isCyclingText = false;
-        let panicKey = 'p';
+        let panicKey = ']';
         let panicUrl = 'https://classroom.google.com';
         let originalContent = '';
 
@@ -1181,7 +1181,7 @@
         window.addEventListener('load', () => {
             const savedMode = localStorage.getItem('appearanceMode') || 'light';
             const savedFont = localStorage.getItem('fontFamily') || 'Poppins';
-            const savedPanicKey = localStorage.getItem('panicKey') || 'p';
+            const savedPanicKey = localStorage.getItem('panicKey') || ']';
             const savedPanicUrl = localStorage.getItem('panicUrl') || 'https://classroom.google.com';
             const savedTitle = localStorage.getItem("cloakTitle");
             const savedFavicon = localStorage.getItem("cloakFavicon");
