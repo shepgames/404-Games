@@ -900,10 +900,12 @@ input:checked + .slider:before {
             <button onclick="showTab('info')">Credits</button>
         </div>
         <div id="appearance" class="tab-content">
-            <select id="fontSelect" onchange="changeFont()">
-                <option value="Poppins">Poppins</option>
-                <option value="Roboto">Roboto</option>
-                <option value="Open Sans">Open Sans</option>
+            <div id="appearance" class="tab-content">
+                <select id="fontSelect" onchange="changeFont()">
+                    <option value="Poppins">Poppins</option>
+                    <option value="Roboto">Roboto</option>
+                    <option value="Open Sans">Open Sans</option>
+                </select>
                 <div class="toggle-container">
                     <label>Open in about:blank</label>
                     <label class="toggle-switch">
@@ -911,12 +913,12 @@ input:checked + .slider:before {
                         <span class="slider"></span>
                     </label>
                 </div>
-            </select>
-            <div class="mode-buttons">
-                <button onclick="setMode('dark')">Dark Mode</button>
-                <button onclick="setMode('light')">Light Mode</button>
-                <button onclick="setMode('blue')">Blue Mode</button>
-                <button onclick="setMode('ultraviolet')">Ultraviolet Mode</button>
+                <div class="mode-buttons">
+                    <button onclick="setMode('dark')">Dark Mode</button>
+                    <button onclick="setMode('light')">Light Mode</button>
+                    <button onclick="setMode('blue')">Blue Mode</button>
+                    <button onclick="setMode('ultraviolet')">Ultraviolet Mode</button>
+                </div>
             </div>
         </div>
         <div id="panic" class="tab-content">
@@ -960,292 +962,315 @@ input:checked + .slider:before {
     </div>
 
     <script>
-        const statements = [
-            "Losers never win, if they keep losing.",
-            "Sometimes it's better to be on the good side, not the great side",
-            "You like jazz?",
-            "One time this guy walked up to me and said...",
-            "Unlimited Games and Proxies here at your service o7",
-            "Will we ever see the end of the universe?",
-            "Hate from Poland",
-            "Smooth Jazz is like hard rock, except it isn't",
-            "Rocks are awesome",
-            "Did you know that over 1 mosquito gets killed each year?",
-            "10+10-10-10-10-10+10+10=0",
-            "Do your homework",
-            "Only 1̶9̶.̶9̶5̶  FREE!",
-            "If you paid for this, I'm sorry",
-            "Only real ones know about the original HTML code",
-            "I can name 50 animals on the top of my head. Ready?",
-            "'Best site out there' - Nobody",
-            "We put the SCOO from SCHOOL in SCOOby Doo",
-            "Sometimes people say 10+10=20, but it actually is...",
-            "Congrats, you got this message, you get nothing :O",
-            "Sometimes I wonder how the brain operates",
-            "Not one speling eror in the site",
-            "Okay who said a link was broken?!"
-        ];
+const statements = [
+    "Losers never win, if they keep losing.",
+    "Sometimes it's better to be on the good side, not the great side",
+    "You like jazz?",
+    "One time this guy walked up to me and said...",
+    "Unlimited Games and Proxies here at your service o7",
+    "Will we ever see the end of the universe?",
+    "Hate from Poland",
+    "Smooth Jazz is like hard rock, except it isn't",
+    "Rocks are awesome",
+    "Did you know that over 1 mosquito gets killed each year?",
+    "10+10-10-10-10-10+10+10=0",
+    "Do your homework",
+    "Only 1̶9̶.̶9̶5̶  FREE!",
+    "If you paid for this, I'm sorry",
+    "Only real ones know about the original HTML code",
+    "I can name 50 animals on the top of my head. Ready?",
+    "'Best site out there' - Nobody",
+    "We put the SCOO from SCHOOL in SCOOby Doo",
+    "Sometimes people say 10+10=20, but it actually is...",
+    "Congrats, you got this message, you get nothing :O",
+    "Sometimes I wonder how the brain operates",
+    "Not one speling eror in the site",
+    "Okay who said a link was broken?!"
+];
 
-        let userUsername = localStorage.getItem("userUsername");
-        const usernameMenu = document.getElementById("usernameMenu");
-        const mainContent = document.getElementById("mainContent");
-        const popup = document.getElementById("greetingPopup");
-        const settingsMenu = document.getElementById("settingsMenu");
-        let typingTimeout = null;
-        let isTabActive = document.visibilityState === "visible";
-        let isCyclingText = false;
-        let panicKey = ']';
-        let panicUrl = 'https://classroom.google.com';
-        let originalContent = '';
+let userUsername = localStorage.getItem("userUsername");
+const usernameMenu = document.getElementById("usernameMenu");
+const mainContent = document.getElementById("mainContent");
+const popup = document.getElementById("greetingPopup");
+const settingsMenu = document.getElementById("settingsMenu");
+let typingTimeout = null;
+let isTabActive = document.visibilityState === "visible";
+let isCyclingText = false;
+let panicKey = ']';
+let panicUrl = 'https://classroom.google.com';
+let originalContent = '';
+let useAboutBlank = localStorage.getItem('useAboutBlank') === 'true';
 
-        document.addEventListener("visibilitychange", () => {
-            isTabActive = document.visibilityState === "visible";
-            if (isTabActive && mainContent.style.display === "block" && !isCyclingText) {
-                cycleText();
-            } else if (typingTimeout) {
-                clearTimeout(typingTimeout);
-            }
-        });
-        let useAboutBlank = localStorage.getItem('useAboutBlank') === 'true';
+document.addEventListener("visibilitychange", () => {
+    isTabActive = document.visibilityState === "visible";
+    if (isTabActive && mainContent.style.display === "block" && !isCyclingText) {
+        cycleText();
+    } else if (typingTimeout) {
+        clearTimeout(typingTimeout);
+    }
+});
 
-        if (!userUsername) {
-            usernameMenu.style.display = "block";
-            setTimeout(() => usernameMenu.classList.add("show"), 100);
+if (!userUsername) {
+    usernameMenu.style.display = "block";
+    setTimeout(() => usernameMenu.classList.add("show"), 100);
+} else {
+    showMainContent();
+}
+
+function submitUsername() {
+    const usernameInput = document.getElementById("usernameInput").value.trim();
+    userUsername = usernameInput || "Guest";
+    localStorage.setItem("userUsername", userUsername);
+    usernameMenu.classList.remove("show");
+    setTimeout(() => {
+        usernameMenu.style.display = "none";
+        showMainContent();
+    }, 300);
+}
+
+function showMainContent() {
+    mainContent.style.display = "block";
+    popup.textContent = `Welcome to Shep Games, ${userUsername}`;
+    setTimeout(() => {
+        popup.classList.add("show");
+        setTimeout(() => popup.classList.remove("show"), 3000);
+    }, 100);
+    if (isTabActive && !isCyclingText) cycleText();
+    updateGameCount();
+}
+
+function showUsernameMenu() {
+    usernameMenu.style.display = "block";
+    document.getElementById("usernameInput").value = userUsername;
+    setTimeout(() => usernameMenu.classList.add("show"), 100);
+    mainContent.style.display = "none";
+}
+
+function showSettings() {
+    settingsMenu.style.display = "block";
+    mainContent.style.display = "none";
+    setTimeout(() => {
+        settingsMenu.classList.add("show");
+        showTab('appearance');
+        document.getElementById('panicKeyInput').value = panicKey;
+    }, 100);
+}
+
+function closeSettings() {
+    settingsMenu.classList.remove("show");
+    setTimeout(() => {
+        settingsMenu.style.display = "none";
+        mainContent.style.display = "block";
+        if (isTabActive && !isCyclingText) cycleText();
+    }, 300);
+}
+
+function typeText(text, element, callback) {
+    if (!isTabActive || isCyclingText) return;
+    isCyclingText = true;
+    if (typingTimeout) clearTimeout(typingTimeout);
+    element.textContent = "";
+    let i = 0;
+    function type() {
+        if (!isTabActive) {
+            isCyclingText = false;
+            return;
+        }
+        if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            typingTimeout = setTimeout(type, 50);
         } else {
-            showMainContent();
+            typingTimeout = setTimeout(() => backspaceText(text, element, callback), 1500);
         }
+    }
+    type();
+}
 
-        function submitUsername() {
-            const usernameInput = document.getElementById("usernameInput").value.trim();
-            userUsername = usernameInput || "Guest";
-            localStorage.setItem("userUsername", userUsername);
-            usernameMenu.classList.remove("show");
-            setTimeout(() => {
-                usernameMenu.style.display = "none";
-                showMainContent();
-            }, 300);
+function backspaceText(text, element, callback) {
+    if (!isTabActive || !isCyclingText) {
+        isCyclingText = false;
+        return;
+    }
+    let i = text.length;
+    function backspace() {
+        if (!isTabActive) {
+            isCyclingText = false;
+            return;
         }
-
-        function showMainContent() {
-            mainContent.style.display = "block";
-            popup.textContent = `Welcome to Shep Games, ${userUsername}`;
-            setTimeout(() => {
-                popup.classList.add("show");
-                setTimeout(() => popup.classList.remove("show"), 3000);
-            }, 100);
-            if (isTabActive && !isCyclingText) cycleText();
-            updateGameCount();
-        }
-
-        function showUsernameMenu() {
-            usernameMenu.style.display = "block";
-            document.getElementById("usernameInput").value = userUsername;
-            setTimeout(() => usernameMenu.classList.add("show"), 100);
-            mainContent.style.display = "none";
-        }
-
-        function showSettings() {
-            settingsMenu.style.display = "block";
-            setTimeout(() => {
-                settingsMenu.classList.add("show");
-                showTab('appearance');
-                document.getElementById('panicKeyInput').value = panicKey;
-            }, 100);
-            mainContent.style.display = "none";
-        }
-
-        function closeSettings() {
-            settingsMenu.classList.remove("show");
-            setTimeout(() => {
-                settingsMenu.style.display = "none";
-                mainContent.style.display = "block";
-                if (isTabActive && !isCyclingText) cycleText();
-            }, 300);
-        }
-
-        function typeText(text, element, callback) {
-            if (!isTabActive || isCyclingText) return;
-            isCyclingText = true;
-            if (typingTimeout) clearTimeout(typingTimeout);
-            element.textContent = "";
-            let i = 0;
-            function type() {
-                if (!isTabActive) {
-                    isCyclingText = false;
-                    return;
-                }
-                if (i < text.length) {
-                    element.textContent += text.charAt(i);
-                    i++;
-                    typingTimeout = setTimeout(type, 50);
-                } else {
-                    typingTimeout = setTimeout(() => backspaceText(text, element, callback), 1500);
-                }
-            }
-            type();
-        }
-
-        function backspaceText(text, element, callback) {
-            if (!isTabActive || !isCyclingText) {
+        if (i >= 0) {
+            element.textContent = text.substring(0, i);
+            i--;
+            typingTimeout = setTimeout(backspace, 50);
+        } else {
+            typingTimeout = setTimeout(() => {
                 isCyclingText = false;
-                return;
-            }
-            let i = text.length;
-            function backspace() {
-                if (!isTabActive) {
-                    isCyclingText = false;
-                    return;
-                }
-                if (i >= 0) {
-                    element.textContent = text.substring(0, i);
-                    i--;
-                    typingTimeout = setTimeout(backspace, 50);
-                } else {
-                    typingTimeout = setTimeout(() => {
-                        isCyclingText = false;
-                        callback();
-                    }, 500);
-                }
-            }
-            backspace();
+                callback();
+            }, 500);
         }
+    }
+    backspace();
+}
 
-        function cycleText() {
-            if (!isTabActive || isCyclingText) return;
-            const textBar = document.getElementById("textBar");
-            const randomStatement = statements[Math.floor(Math.random() * statements.length)];
-            typeText(randomStatement, textBar, cycleText);
-        }
-        function toggleAboutBlank() {
+function cycleText() {
+    if (!isTabActive || isCyclingText) return;
+    const textBar = document.getElementById("textBar");
+    const randomStatement = statements[Math.floor(Math.random() * statements.length)];
+    typeText(randomStatement, textBar, cycleText);
+}
+
+function toggleAboutBlank() {
     useAboutBlank = document.getElementById('aboutBlankToggle').checked;
     localStorage.setItem('useAboutBlank', useAboutBlank);
-    popup.textContent = `Games will now open ${useAboutBlank ? 'in about:blank tabs' : 'normally'}`;
+    popup.textContent = `Site will ${useAboutBlank ? 'open in about:blank on next load' : 'open normally'}`;
+    popup.classList.add('show');
+    setTimeout(() => popup.classList.remove('show'), 3000);
+    if (useAboutBlank) {
+        openInAboutBlank();
+    }
+}
+
+function openInAboutBlank() {
+    const currentUrl = window.location.href;
+    const aboutBlankWindow = window.open('about:blank', '_blank');
+    if (aboutBlankWindow) {
+        const doc = aboutBlankWindow.document;
+        doc.write(`
+            <!DOCTYPE html>
+            <html>
+            <head><title>Shep Games</title></head>
+            <body style="margin:0;padding:0;overflow:hidden;">
+                <iframe src="${currentUrl}" style="width:100%;height:100vh;border:none;"></iframe>
+            </body>
+            </html>
+        `);
+        doc.close();
+        window.location.href = 'about:blank'; // Close the original window
+    }
+}
+
+function openGame(url) {
+    const mainContent = document.getElementById('mainContent');
+    originalContent = mainContent.innerHTML;
+    mainContent.innerHTML = `
+        <object type="text/html" data="${url}" style="width: 100%; height: 100vh;"></object>
+        <button class="fullscreen-button" onclick="toggleFullscreen()">Fullscreen</button>
+    `;
+    const backButton = document.createElement('button');
+    backButton.className = 'button back-button';
+    backButton.textContent = 'Back';
+    backButton.onclick = goBack;
+    document.body.appendChild(backButton);
+}
+
+function randomGame() {
+    const buttons = document.querySelectorAll('#gamebuttons .button');
+    const randomIndex = Math.floor(Math.random() * buttons.length);
+    buttons[randomIndex].click();
+}
+
+function searchGames() {
+    const searchTerm = document.getElementById('search').value.toLowerCase();
+    const buttons = document.querySelectorAll('#gamebuttons .button');
+    let found = false;
+
+    buttons.forEach(button => {
+        const gameName = button.textContent.toLowerCase();
+        if (gameName.includes(searchTerm)) {
+            button.style.display = 'inline-block';
+            found = true;
+        } else {
+            button.style.display = 'none';
+        }
+    });
+
+    document.getElementById('noResults').style.display = found ? 'none' : 'block';
+}
+
+function updateGameCount() {
+    const gameButtons = document.querySelectorAll('#gamebuttons .button');
+    const gameCount = gameButtons.length;
+    document.querySelector('.content h2').textContent = `Game Count: ${gameCount}`;
+}
+
+function goBack() {
+    const mainContent = document.getElementById('mainContent');
+    mainContent.innerHTML = originalContent;
+    const backButton = document.querySelector('.back-button');
+    if (backButton) backButton.remove();
+    if (isTabActive && !isCyclingText) cycleText();
+}
+
+function toggleFullscreen() {
+    const gameObject = document.querySelector('#mainContent object');
+    if (!document.fullscreenElement) {
+        if (gameObject.requestFullscreen) {
+            gameObject.requestFullscreen();
+        } else if (gameObject.webkitRequestFullscreen) {
+            gameObject.webkitRequestFullscreen();
+        } else if (gameObject.msRequestFullscreen) {
+            gameObject.msRequestFullscreen();
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+    }
+}
+
+function setMode(mode) {
+    document.body.classList.remove('light-mode', 'dark-mode', 'blue-mode', 'ultraviolet-mode');
+    document.body.classList.add(`${mode}-mode`);
+    localStorage.setItem('appearanceMode', mode);
+}
+
+function changeFont() {
+    const font = document.getElementById('fontSelect').value;
+    document.body.style.fontFamily = `'${font}', sans-serif`;
+    localStorage.setItem('fontFamily', font);
+}
+
+function showTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    document.getElementById(tabId).classList.add('active');
+}
+
+function setPanicUrl(url) {
+    panicUrl = url;
+    localStorage.setItem('panicUrl', url);
+    popup.textContent = url ? `Panic URL set to: ${url}` : 'Panic disabled';
     popup.classList.add('show');
     setTimeout(() => popup.classList.remove('show'), 3000);
 }
 
-        function openGame(url) {
-            const mainContent = document.getElementById('mainContent');
-            originalContent = mainContent.innerHTML;
-            mainContent.innerHTML = `
-                <object type="text/html" data="${url}" style="width: 100%; height: 100vh;"></object>
-                <button class="fullscreen-button" onclick="toggleFullscreen()">Fullscreen</button>
-            `;
-            const backButton = document.createElement('button');
-            backButton.className = 'button back-button';
-            backButton.textContent = 'Back';
-            backButton.onclick = goBack;
-            document.body.appendChild(backButton);
-        }
+function setCloak(title, faviconPath) {
+    document.title = title;
+    document.getElementById("favicon").href = faviconPath;
+    localStorage.setItem("cloakTitle", title);
+    localStorage.setItem("cloakFavicon", faviconPath);
+    popup.textContent = `Site cloaked as: ${title}`;
+    popup.classList.add('show');
+    setTimeout(() => popup.classList.remove('show'), 3000);
+}
 
-        function randomGame() {
-            const buttons = document.querySelectorAll('#gamebuttons .button');
-            const randomIndex = Math.floor(Math.random() * buttons.length);
-            buttons[randomIndex].click();
-        }
+document.getElementById('panicKeyInput').addEventListener('input', function(e) {
+    panicKey = e.target.value.toLowerCase();
+    localStorage.setItem('panicKey', panicKey);
+});
 
-        function searchGames() {
-            const searchTerm = document.getElementById('search').value.toLowerCase();
-            const buttons = document.querySelectorAll('#gamebuttons .button');
-            let found = false;
+document.addEventListener('keydown', function(e) {
+    if (e.key.toLowerCase() === panicKey && panicUrl) {
+        window.location.href = panicUrl;
+    }
+});
 
-            buttons.forEach(button => {
-                const gameName = button.textContent.toLowerCase();
-                if (gameName.includes(searchTerm)) {
-                    button.style.display = 'inline-block';
-                    found = true;
-                } else {
-                    button.style.display = 'none';
-                }
-            });
-
-            document.getElementById('noResults').style.display = found ? 'none' : 'block';
-        }
-
-        function updateGameCount() {
-            const gameButtons = document.querySelectorAll('#gamebuttons .button');
-            const gameCount = gameButtons.length;
-            document.querySelector('.content h2').textContent = `Game Count: ${gameCount}`;
-        }
-
-        function goBack() {
-            const mainContent = document.getElementById('mainContent');
-            mainContent.innerHTML = originalContent;
-            const backButton = document.querySelector('.back-button');
-            if (backButton) backButton.remove();
-            if (isTabActive && !isCyclingText) cycleText();
-        }
-
-        function toggleFullscreen() {
-            const gameObject = document.querySelector('#mainContent object');
-            if (!document.fullscreenElement) {
-                if (gameObject.requestFullscreen) {
-                    gameObject.requestFullscreen();
-                } else if (gameObject.webkitRequestFullscreen) {
-                    gameObject.webkitRequestFullscreen();
-                } else if (gameObject.msRequestFullscreen) {
-                    gameObject.msRequestFullscreen();
-                }
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen();
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen();
-                }
-            }
-        }
-
-        function setMode(mode) {
-            document.body.classList.remove('light-mode', 'dark-mode', 'blue-mode', 'ultraviolet-mode');
-            document.body.classList.add(`${mode}-mode`);
-            localStorage.setItem('appearanceMode', mode);
-        }
-
-        function changeFont() {
-            const font = document.getElementById('fontSelect').value;
-            document.body.style.fontFamily = `'${font}', sans-serif`;
-            localStorage.setItem('fontFamily', font);
-        }
-
-        function showTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.getElementById(tabId).classList.add('active');
-        }
-
-        function setPanicUrl(url) {
-            panicUrl = url;
-            localStorage.setItem('panicUrl', url);
-            popup.textContent = url ? `Panic URL set to: ${url}` : 'Panic disabled';
-            popup.classList.add('show');
-            setTimeout(() => popup.classList.remove('show'), 3000);
-        }
-
-        function setCloak(title, faviconPath) {
-            document.title = title;
-            document.getElementById("favicon").href = faviconPath;
-            localStorage.setItem("cloakTitle", title);
-            localStorage.setItem("cloakFavicon", faviconPath);
-            popup.textContent = `Site cloaked as: ${title}`;
-            popup.classList.add('show');
-            setTimeout(() => popup.classList.remove('show'), 3000);
-        }
-
-        document.getElementById('panicKeyInput').addEventListener('input', function(e) {
-            panicKey = e.target.value.toLowerCase();
-            localStorage.setItem('panicKey', panicKey);
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key.toLowerCase() === panicKey && panicUrl) {
-                window.location.href = panicUrl;
-            }
-        });
-
-        window.addEventListener('load', () => {
+window.addEventListener('load', () => {
     const savedMode = localStorage.getItem('appearanceMode') || 'light';
     const savedFont = localStorage.getItem('fontFamily') || 'Poppins';
     const savedPanicKey = localStorage.getItem('panicKey') || ']';
@@ -1263,6 +1288,9 @@ input:checked + .slider:before {
     if (savedTitle && savedFavicon) {
         document.title = savedTitle;
         document.getElementById("favicon").href = savedFavicon;
+    }
+    if (userUsername) {
+        mainContent.style.display = "block";
     }
 });
     </script>
