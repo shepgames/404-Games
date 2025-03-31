@@ -428,6 +428,58 @@
                 font-size: 1rem;
             }
         }
+        .toggle-container {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #228b22;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
     </style>
 </head>
 <body class="light-mode">
@@ -852,6 +904,13 @@
                 <option value="Poppins">Poppins</option>
                 <option value="Roboto">Roboto</option>
                 <option value="Open Sans">Open Sans</option>
+                <div class="toggle-container">
+                    <label>Open in about:blank</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="aboutBlankToggle" onchange="toggleAboutBlank()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
             </select>
             <div class="mode-buttons">
                 <button onclick="setMode('dark')">Dark Mode</button>
@@ -947,6 +1006,7 @@
                 clearTimeout(typingTimeout);
             }
         });
+        let useAboutBlank = localStorage.getItem('useAboutBlank') === 'true';
 
         if (!userUsername) {
             usernameMenu.style.display = "block";
@@ -1056,6 +1116,13 @@
             const randomStatement = statements[Math.floor(Math.random() * statements.length)];
             typeText(randomStatement, textBar, cycleText);
         }
+        function toggleAboutBlank() {
+    useAboutBlank = document.getElementById('aboutBlankToggle').checked;
+    localStorage.setItem('useAboutBlank', useAboutBlank);
+    popup.textContent = `Games will now open ${useAboutBlank ? 'in about:blank tabs' : 'normally'}`;
+    popup.classList.add('show');
+    setTimeout(() => popup.classList.remove('show'), 3000);
+}
 
         function openGame(url) {
             const mainContent = document.getElementById('mainContent');
@@ -1179,23 +1246,25 @@
         });
 
         window.addEventListener('load', () => {
-            const savedMode = localStorage.getItem('appearanceMode') || 'light';
-            const savedFont = localStorage.getItem('fontFamily') || 'Poppins';
-            const savedPanicKey = localStorage.getItem('panicKey') || ']';
-            const savedPanicUrl = localStorage.getItem('panicUrl') || 'https://classroom.google.com';
-            const savedTitle = localStorage.getItem("cloakTitle");
-            const savedFavicon = localStorage.getItem("cloakFavicon");
+    const savedMode = localStorage.getItem('appearanceMode') || 'light';
+    const savedFont = localStorage.getItem('fontFamily') || 'Poppins';
+    const savedPanicKey = localStorage.getItem('panicKey') || ']';
+    const savedPanicUrl = localStorage.getItem('panicUrl') || 'https://classroom.google.com';
+    const savedTitle = localStorage.getItem("cloakTitle");
+    const savedFavicon = localStorage.getItem("cloakFavicon");
+    useAboutBlank = localStorage.getItem('useAboutBlank') === 'true';
 
-            document.body.classList.add(`${savedMode}-mode`);
-            document.body.style.fontFamily = `'${savedFont}', sans-serif`;
-            document.getElementById('fontSelect').value = savedFont;
-            panicKey = savedPanicKey;
-            panicUrl = savedPanicUrl;
-            if (savedTitle && savedFavicon) {
-                document.title = savedTitle;
-                document.getElementById("favicon").href = savedFavicon;
-            }
-        });
+    document.body.classList.add(`${savedMode}-mode`);
+    document.body.style.fontFamily = `'${savedFont}', sans-serif`;
+    document.getElementById('fontSelect').value = savedFont;
+    document.getElementById('aboutBlankToggle').checked = useAboutBlank;
+    panicKey = savedPanicKey;
+    panicUrl = savedPanicUrl;
+    if (savedTitle && savedFavicon) {
+        document.title = savedTitle;
+        document.getElementById("favicon").href = savedFavicon;
+    }
+});
     </script>
 </body>
 </html>
