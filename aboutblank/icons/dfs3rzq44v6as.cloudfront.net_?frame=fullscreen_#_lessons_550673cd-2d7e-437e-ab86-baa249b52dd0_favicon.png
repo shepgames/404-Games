@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tortilla</title>
+    <meta name="theme-color" content="#998100">
+    <meta property="og:title" content="QuizTrail" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="/" />
+    <meta property="og:image" content="/assets/img/quiztrail.png" />
+    <meta property="og:description" content="K-12 testing system for students and teachers." />
+    <meta name="keywords" content="unblocked games, school games, free games, online games, tortillagames, unblocked games for school, play games at school, school-friendly games, free online games, no blocked games, gaming website, fun games for school, safe games for school, browser games, Eaglercraft, Eaglercraft unblocked, play Eaglercraft, Eaglercraft games, unblocked Eaglercraft games, Minecraft alternatives, Eaglercraft school games, free Eaglercraft, unblocked Minecraft, multiplayer games, Eaglercraft online, free multiplayer games, browser Minecraft, free Eaglercraft server, Eaglercraft mods, gaming at school, unblocked browser games, school-friendly Eaglercraft, fun Eaglercraft for school, best school games, creative games for school, adventure games for school, multiplayer unblocked games, Eaglercraft free online, play Minecraft at school, Eaglercraft worlds, unblocked adventure games, sandbox games, Eaglercraft sandbox, school gaming site, Eaglercraft server list, unblocked survival games, play unblocked games, safe gaming at school, Eaglercraft unblocked Minecraft, Eaglercraft multiplayer, sandbox games for school, Eaglercraft custom servers, unblocked creative games, gaming website for school, fun school gaming, best unblocked games, Eaglercraft download, Eaglercraft setup, Eaglercraft mods download, Eaglercraft survival games, unblocked survival worlds, Eaglercraft gaming tips, play browser games, unblocked fun games, safe online gaming, Eaglercraft world building, free browser Minecraft, multiplayer sandbox games, unblocked browser Minecraft, free to play Eaglercraft, Eaglercraft maps, creative sandbox games, fun gaming website, unblocked multiplayer games, school browser games, Eaglercraft server hosting, fun school-friendly games, school-friendly browser games, free Eaglercraft downloads, Eaglercraft mods guide, unblocked fun at school, Eaglercraft safe play, unblocked school adventures, free Eaglercraft tools, creative Minecraft at school, best browser games, multiplayer unblocked Minecraft, sandbox unblocked games, creative school games, Minecraft browser unblocked, Eaglercraft multiplayer servers, Eaglercraft modpacks, Eaglercraft gameplay, fun sandbox worlds, browser-based Minecraft, Eaglercraft hacks, unblocked school sandbox, Minecraft alternatives unblocked, browser Eaglercraft servers, Eaglercraft worlds download, gaming websites for school, Eaglercraft server play, fun school sandbox games, Eaglercraft school-friendly mods, play school unblocked games, free Minecraft browser games, browser games for school, safe Eaglercraft servers, unblocked gaming platform, Eaglercraft education, Eaglercraft creative mode, Minecraft for school, school game servers, Minecraft unblocked access, browser-based Eaglercraft, school-friendly Eaglercraft downloads, multiplayer adventure games, Eaglercraft for school kids, school Minecraft play, sandbox education games, browser games sandbox, Minecraft Eaglercraft mods, unblocked creative gaming, Eaglercraft play free, safe sandbox games for school, fun multiplayer Eaglercraft, Eaglercraft for classrooms, Eaglercraft online servers, browser-based sandbox, free sandbox multiplayer, browser games Minecraft, safe games online, unblocked mods for school, free games for students, school games Minecraft, Eaglercraft server guides, Minecraft browser access, unblocked school Minecraft servers, free sandbox creativity, Eaglercraft survival guides, Eaglercraft online play, sandbox education tools, free Eaglercraft gaming, creative browser games, Eaglercraft modding, fun Eaglercraft servers." />
+    <link rel="icon" href="assets/img/tortilla.png">
+    <link rel="manifest" href="assets/manifest.json">
+    <script src="assets/js/scripts.js"></script>
+    <script src="assets/js/splashes.js"></script>
+    <script src="assets/js/swal2.js"></script>
+    <script src="assets/js/crypto.js"></script>
+    <script src="assets/js/save.js"></script>
+    <script src="assets/js/events.js"></script>
+    <script defer src="assets/js/index.js"></script>
+    <script src="assets/js/master.js"></script>
+    <script src="assets/js/keybinds.js"></script>
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/notify.js"></script>
+    <script src="assets/js/offlinesw.js"></script>
+    <script src="prxy/register-sw.js"></script>
+    <link rel="stylesheet" href="assets/css/navbar.css">
+    <link rel="stylesheet" href="assets/css/master.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/captcha.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/christmas-lights.css">
+    <link rel="apple-touch-icon" href="assets/img/tortilla.png">
+    <link rel="stylesheet" href="assets/line-awesome/css/line-awesome.css">
+    <meta name="theme-color" content="#3533cc">
+    <script src="https://uptime.betterstack.com/widgets/announcement.js" data-id="197414" async="async" type="text/javascript"></script>
+</head>
+<body oncontextmenu="return false;">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker
+                .register('/sw.js')
+                .then((registration) => {
+                    console.log('Service Worker registered successfully:', registration);
+                })
+                .catch((error) => {
+                    console.error('Service Worker registration failed:', error);
+                });
+        }
+    </script>
+    <div id="notifications"></div>
+    <div id="main" onclick="document.querySelector('.game-frame').focus()">
+        <div class="loader"></div>
+        <div class="gameContainer">
+            <iframe src onload="this.contentWindow.focus();addPanicKey(this.contentWindow.document)" class="game-frame"></iframe>
+            <div class="game-btns">
+                <button class="game-btn" onclick="openFullscreen(document.querySelector('.game-frame'))"><i class="fa fa-expand"></i></button>
+                <button class="game-btn" onclick="document.querySelector('.game-frame').contentWindow.location.reload()"><i class="fa fa-rotate"></i></button>
+                <button class="game-btn" onclick="openNewTab()"><i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+            </div>
+        </div>
+        <!--<iframe data-aa='2360641' src='//ad.a-ads.com/2360641' style='width: 7.5%; height:87.5%; position: absolute; border:0px; padding:0; overflow:hidden; background-color: transparent; left: 1.25%; top: 2.5%;'></iframe>
+        <iframe data-aa='2360641' src='//ad.a-ads.com/2360641' style='width: 7.5%; height:87.5%; position: absolute; border:0px; padding:0; overflow:hidden; background-color: transparent; right: 1.25%; top: 12.5%;'></iframe>-->
+    </div>
+    <div id="main" style="display: block; z-index: 500;">
+        <div class="loader" id="pageloader"></div>
+    </div>
+    <canvas id="bg"></canvas>
+    <div class="navbar">
+        <ul>
+            <li class="active" id="navbar-home" onclick="closeMenu(true)"><a>Home <i class="fa fa-home"></i></a></li>
+            <li class="hoverable" id="navbar-lessons" onclick="openMenu('pages/lessons.html', 'lessons', 'nav')"><a>Play <i class="fa fa-gamepad"></i></a></li>
+            <li class="hoverable" id="navbar-apps" onclick="openMenu('pages/apps.html', 'apps', 'nav')"><a>Apps <i class="fa-brands fa-app-store-ios"></i></i></a></li>
+            <li class="hoverable" id="navbar-prxy" onclick="openMenu('prxy/', 'prxy', 'nav')"><a>Prxy <i class="fa fa-server"></i></a></li>
+            <li class="hoverable" id="navbar-emulator" onclick="openMenu('emujs/', 'emulator', 'nav')"><a>Emu <i class="fa fa-terminal"></i></a></li>
+            <li class="hoverable" id="navbar-bookmarklets" onclick="openMenu('pages/bookmarklets.html', 'bookmarklets', 'nav')"><a>Bookmarklets <i class="fa fa-bookmark"></i></a></li>
+            <li class="hoverable" id="navbar-place" onclick="openMenu('place/', 'place', 'nav')"><a>r/place <i class="fa fa-palette"></i></a></li>
+            <!--<li class="hoverable" id="navbar-gchat" onclick="openMenu('gchat/defaultchat.html', 'gchat', 'nav')"><a>Chat <i class="fa fa-users"></i></a></li>-->
+            <li class="hoverable" id="navbar-credits" onclick="openMenu('pages/credits.html', 'credits', 'nav')"><a>Credits <i class="fa fa-user"></i></a></li>
+            <li class="hoverable" id="navbar-changelog" onclick="openMenu('pages/changelog.html', 'changelog', 'nav')"><a>Changelog <i class="fa fa-clipboard-list"></i></a></li>
+            <li class="hoverable" id="navbar-settings" onclick="toggleSettings()" style="position:fixed;right:1vw;width:1vw;height:1vw;"><a><i class="fa fa-cog"></i></a></li>
+            <!--<li class="hoverable" id="navbar-admin" onclick="openMenu('admin/tools', 'admin')"><a>Admin <i class="las la-user-shield"></i></a></li>-->
+        </ul>
+    </div>
+    <div class="settings" style="display: none;">
+        <i onclick="toggleSettings()" class="fas fa-solid fa-xmark"></i>
+        <h1>Settings</h1>
+        <h3>Panic Settings</h3>
+        <label for=".panicKeySetting">Panic Key</label>
+        <input class="panicKeySetting" autocomplete="off" placeholder="Key" oninput="setPanicKey(this.value, this)">
+        <label for=".panicURLSetting">Panic URL</label>
+        <input class="panicURLSetting" autocomplete="off" placeholder="URL" oninput="setPanicURL(this.value, this)">
+        <h3>Tab Cloak</h3>
+        <label for=".cloakTabTitleSetting">Tab Title</label>
+        <input class="cloakTabTitleSetting" autocomplete="off" placeholder="Title" oninput="setTabTitle(this.value, this)">
+        <label for=".cloakTabIconURLSetting">Icon URL</label>
+        <input class="cloakTabIconURLSetting" autocomplete="off" placeholder="URL" oninput="setTabIcon(this.value, this)">
+        <h3>Theme</h3>
+        <select class="themeSelect">
+        </select>
+        <!--<h3>Password Settings</h3>
+        <label for=".sitePasswordSetting">Site Password</label>
+        <input class="sitePasswordSetting" autocomplete="off" type="password" placeholder="Password" oninput="setSitePassword(this.value)">-->
+        <h3>Save Data</h3>
+        <span class="saveSetting" onclick="downloadSave()">Export Save</span>
+        <br>
+        <br>
+        <span class="saveSetting importSave" onclick="uploadSave()">Import Save</span>
+        <input class="hiddenUpload" type="file" accept=".save" style="display: none;">
+    </div>
+    <div class="home">
+        <div class="image fade" style="background: url('assets/img/tortilla.png'); background-size: cover; transform: translateY(25%);"></div>
+        <div class="header fade">
+            <h1>Welcome to Trtilla!</h1>
+            <p class="subheader"></p><button class="newSplash" onclick="setSplash()"><i class="fa-solid fa-rotate"></i></button>
+        </div>
+    </div>
+    <div class="info" onclick="document.querySelector('.game-frame').focus()">
+        <a id="version"></a>
+        <br>
+        <a id="visits"></a>
+        <br>
+        <a id="activeUsers"></a>
+    </div>
+    <button class="aboutBlank" onclick="aboutBlank(location.href, false, false);window.open('', '_self').close();location.href=localStorage.getItem('panicURL');"><i class="fa-solid fa-shield"></i></button>
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d78b6b35d7a546e78d47be85573b807f"}'></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTQXGCE0WC"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-FTQXGCE0WC');
+    </script>
+</body>
+</html>
